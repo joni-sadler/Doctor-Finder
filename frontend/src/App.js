@@ -1,33 +1,38 @@
 import React from "react";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
+import styled from "styled-components";
+import Home from "./Home";
+import About from "./About";
+import Faq from "./Faq";
+import ProviderPage from "./ProviderPage";
 
 const App = () => {
   return (
-    <div>
-      This is the app component
-    </div>
+    <BrowserRouter>
+      {/* <Header /> */}
+      <Main>
+        <Switch>
+          <Route exact path="/">
+            <Home />
+          </Route>
+          <Route exact path="/about">
+            <About />
+          </Route>
+          <Route exact path="/faq">
+            <Faq />
+          </Route>
+          <Route exact path="/providerlogin">
+            <ProviderPage />
+          </Route>
+        </Switch>
+      </Main>
+    </BrowserRouter>
   );
 }
 
-
-// function App() {
-//   return (
-//     <div className="App">
-//       <header className="App-header">
-//         <img src={logo} className="App-logo" alt="logo" />
-//         <p>
-//           Edit <code>src/App.js</code> and save to reload.
-//         </p>
-//         <a
-//           className="App-link"
-//           href="https://reactjs.org"
-//           target="_blank"
-//           rel="noopener noreferrer"
-//         >
-//           Learn React
-//         </a>
-//       </header>
-//     </div>
-//   );
-// }
+const Main = styled.div` 
+  display: flex;
+  height: 60vw;
+`;
 
 export default App;
