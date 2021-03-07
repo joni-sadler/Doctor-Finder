@@ -8,7 +8,7 @@ const Home = () => {
     <Container>
       <Title>Navigating Montreal's Health System</Title>
       <MenuDiv>
-        <Patient to={`/map`}>
+        <Patient to={`/healthcarefinder`}>
           I'm seeking healthcare
         </Patient>
         <Provider to={`providerlogin`}>

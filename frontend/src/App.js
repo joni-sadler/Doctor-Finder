@@ -5,6 +5,7 @@ import Home from "./Home";
 import About from "./About";
 import Faq from "./Faq";
 import ProviderPage from "./ProviderPage";
+import HealthcareFinder from "./HealthcareFinder";
 
 const App = () => {
   return (
@@ -23,6 +24,9 @@ const App = () => {
           </Route>
           <Route exact path="/providerlogin">
             <ProviderPage />
+          </Route>
+          <Route exact path="/healthcarefinder">
+            <HealthcareFinder />
           </Route>
         </Switch>
       </Main>
