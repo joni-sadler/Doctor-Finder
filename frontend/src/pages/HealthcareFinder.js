@@ -8,17 +8,20 @@ const HealthcareFinder = () => {
 
   const doctorFunction = () => {
     setFindDoctor(!findDoctor);
-    console.log(findDoctor);
+    setWalkInClinic(false);
+    setAppointment(false);
   }
 
   const clinicFunction = () => {
     setWalkInClinic(!walkInClinic);
-    console.log(walkInClinic);
+    setFindDoctor(false);
+    setAppointment(false);
   }
 
   const appointmentFunction = () => {
     setAppointment(!appointment);
-    console.log(appointment);
+    setFindDoctor(false);
+    setWalkInClinic(false);
   }
 
   return (
