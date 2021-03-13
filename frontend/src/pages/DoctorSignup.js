@@ -3,13 +3,6 @@ import styled from "styled-components";
 
 const DoctorSignup = () => {
   const [signupInfo, setSignupInfo] = useState({});
-  const [acceptingPatients, setAcceptingPatients] = useState(false);
-
-  // const updateInfo = (newValues) => {
-  //   setSignupInfo({ ...signupInfo, ...newValues })
-  //   console.log(signupInfo);
-  // }
-
 
   const titleHandler = (name) => {
     return ({ target: {value} }) => {
@@ -53,15 +46,6 @@ const DoctorSignup = () => {
     }
   }
 
-  const handleAcceptingPatientsTrue = () => {
-    setAcceptingPatients(true);
-  }
-
-  const handleAcceptingPatientsFalse = () => {
-    setAcceptingPatients(false);
-  }
-
-  // console.log(acceptingPatients);
 
   const submitFunction = () => {
     console.log(signupInfo);
@@ -156,34 +140,13 @@ const DoctorSignup = () => {
           <input
             name="password"
             placeholder="Set your password"
-            type="text"
+            type="password"
             required
             value={signupInfo.password}
             onChange={passwordHandler("password")}
             style={{ height: "25px", width: "400px"}}
           />
         </Field>
-
-        <Field>
-          <div>
-          <p>Are you accepting patients as a family doctor?</p>
-          Yes <input
-            name="acceptingPatients"
-            type="radio"
-            value="true"
-            onChange={handleAcceptingPatientsTrue}
-          />
-          </div>
-          <div>
-          No <input
-            name="acceptingPatients"
-            type="radio"
-            value="false"
-            onChange={handleAcceptingPatientsFalse}
-          />
-          </div>
-        </Field>
-
         <SubmitWrapper>
           <SubmitButton onClick={submitFunction}>
             Submit
