@@ -7,11 +7,6 @@ const options = {
   useUnifiedTopology: true,
 }
 
-// const create_clinic = (req, res) => {
-//   const { clinic } = req.body; 
-//   // add clinic to database
-//   res.status(201).json({ message, clinic });
-// }
 
 const addClinic = async (req, res) => {
   const client = await MongoClient(MONGO_URI, options);
@@ -38,9 +33,57 @@ const addClinic = async (req, res) => {
   console.log("disconnected");
 }
 
-const getClinics = (req, res) => {
-  // ingest clinic list to MongoDb and get here
+const getWalkInClinics = async (req, res) => {
+  const client = await MongoClient(MONGO_URI, options);
+
+  await client.connect();
+
+  try {
+
+    const db = client.db("healthcare_database");
+    console.log("connected!");
+
+    const data = await db.collection("clinics").find({ "acceptsWalkIns": true }).toArray();
+
+    console.log(data);
+
+    res.status(200).json({ status: 201, data: data });
+
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ status: 500, message: err.message });
+  }
+
+  client.close();
+  console.log("disconnected");
 }
+
+
+const getAppointmentClinics = async (req, res) => {
+  const client = await MongoClient(MONGO_URI, options);
+
+  await client.connect();
+
+  try {
+
+    const db = client.db("healthcare_database");
+    console.log("connected!");
+
+    const data = await db.collection("clinics").find({ "canBookAppointments": true }).toArray();
+
+    console.log(data);
+
+    res.status(200).json({ status: 201, data: data });
+
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ status: 500, message: err.message });
+  }
+
+  client.close();
+  console.log("disconnected");
+}
+
 
 const getSingleClinic = (req, res) => {
   // get single clinic with params
@@ -48,4 +91,4 @@ const getSingleClinic = (req, res) => {
 }
 
 
-module.exports = { addClinic, getClinics, getSingleClinic };
+module.exports = { addClinic, getWalkInClinics, getAppointmentClinics, getSingleClinic };
