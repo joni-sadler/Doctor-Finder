@@ -1,18 +1,35 @@
 import React, {useState} from "react";
 import styled from "styled-components";
 
-const ClinicSignup = () => {
-
-
+const DoctorSignup = () => {
   const [signupInfo, setSignupInfo] = useState({});
+  const [acceptingPatients, setAcceptingPatients] = useState(false);
 
-//   const updateInfo = (newValues) => {
-//     setSignupInfo({ ...signupInfo, ...newValues })
-//     console.log(signupInfo);
-//   }
+  // const updateInfo = (newValues) => {
+  //   setSignupInfo({ ...signupInfo, ...newValues })
+  //   console.log(signupInfo);
+  // }
 
 
-const emailHandler = (name) => {
+  const titleHandler = (name) => {
+    return ({ target: {value} }) => {
+      setSignupInfo((signupInfo) => ({ ...signupInfo, [name]: value }));
+    }
+  }
+
+  const firstNameHandler = (name) => {
+    return ({ target: {value} }) => {
+      setSignupInfo((signupInfo) => ({ ...signupInfo, [name]: value }));
+    }
+  }
+
+  const lastNameHandler = (name) => {
+    return ({ target: {value} }) => {
+      setSignupInfo((signupInfo) => ({ ...signupInfo, [name]: value }));
+    }
+  }
+
+  const emailHandler = (name) => {
     return ({ target: {value} }) => {
       setSignupInfo((signupInfo) => ({ ...signupInfo, [name]: value }));
     }
@@ -24,19 +41,7 @@ const emailHandler = (name) => {
     }
   }
 
-  const clinicAddressHandler = (name) => {
-    return ({ target: {value} }) => {
-      setSignupInfo((signupInfo) => ({ ...signupInfo, [name]: value }));
-    }
-  }
-
-  const openingHoursHandler = (name) => {
-    return ({ target: {value} }) => {
-      setSignupInfo((signupInfo) => ({ ...signupInfo, [name]: value }));
-    }
-  }
-
-  const specialtiesHandler = (name) => {
+  const additionalClinicNameHandler = (name) => {
     return ({ target: {value} }) => {
       setSignupInfo((signupInfo) => ({ ...signupInfo, [name]: value }));
     }
@@ -48,10 +53,19 @@ const emailHandler = (name) => {
     }
   }
 
+  const handleAcceptingPatientsTrue = () => {
+    setAcceptingPatients(true);
+  }
+
+  const handleAcceptingPatientsFalse = () => {
+    setAcceptingPatients(false);
+  }
+
+  // console.log(acceptingPatients);
+
   const submitFunction = () => {
-    // submit info
     console.log(signupInfo);
-    fetch("/clinic_signup", {
+    fetch("/doctor_signup", {
       method: "POST",
       body: JSON.stringify({...signupInfo}),
       headers: {"Accept": "application/json", "Content-type": "application/json"},
@@ -72,12 +86,45 @@ const emailHandler = (name) => {
     <Container>
       <Title>Signup</Title>
         <SignupWrapper>
-
+        <Field>
+          <input
+            name="title"
+            placeholder="Title"
+            type="text"
+            required
+            value={signupInfo.title}
+            onChange={titleHandler("title")}
+            style={{ height: "25px", width: "400px"}}
+          />
+        </Field>
+        <Field>
+          <input
+            name="firstName"
+            placeholder="First Name"
+            type="text"
+            required
+            value={signupInfo.firstName}
+            onChange={firstNameHandler("firstName")}
+            style={{ height: "25px", width: "400px"}}
+          />
+        </Field>
+        <Field>
+          <input
+            name="lastName"
+            placeholder="Last Name"
+            type="text"
+            required
+            value={signupInfo.lastName}
+            onChange={lastNameHandler("lastName")}
+            style={{ height: "25px", width: "400px"}}
+          />
+        </Field>
         <Field>
           <input
             name="email"
             placeholder="Email"
             type="text"
+            required
             value={signupInfo.email}
             onChange={emailHandler("email")}
             style={{ height: "25px", width: "400px"}}
@@ -88,6 +135,7 @@ const emailHandler = (name) => {
             name="clinicName"
             placeholder="Name of your clinic"
             type="text"
+            required
             value={signupInfo.clinicName}
             onChange={clinicNameHandler("clinicName")}
             style={{ height: "25px", width: "400px"}}
@@ -95,31 +143,12 @@ const emailHandler = (name) => {
         </Field>
         <Field>
           <input
-            name="clinicAddress"
-            placeholder="Address of your clinic"
+            name="additionalClinic"
+            placeholder="If you work at multiple clinics, list additional ones here"
             type="text"
-            value={signupInfo.clinicAddress}
-            onChange={clinicAddressHandler("clinicAddress")}
-            style={{ height: "25px", width: "400px"}}
-          />
-        </Field>
-        <Field>
-          <input
-            name="hours"
-            placeholder="What are your opening hours?"
-            type="text"
-            value={signupInfo.hours}
-            onChange={openingHoursHandler("hours")}
-            style={{ height: "25px", width: "400px"}}
-          />
-        </Field>
-        <Field>
-          <input
-            name="specialties"
-            placeholder="Does your clinic offer any special services? Please list them."
-            type="text"
-            value={signupInfo.specialties}
-            onChange={specialtiesHandler("specialties")}
+            required
+            value={signupInfo.additionalClinicName}
+            onChange={additionalClinicNameHandler("additionalClinic")}
             style={{ height: "25px", width: "400px"}}
           />
         </Field>
@@ -128,11 +157,33 @@ const emailHandler = (name) => {
             name="password"
             placeholder="Set your password"
             type="text"
+            required
             value={signupInfo.password}
             onChange={passwordHandler("password")}
             style={{ height: "25px", width: "400px"}}
           />
         </Field>
+
+        <Field>
+          <div>
+          <p>Are you accepting patients as a family doctor?</p>
+          Yes <input
+            name="acceptingPatients"
+            type="radio"
+            value="true"
+            onChange={handleAcceptingPatientsTrue}
+          />
+          </div>
+          <div>
+          No <input
+            name="acceptingPatients"
+            type="radio"
+            value="false"
+            onChange={handleAcceptingPatientsFalse}
+          />
+          </div>
+        </Field>
+
         <SubmitWrapper>
           <SubmitButton onClick={submitFunction}>
             Submit
@@ -186,4 +237,4 @@ const SubmitButton = styled.button`
   font-weight: 500;
 `;
 
-export default ClinicSignup;
+export default DoctorSignup;
