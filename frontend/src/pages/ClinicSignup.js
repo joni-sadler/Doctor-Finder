@@ -5,6 +5,9 @@ const ClinicSignup = () => {
 
 
   const [signupInfo, setSignupInfo] = useState({});
+  const [acceptsPatients, setAcceptsPatients] = useState(false);
+  const [acceptsWalkIns, setAcceptsWalkIns] = useState(false);
+  const [canBookAppointments, setCanBookAppointments] = useState(false);
 
 //   const updateInfo = (newValues) => {
 //     setSignupInfo({ ...signupInfo, ...newValues })
@@ -48,12 +51,29 @@ const emailHandler = (name) => {
     }
   }
 
+  const acceptingPatientsHandlerTrue = () => {
+    setAcceptsPatients(true)
+  }
+
+  const acceptingWalkInHandlerTrue = () => {
+    setAcceptsWalkIns(true)
+  }
+
+  const acceptingAppointmentsHandlerTrue = () => {
+      setCanBookAppointments(true)
+  }
+
   const submitFunction = () => {
     // submit info
     console.log(signupInfo);
     fetch("/clinic_signup", {
       method: "POST",
-      body: JSON.stringify({...signupInfo}),
+      body: JSON.stringify({
+          ...signupInfo, 
+          acceptsPatients: acceptsPatients,
+          acceptsWalkIns: acceptsWalkIns,
+          canBookAppointments: canBookAppointments
+        }),
       headers: {"Accept": "application/json", "Content-type": "application/json"},
     })
     .then((res) => res.json())
@@ -132,6 +152,48 @@ const emailHandler = (name) => {
             onChange={passwordHandler("password")}
             style={{ height: "25px", width: "400px"}}
           />
+        </Field>
+        <Field>
+          <p>Are any of your doctors accepting new patients?</p>
+          <input 
+            name="acceptsPatients"
+            type="radio"
+            value="True"
+            onChange={acceptingPatientsHandlerTrue}
+          /> Yes
+          <input 
+            name="acceptsPatients"
+            type="radio"
+            value="False"
+          /> No
+        </Field>
+        <Field>
+          <p>Do you accept walk-ins?</p>
+          <input 
+            name="acceptsWalkins"
+            type="radio"
+            value="True"
+            onChange={acceptingWalkInHandlerTrue}
+          /> Yes
+          <input 
+            name="acceptsWalkins"
+            type="radio"
+            value="False"
+          /> No
+        </Field>
+        <Field>
+          <p>Can patients book an appointment in advance at your clinic?</p>
+          <input 
+            name="acceptsAppointments"
+            type="radio"
+            value="True"
+            onChange={acceptingAppointmentsHandlerTrue}
+          /> Yes
+          <input 
+            name="acceptsAppointments"
+            type="radio"
+            value="False"
+          /> No
         </Field>
         <SubmitWrapper>
           <SubmitButton onClick={submitFunction}>
