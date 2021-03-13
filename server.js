@@ -3,7 +3,7 @@ const app = express();
 const bodyParser = require("body-parser");
 const PORT = 8000;
 const { addDoctor, getDoctors, getSingleDoctor } = require("./doctor-controllers");
-const { addClinic, getClinics, getSingleClinic } = require("./clinic-controllers");
+const { addClinic, getWalkInClinics, getAppointmentClinics, getSingleClinic } = require("./clinic-controllers");
 
 app.use(express.urlencoded({extended: true})); 
 app.use(express.json()); 
@@ -13,8 +13,11 @@ app.get("/", (req, res) => {
  res.send("Backend server is working.")
 })
 
-// Get list of all clinics
-app.get("/healthcare_finder", getClinics)
+// Get list of all clinics accepting walk-ins
+app.get("/walk_in_clinics", getWalkInClinics)
+
+// Get list of all clinics accepting appointments
+app.get("/clinic_appointments", getAppointmentClinics)
 
 // Get single clinic
 app.get("/clinics/:id", getSingleClinic)
