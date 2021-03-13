@@ -2,27 +2,27 @@ import React, {useEffect, useState} from "react";
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 
-const WalkInClinics = () => {
-  const [walkInClinics, setWalkInClinics] = useState([]);
+const AppointmentClinics = () => {
+    const [appointmentClinics, setAppointmentClinics] = useState([]);
 
   useEffect(() => {
-    fetch(`/walk_in_clinics`, {
+    fetch(`/clinic_appointments`, {
         method: "GET",
       })
         .then((res) => res.json())
-        .then((res) => setWalkInClinics(res.data));
+        .then((res) => setAppointmentClinics(res.data));
   }, [])
 
-  console.log(walkInClinics);
+  console.log(appointmentClinics);
 
 
   return (
     <Container>
       <MenuWrapper>
-        <MenuText>Walk-In Clinics:</MenuText>
-          {walkInClinics.map((walkInClinic) => {
+        <MenuText>Clinics Booking Appointments:</MenuText>
+          {appointmentClinics.map((appointmentClinic) => {
             return (
-              <ListItem to={`/`}>{walkInClinic.clinicName}</ListItem>
+              <ListItem to={`/`}>{appointmentClinic.clinicName}</ListItem>
             )
         })}
 
@@ -70,4 +70,4 @@ const ListItem = styled(NavLink)`
   cursor: pointer;
 `;
 
-export default WalkInClinics;
+export default AppointmentClinics;

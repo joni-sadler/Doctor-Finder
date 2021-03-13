@@ -1,14 +1,11 @@
 import React, {useState} from "react";
 import styled from "styled-components";
-import WalkInClinics from "./WalkInClinics";
 import { NavLink } from "react-router-dom";
 
 const HealthcareFinder = () => {
   const [findDoctor, setFindDoctor] = useState(false);
   const [walkInClinic, setWalkInClinic] = useState(false);
   const [appointment, setAppointment] = useState(false);
-  const [listWalkInClinics, setListWalkInClinics] = useState([]);
-  const [listAppointmentClinics, setListAppointmentClinics] = useState([]);
 
   const doctorFunction = () => {
     setFindDoctor(!findDoctor);
@@ -16,31 +13,6 @@ const HealthcareFinder = () => {
     setAppointment(false);
   }
 
-  // const clinicFunction = () => {
-  //   setWalkInClinic(!walkInClinic);
-  //   setFindDoctor(false);
-  //   setAppointment(false);
-  //   fetch(`/healthcare_finder`, {
-  //     method: "GET",
-  //   })
-  //     .then((res) => res.json())
-  //     .then((res) => setListWalkInClinics(res.data));
-  // }
-
-  console.log(listWalkInClinics);
-
-  const appointmentFunction = () => {
-    setAppointment(!appointment);
-    setFindDoctor(false);
-    setWalkInClinic(false);
-    fetch(`/healthcare_finder`, {
-      method: "GET",
-    })
-      .then((res) => res.json())
-      .then((res) => setListAppointmentClinics(res.data));
-  }
-  
-  console.log(listAppointmentClinics);
 
   return (
     <Container>
@@ -54,27 +26,10 @@ const HealthcareFinder = () => {
             </div>
           }
 
-
         <ListItem to={`/walk_in_clinics`}>Find a walk-in clinic</ListItem>
 
-        <MenuText onClick={appointmentFunction}>Find a clinic that accepts appointments</MenuText>
-          {appointment &&
-            <ConditionalDiv>
-            {/* <ConditionalText>• See the closest walk-in clinic</ConditionalText>
-            <ConditionalText>• See a list of all walk-in clinics</ConditionalText> */}
-              {/* <WalkInClinics /> */}
-              {listAppointmentClinics.map((appointmentClinic) => {
-                return (
-                  <ListItem
-                    to={`/`}
-                  >
-                    {appointmentClinic.clinicName}
-                  </ListItem>
-                )
-              })}
+        <ListItem to={`/clinic_appointments`}>Find a clinic that accepts appointments</ListItem>
 
-          </ConditionalDiv>
-          }
       </MenuWrapper>
       <MapWrapper>
         Map goes here
