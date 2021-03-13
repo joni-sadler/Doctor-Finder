@@ -26,7 +26,7 @@ app.get("/clinics/:id", getSingleClinic)
 app.post("/clinic_signup", addClinic)
 
 // Get list of all doctors
-app.get("/healthcare_finder", getDoctors)
+app.get("/doctor_finder", getDoctors)
 
 // Get single doctor
 app.get("/doctors/:id", getSingleDoctor)
