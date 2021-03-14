@@ -13,15 +13,17 @@ const FamilyDoctor = () => {
         .then((res) => setAcceptingPatients(res.data));
   }, [])
 
-  console.log(acceptingPatients);
-
   return (
     <Container>
       <MenuWrapper>
         <MenuText>Clinics with doctors accepting new patients:</MenuText>
-          {acceptingPatients.map((clinic) => {
+          {acceptingPatients.map((acceptingPatients) => {
             return (
-              <ListItem to={`/`}>{clinic.clinicName}</ListItem>
+              <ListItem
+                to={`/clinics/${acceptingPatients._id}`}
+                key={acceptingPatients._id}
+              >
+                {acceptingPatients.clinicName}</ListItem>
             )
         })}
 

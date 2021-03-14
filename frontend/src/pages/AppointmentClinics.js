@@ -19,10 +19,14 @@ const AppointmentClinics = () => {
   return (
     <Container>
       <MenuWrapper>
-        <MenuText>Clinics Booking Appointments:</MenuText>
+      <MenuText>Walk-In Clinics:</MenuText>
           {appointmentClinics.map((appointmentClinic) => {
             return (
-              <ListItem to={`/`}>{appointmentClinic.clinicName}</ListItem>
+              <ListItem 
+                to={`/clinics/${appointmentClinic._id}`}
+                key={appointmentClinic._id}
+                >
+                {appointmentClinic.clinicName}</ListItem>
             )
         })}
 

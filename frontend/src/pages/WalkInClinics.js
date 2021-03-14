@@ -5,7 +5,6 @@ import Clinic from "./Clinic"
 
 const WalkInClinics = () => {
   const [walkInClinics, setWalkInClinics] = useState([]);
-  const [displayClinicInfo, setDisplayClinicInfo] = useState(false);
 
   useEffect(() => {
     fetch(`/walk_in_clinics`, {
