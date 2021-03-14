@@ -1,9 +1,11 @@
 import React, {useEffect, useState} from "react";
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
+import Clinic from "./Clinic"
 
 const WalkInClinics = () => {
   const [walkInClinics, setWalkInClinics] = useState([]);
+  const [displayClinicInfo, setDisplayClinicInfo] = useState(false);
 
   useEffect(() => {
     fetch(`/walk_in_clinics`, {
@@ -22,7 +24,11 @@ const WalkInClinics = () => {
         <MenuText>Walk-In Clinics:</MenuText>
           {walkInClinics.map((walkInClinic) => {
             return (
-              <ListItem to={`/`}>{walkInClinic.clinicName}</ListItem>
+              <ListItem 
+                to={`/clinics/${walkInClinic._id}`}
+                key={walkInClinic._id}
+                >
+                {walkInClinic.clinicName}</ListItem>
             )
         })}
 
