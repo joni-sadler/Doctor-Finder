@@ -27,7 +27,7 @@ const addDoctor = async (req, res) => {
   console.log("disconnected");
 }
 
-const getDoctors = async (req, res) => {
+const getDoctorsAcceptingPatients = async (req, res) => {
   const client = await MongoClient(MONGO_URI, options);
   await client.connect();
 
@@ -45,24 +45,43 @@ const getDoctors = async (req, res) => {
   console.log("disconnected");
 }
 
-// const getSingleDoctor = async (req, res) => {
-//   const client = await MongoClient(MONGO_URI, options);
 
-//   // console.log(req.body);
-//   const _id = req.params._id
-//   console.log(_id);
+const getAllDoctors = async (req, res) => {
+  const client = await MongoClient(MONGO_URI, options);
+  await client.connect();
 
-//   await client.connect();
+  try {
+    const db = client.db("healthcare_database");
+    console.log("connected!");
+    const data = await db.collection("doctors").find().toArray();
+    res.status(200).json({ status: 200, data: data });
 
-//   const db = client.db("healthcare_database");
-//   console.log("connected!");
+  } catch (err) {
+    res.status(500).json({ status: 500, message: err.message });
+  }
 
-//   await db.collection("doctors").findOne({_id}, (err, result) => {
-//     result
-//     ? res.status(200).json({ status: 200, _id, data: result })
-//     : res.status(404).json({ status: 404, _id, data: err });
-//     client.close();
-//   });
-// }
+  client.close();
+  console.log("disconnected");
+}
 
-module.exports = { addDoctor, getDoctors, getSingleDoctor };
+const getSingleDoctor = async (req, res) => {
+  // const client = await MongoClient(MONGO_URI, options);
+
+  // // console.log(req.body);
+  // const _id = req.params._id
+  // console.log(_id);
+
+  // await client.connect();
+
+  // const db = client.db("healthcare_database");
+  // console.log("connected!");
+
+  // await db.collection("doctors").findOne({_id}, (err, result) => {
+  //   result
+  //   ? res.status(200).json({ status: 200, _id, data: result })
+  //   : res.status(404).json({ status: 404, _id, data: err });
+  //   client.close();
+  // });
+}
+
+module.exports = { addDoctor, getDoctorsAcceptingPatients, getAllDoctors, getSingleDoctor };
