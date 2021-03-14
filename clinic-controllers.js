@@ -1,4 +1,4 @@
-const { MongoClient } = require("mongodb");
+const { MongoClient, ObjectId } = require("mongodb");
 require("dotenv").config();
 const { MONGO_URI } = process.env;
 
@@ -65,9 +65,24 @@ const getAppointmentClinics = async (req, res) => {
 }
 
 
-const getSingleClinic = (req, res) => {
-  // get single clinic with params
-  // const clinicId = req.params.id;
+const getSingleClinic = async (req, res) => {
+  const client = await MongoClient(MONGO_URI, options);
+  await client.connect();
+
+  try {
+    const db = client.db("healthcare_database");
+    console.log("connected!");
+    console.log(req.params.id);
+    const data = await db.collection("clinics").findOne({ "_id": ObjectId(req.params.id) });
+    console.log(data);
+    res.status(200).json({ status: 200, data: data });
+
+  } catch (err) {
+    res.status(500).json({ status: 500, message: err.message });
+  }
+
+  client.close();
+  console.log("disconnected");
 }
 
 
