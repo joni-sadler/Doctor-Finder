@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
 const PORT = 8000;
-const { addDoctor, getDoctors, getSingleDoctor } = require("./doctor-controllers");
+const { addDoctor, getDoctorsAcceptingPatients, getAllDoctors, getSingleDoctor } = require("./doctor-controllers");
 const { addClinic, getWalkInClinics, getAppointmentClinics, getSingleClinic } = require("./clinic-controllers");
 
 app.use(express.urlencoded({extended: true})); 
@@ -25,8 +25,11 @@ app.get("/clinics/:id", getSingleClinic)
 // Add a clinic
 app.post("/clinic_signup", addClinic)
 
-// Get list of all doctors
-app.get("/doctor_finder", getDoctors)
+// Get list of all doctors accepting patients
+app.get("/doctor_finder", getDoctorsAcceptingPatients)
+
+// Get a list of all doctors registered in the database
+app.get("/doctors", getAllDoctors)
 
 // Get single doctor
 app.get("/doctors/:id", getSingleDoctor)
