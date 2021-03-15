@@ -2,24 +2,11 @@ import React, {useState} from "react";
 import styled from "styled-components";
 
 const ClinicSignup = () => {
-
-
   const [signupInfo, setSignupInfo] = useState({});
   const [acceptsPatients, setAcceptsPatients] = useState(false);
   const [acceptsWalkIns, setAcceptsWalkIns] = useState(false);
   const [canBookAppointments, setCanBookAppointments] = useState(false);
 
-//   const updateInfo = (newValues) => {
-//     setSignupInfo({ ...signupInfo, ...newValues })
-//     console.log(signupInfo);
-//   }
-
-
-const emailHandler = (name) => {
-    return ({ target: {value} }) => {
-      setSignupInfo((signupInfo) => ({ ...signupInfo, [name]: value }));
-    }
-  }
 
   const clinicNameHandler = (name) => {
     return ({ target: {value} }) => {
@@ -28,6 +15,18 @@ const emailHandler = (name) => {
   }
 
   const clinicAddressHandler = (name) => {
+    return ({ target: {value} }) => {
+      setSignupInfo((signupInfo) => ({ ...signupInfo, [name]: value }));
+    }
+  }
+
+  const emailHandler = (name) => {
+    return ({ target: {value} }) => {
+      setSignupInfo((signupInfo) => ({ ...signupInfo, [name]: value }));
+    }
+  }
+
+  const phoneNumberHandler = (name) => {
     return ({ target: {value} }) => {
       setSignupInfo((signupInfo) => ({ ...signupInfo, [name]: value }));
     }
@@ -64,7 +63,6 @@ const emailHandler = (name) => {
   }
 
   const submitFunction = () => {
-    // submit info
     console.log(signupInfo);
     fetch("/clinic_signup", {
       method: "POST",
@@ -95,16 +93,6 @@ const emailHandler = (name) => {
 
         <Field>
           <input
-            name="email"
-            placeholder="Email"
-            type="text"
-            value={signupInfo.email}
-            onChange={emailHandler("email")}
-            style={{ height: "25px", width: "400px"}}
-          />
-        </Field>
-        <Field>
-          <input
             name="clinicName"
             placeholder="Name of your clinic"
             type="text"
@@ -120,6 +108,27 @@ const emailHandler = (name) => {
             type="text"
             value={signupInfo.clinicAddress}
             onChange={clinicAddressHandler("clinicAddress")}
+            style={{ height: "25px", width: "400px"}}
+          />
+        </Field>
+        <Field>
+          <input
+            name="email"
+            placeholder="Email"
+            type="text"
+            value={signupInfo.email}
+            onChange={emailHandler("email")}
+            style={{ height: "25px", width: "400px"}}
+          />
+        </Field>
+        <Field>
+          <input
+            name="phoneNumber"
+            placeholder="Phone number"
+            type="password"
+            required
+            value={signupInfo.phoneNumber}
+            onChange={phoneNumberHandler("phoneNumber")}
             style={{ height: "25px", width: "400px"}}
           />
         </Field>
@@ -147,7 +156,7 @@ const emailHandler = (name) => {
           <input
             name="password"
             placeholder="Set your password"
-            type="text"
+            type="password"
             value={signupInfo.password}
             onChange={passwordHandler("password")}
             style={{ height: "25px", width: "400px"}}
@@ -208,15 +217,16 @@ const emailHandler = (name) => {
 const Container = styled.div` 
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
-  height: 50vw;
+  height: 100vw;
   width: 100%;
 `;
 
 const Title = styled.p` 
   font-size: 40px;
   font-weight: 600;
+  margin: 10px;
 `;
 
 const SignupWrapper = styled.div` 

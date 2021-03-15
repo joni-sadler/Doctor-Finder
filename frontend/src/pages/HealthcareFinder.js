@@ -10,6 +10,8 @@ const HealthcareFinder = () => {
         <ListItem to={`/doctor_finder`}>Find a family doctor</ListItem>
         <ListItem to={`/walk_in_clinics`}>Find a walk-in clinic</ListItem>
         <ListItem to={`/clinic_appointments`}>Find a clinic that accepts appointments</ListItem>
+        <ListItem to={`/doctors`}>See all doctors in my area</ListItem>
+        <ListItem to={`/clinics`}>See all clinics in my area</ListItem>
       </MenuWrapper>
       <MapWrapper>
         Map goes here

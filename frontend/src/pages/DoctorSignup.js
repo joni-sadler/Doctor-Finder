@@ -46,6 +46,12 @@ const DoctorSignup = () => {
     }
   }
 
+  const phoneNumberHandler = (name) => {
+    return ({ target: {value} }) => {
+      setSignupInfo((signupInfo) => ({ ...signupInfo, [name]: value }));
+    }
+  }
+
 
   const submitFunction = () => {
     console.log(signupInfo);
@@ -84,7 +90,7 @@ const DoctorSignup = () => {
         <Field>
           <input
             name="firstName"
-            placeholder="First Name"
+            placeholder="First name"
             type="text"
             required
             value={signupInfo.firstName}
@@ -95,7 +101,7 @@ const DoctorSignup = () => {
         <Field>
           <input
             name="lastName"
-            placeholder="Last Name"
+            placeholder="Last name"
             type="text"
             required
             value={signupInfo.lastName}
@@ -111,6 +117,17 @@ const DoctorSignup = () => {
             required
             value={signupInfo.email}
             onChange={emailHandler("email")}
+            style={{ height: "25px", width: "400px"}}
+          />
+        </Field>
+        <Field>
+          <input
+            name="phoneNumber"
+            placeholder="Phone number"
+            type="password"
+            required
+            value={signupInfo.phoneNumber}
+            onChange={phoneNumberHandler("phoneNumber")}
             style={{ height: "25px", width: "400px"}}
           />
         </Field>
@@ -160,7 +177,7 @@ const DoctorSignup = () => {
 const Container = styled.div` 
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   height: 50vw;
   width: 100%;
@@ -169,6 +186,7 @@ const Container = styled.div`
 const Title = styled.p` 
   font-size: 40px;
   font-weight: 600;
+  margin: 10px;
 `;
 
 const SignupWrapper = styled.div` 

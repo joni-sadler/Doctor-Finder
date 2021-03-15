@@ -12,7 +12,9 @@ import WalkInClinics from "./pages/WalkInClinics";
 import AppointmentClinics from "./pages/AppointmentClinics";
 import FamilyDoctor from "./pages/FamilyDoctor";
 import Clinic from "./pages/Clinic";
+import ClinicList from "./pages/ClinicList";
 import DoctorList from "./pages/DoctorList";
+import Doctor from "./pages/Doctor";
 
 const App = () => {
   return (
@@ -46,14 +48,20 @@ const App = () => {
           <Route exact path="/clinic_appointments">
             <AppointmentClinics />
           </Route>
-          <Route exact path="/clinics/:clinic">
+          <Route path="/clinics/:clinic">
             <Clinic />
+          </Route>
+          <Route path="/clinics">
+            <ClinicList />
           </Route>
           <Route exact path="/doctor_finder">
             <FamilyDoctor />
           </Route>
           <Route exact path="/doctors">
             <DoctorList />
+          </Route>
+          <Route path="/doctors/:doctor">
+            <Doctor />
           </Route>
         </Switch>
       </Main>
