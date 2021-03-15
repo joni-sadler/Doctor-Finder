@@ -65,6 +65,25 @@ const getAppointmentClinics = async (req, res) => {
 }
 
 
+const getAllClinics = async (req, res) => {
+  const client = await MongoClient(MONGO_URI, options);
+  await client.connect();
+
+  try {
+    const db = client.db("healthcare_database");
+    console.log("connected!");
+    const data = await db.collection("clinics").find().toArray();
+    res.status(200).json({ status: 200, data: data });
+
+  } catch (err) {
+    res.status(500).json({ status: 500, message: err.message });
+  }
+
+  client.close();
+  console.log("disconnected");
+}
+
+
 const getSingleClinic = async (req, res) => {
   const client = await MongoClient(MONGO_URI, options);
   await client.connect();
@@ -86,4 +105,4 @@ const getSingleClinic = async (req, res) => {
 }
 
 
-module.exports = { addClinic, getWalkInClinics, getAppointmentClinics, getSingleClinic };
+module.exports = { addClinic, getWalkInClinics, getAppointmentClinics, getAllClinics, getSingleClinic };

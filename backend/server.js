@@ -3,7 +3,7 @@ const app = express();
 const bodyParser = require("body-parser");
 const PORT = 8000;
 const { addDoctor, getDoctorsAcceptingPatients, getAllDoctors, getSingleDoctor } = require("./doctor-controllers");
-const { addClinic, getWalkInClinics, getAppointmentClinics, getSingleClinic } = require("./clinic-controllers");
+const { addClinic, getWalkInClinics, getAppointmentClinics, getAllClinics, getSingleClinic } = require("./clinic-controllers");
 
 app.use(express.urlencoded({extended: true})); 
 app.use(express.json()); 
@@ -18,6 +18,9 @@ app.get("/walk_in_clinics", getWalkInClinics)
 
 // Get list of all clinics accepting appointments
 app.get("/clinic_appointments", getAppointmentClinics)
+
+// Get a list of all clinics registered in the database
+app.get("/clinics", getAllClinics)
 
 // Get single clinic
 app.get("/clinics/:id", getSingleClinic)

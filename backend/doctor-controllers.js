@@ -1,4 +1,4 @@
-const { MongoClient } = require("mongodb");
+const { MongoClient, ObjectId } = require("mongodb");
 require("dotenv").config();
 const { MONGO_URI } = process.env;
 
@@ -65,23 +65,23 @@ const getAllDoctors = async (req, res) => {
 }
 
 const getSingleDoctor = async (req, res) => {
-  // const client = await MongoClient(MONGO_URI, options);
+  const client = await MongoClient(MONGO_URI, options);
+  await client.connect();
 
-  // // console.log(req.body);
-  // const _id = req.params._id
-  // console.log(_id);
+  try {
+    const db = client.db("healthcare_database");
+    console.log("connected!");
+    console.log(req.params.id);
+    const data = await db.collection("doctors").findOne({ "_id": ObjectId(req.params.id) });
+    console.log(data);
+    res.status(200).json({ status: 200, data: data });
 
-  // await client.connect();
+  } catch (err) {
+    res.status(500).json({ status: 500, message: err.message });
+  }
 
-  // const db = client.db("healthcare_database");
-  // console.log("connected!");
-
-  // await db.collection("doctors").findOne({_id}, (err, result) => {
-  //   result
-  //   ? res.status(200).json({ status: 200, _id, data: result })
-  //   : res.status(404).json({ status: 404, _id, data: err });
-  //   client.close();
-  // });
+  client.close();
+  console.log("disconnected");
 }
 
 module.exports = { addDoctor, getDoctorsAcceptingPatients, getAllDoctors, getSingleDoctor };
