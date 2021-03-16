@@ -6,7 +6,7 @@ const ClinicSignup = () => {
   const [acceptsPatients, setAcceptsPatients] = useState(false);
   const [acceptsWalkIns, setAcceptsWalkIns] = useState(false);
   const [canBookAppointments, setCanBookAppointments] = useState(false);
-
+  const [hasSubmittedInfo, setHasSubmittedInfo] = useState(false);
 
   const clinicNameHandler = (name) => {
     return ({ target: {value} }) => {
@@ -63,6 +63,7 @@ const ClinicSignup = () => {
   }
 
   const submitFunction = () => {
+    setHasSubmittedInfo(true);
     console.log(signupInfo);
     fetch("/clinic_signup", {
       method: "POST",
@@ -125,7 +126,7 @@ const ClinicSignup = () => {
           <input
             name="phoneNumber"
             placeholder="Phone number"
-            type="password"
+            type="text"
             required
             value={signupInfo.phoneNumber}
             onChange={phoneNumberHandler("phoneNumber")}
@@ -210,6 +211,11 @@ const ClinicSignup = () => {
           </SubmitButton>
         </SubmitWrapper>
       </SignupWrapper>
+      {hasSubmittedInfo &&
+          <div>
+            <RegistrationMessaging>Thank you for registering! Your info is now securely stored in our database.</RegistrationMessaging>
+          </div>
+        }
     </Container>
   )
 }
@@ -256,6 +262,11 @@ const SubmitButton = styled.button`
   padding: 5px;
   font-size: 30px;
   font-weight: 500;
+`;
+
+const RegistrationMessaging = styled.p` 
+  font-size: 20px;
+  font-weight: 600;
 `;
 
 export default ClinicSignup;

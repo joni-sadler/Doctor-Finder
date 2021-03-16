@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 const DoctorSignup = () => {
   const [signupInfo, setSignupInfo] = useState({});
+  const [hasSubmittedInfo, setHasSubmittedInfo] = useState(false);
 
   const titleHandler = (name) => {
     return ({ target: {value} }) => {
@@ -40,6 +41,12 @@ const DoctorSignup = () => {
     }
   }
 
+  const specialtyHandler = (name) => {
+    return ({ target: {value} }) => {
+      setSignupInfo((signupInfo) => ({ ...signupInfo, [name]: value }));
+    }
+  }
+
   const passwordHandler = (name) => {
     return ({ target: {value} }) => {
       setSignupInfo((signupInfo) => ({ ...signupInfo, [name]: value }));
@@ -54,6 +61,7 @@ const DoctorSignup = () => {
 
 
   const submitFunction = () => {
+    setHasSubmittedInfo(true);
     console.log(signupInfo);
     fetch("/doctor_signup", {
       method: "POST",
@@ -124,7 +132,7 @@ const DoctorSignup = () => {
           <input
             name="phoneNumber"
             placeholder="Phone number"
-            type="password"
+            type="text"
             required
             value={signupInfo.phoneNumber}
             onChange={phoneNumberHandler("phoneNumber")}
@@ -155,6 +163,17 @@ const DoctorSignup = () => {
         </Field>
         <Field>
           <input
+            name="specialty"
+            placeholder="Do you specialize in a particular type of medicine?"
+            type="text"
+            required
+            value={signupInfo.additionalClinicName}
+            onChange={specialtyHandler("specialty")}
+            style={{ height: "25px", width: "400px"}}
+          />
+        </Field>
+        <Field>
+          <input
             name="password"
             placeholder="Set your password"
             type="password"
@@ -170,6 +189,11 @@ const DoctorSignup = () => {
           </SubmitButton>
         </SubmitWrapper>
       </SignupWrapper>
+      {hasSubmittedInfo &&
+          <div>
+            <RegistrationMessaging>Thank you for registering! Your info is now securely stored in our database.</RegistrationMessaging>
+          </div>
+        }
     </Container>
   )
 }
@@ -216,6 +240,11 @@ const SubmitButton = styled.button`
   padding: 5px;
   font-size: 30px;
   font-weight: 500;
+`;
+
+const RegistrationMessaging = styled.p` 
+  font-size: 20px;
+  font-weight: 600;
 `;
 
 export default DoctorSignup;
