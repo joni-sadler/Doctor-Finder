@@ -1,62 +1,40 @@
-import React, {useState} from "react";
-import styled from "styled-components";
+import React, {useState, useEffect} from "react";
+import styled, {keyframes} from "styled-components";
+import {fadeInDown, fadeOutUp} from "react-animations";
 
 const DoctorSignup = () => {
   const [signupInfo, setSignupInfo] = useState({});
   const [hasSubmittedInfo, setHasSubmittedInfo] = useState(false);
+  const [clinics, setClinics] = useState([]);
+  const [primaryClinic, setPrimaryClinic] = useState();
+  const [secondaryClinic, setSecondaryClinic] = useState();
+  const [displayPrimaryClinicMenu, setDisplayPrimaryClinicMenu] = useState(false);
+  const [displaySecondaryClinicMenu, setDisplaySecondaryClinicMenu] = useState(false);
 
-  const titleHandler = (name) => {
+  useEffect(() => {
+    fetch(`/clinics`, {
+      method: "GET",
+    })
+    .then((res) => res.json())
+     .then((res) => setClinics(res.data));
+  }, [])
+
+    console.log(clinics);
+
+
+  const signupInfoHandler = (name) => {
     return ({ target: {value} }) => {
       setSignupInfo((signupInfo) => ({ ...signupInfo, [name]: value }));
     }
   }
 
-  const firstNameHandler = (name) => {
-    return ({ target: {value} }) => {
-      setSignupInfo((signupInfo) => ({ ...signupInfo, [name]: value }));
-    }
+  const primaryClinicMenuHandler = () => {
+    setDisplayPrimaryClinicMenu(!displayPrimaryClinicMenu);
+    
   }
 
-  const lastNameHandler = (name) => {
-    return ({ target: {value} }) => {
-      setSignupInfo((signupInfo) => ({ ...signupInfo, [name]: value }));
-    }
-  }
-
-  const emailHandler = (name) => {
-    return ({ target: {value} }) => {
-      setSignupInfo((signupInfo) => ({ ...signupInfo, [name]: value }));
-    }
-  }
-
-  const clinicNameHandler = (name) => {
-    return ({ target: {value} }) => {
-      setSignupInfo((signupInfo) => ({ ...signupInfo, [name]: value }));
-    }
-  }
-
-  const additionalClinicNameHandler = (name) => {
-    return ({ target: {value} }) => {
-      setSignupInfo((signupInfo) => ({ ...signupInfo, [name]: value }));
-    }
-  }
-
-  const specialtyHandler = (name) => {
-    return ({ target: {value} }) => {
-      setSignupInfo((signupInfo) => ({ ...signupInfo, [name]: value }));
-    }
-  }
-
-  const passwordHandler = (name) => {
-    return ({ target: {value} }) => {
-      setSignupInfo((signupInfo) => ({ ...signupInfo, [name]: value }));
-    }
-  }
-
-  const phoneNumberHandler = (name) => {
-    return ({ target: {value} }) => {
-      setSignupInfo((signupInfo) => ({ ...signupInfo, [name]: value }));
-    }
+  const secondaryClinicMenuHandler = () => {
+    setDisplaySecondaryClinicMenu(!displaySecondaryClinicMenu);
   }
 
 
@@ -65,7 +43,7 @@ const DoctorSignup = () => {
     console.log(signupInfo);
     fetch("/doctor_signup", {
       method: "POST",
-      body: JSON.stringify({...signupInfo}),
+      body: JSON.stringify({...signupInfo, primaryClinic, secondaryClinic}),
       headers: {"Accept": "application/json", "Content-type": "application/json"},
     })
     .then((res) => res.json())
@@ -91,7 +69,7 @@ const DoctorSignup = () => {
             type="text"
             required
             value={signupInfo.title}
-            onChange={titleHandler("title")}
+            onChange={signupInfoHandler("title")}
             style={{ height: "25px", width: "400px"}}
           />
         </Field>
@@ -102,7 +80,7 @@ const DoctorSignup = () => {
             type="text"
             required
             value={signupInfo.firstName}
-            onChange={firstNameHandler("firstName")}
+            onChange={signupInfoHandler("firstName")}
             style={{ height: "25px", width: "400px"}}
           />
         </Field>
@@ -113,7 +91,7 @@ const DoctorSignup = () => {
             type="text"
             required
             value={signupInfo.lastName}
-            onChange={lastNameHandler("lastName")}
+            onChange={signupInfoHandler("lastName")}
             style={{ height: "25px", width: "400px"}}
           />
         </Field>
@@ -124,7 +102,7 @@ const DoctorSignup = () => {
             type="text"
             required
             value={signupInfo.email}
-            onChange={emailHandler("email")}
+            onChange={signupInfoHandler("email")}
             style={{ height: "25px", width: "400px"}}
           />
         </Field>
@@ -135,32 +113,34 @@ const DoctorSignup = () => {
             type="text"
             required
             value={signupInfo.phoneNumber}
-            onChange={phoneNumberHandler("phoneNumber")}
+            onChange={signupInfoHandler("phoneNumber")}
             style={{ height: "25px", width: "400px"}}
           />
         </Field>
-        <Field>
-          <input
-            name="clinicName"
-            placeholder="Name of your clinic"
-            type="text"
-            required
-            value={signupInfo.clinicName}
-            onChange={clinicNameHandler("clinicName")}
-            style={{ height: "25px", width: "400px"}}
-          />
-        </Field>
-        <Field>
-          <input
-            name="additionalClinic"
-            placeholder="If you work at multiple clinics, list additional ones here"
-            type="text"
-            required
-            value={signupInfo.additionalClinicName}
-            onChange={additionalClinicNameHandler("additionalClinic")}
-            style={{ height: "25px", width: "400px"}}
-          />
-        </Field>
+        <ClinicDropdown>
+          <Text onClick={primaryClinicMenuHandler}>Name of the clinic you are based at:</Text>
+            {displayPrimaryClinicMenu &&
+              <CategoryNav>
+                {clinics.map((clinic) => {
+                  return (
+                    <ClinicList onClick={() => setPrimaryClinic(clinic.clinicName)}>{clinic.clinicName}</ClinicList>
+                  )
+                })}
+              </CategoryNav>
+            }
+        </ClinicDropdown>        
+        <ClinicDropdown>
+          <Text onClick={secondaryClinicMenuHandler}>If you work at an additional clinic, please select it:</Text>
+            {displaySecondaryClinicMenu &&
+              <CategoryNav>
+                {clinics.map((clinic) => {
+                  return (
+                    <ClinicList onClick={() => setSecondaryClinic(clinic.clinicName)}>{clinic.clinicName}</ClinicList>
+                  ) 
+                })}
+              </CategoryNav>
+            }
+        </ClinicDropdown>
         <Field>
           <input
             name="specialty"
@@ -168,7 +148,7 @@ const DoctorSignup = () => {
             type="text"
             required
             value={signupInfo.additionalClinicName}
-            onChange={specialtyHandler("specialty")}
+            onChange={signupInfoHandler("specialty")}
             style={{ height: "25px", width: "400px"}}
           />
         </Field>
@@ -179,7 +159,7 @@ const DoctorSignup = () => {
             type="password"
             required
             value={signupInfo.password}
-            onChange={passwordHandler("password")}
+            onChange={signupInfoHandler("password")}
             style={{ height: "25px", width: "400px"}}
           />
         </Field>
@@ -224,6 +204,51 @@ const SignupWrapper = styled.div`
 
 const Field = styled.div` 
   padding: 10px;
+`;
+
+const Text = styled.p`
+  margin-left: 10px;
+  cursor: pointer;
+`;
+
+const ClinicDropdown = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const slideDown = keyframes`
+  ${fadeInDown};
+`;
+
+const slideUp = keyframes`
+  ${fadeOutUp};
+`;
+
+const CategoryNav = styled.nav`
+  background: #ffffff;
+  border-radius: 3px;
+  position: inherit;
+  top: 10%;
+  right: 10px;
+  width: 80%;
+  opacity: 1;
+  padding-left: 5px;
+  margin: 0px 0px 10px 10px;
+  max-height: 300px;
+  border: 1px solid black;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  /* animation: 0.3s ${slideDown}; */
+`;
+
+const ClinicList = styled.p` 
+  margin: 5px;
+  padding: 3px;
+  &:hover {
+    cursor: pointer;
+    background-color: lightgray;
+  }
 `;
 
 const SubmitWrapper = styled.div` 
