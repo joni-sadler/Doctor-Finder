@@ -92,9 +92,13 @@ const getSingleClinic = async (req, res) => {
     const db = client.db("healthcare_database");
     console.log("connected!");
     console.log(req.params.id);
-    const data = await db.collection("clinics").findOne({ "_id": ObjectId(req.params.id) });
-    console.log(data);
-    res.status(200).json({ status: 200, data: data });
+    const clinicData = await db.collection("clinics").findOne({ "_id": ObjectId(req.params.id) });
+    const doctorDataPrimary = await db.collection("doctors").find({ "primaryClinic": clinicData.clinicName }).toArray();
+    const doctorDataSecondary = await db.collection("doctors").find({ "secondaryClinic": clinicData.clinicName }).toArray();
+    const doctorData = doctorDataPrimary.concat(doctorDataSecondary);
+    console.log(doctorData)
+    console.log(clinicData);
+    res.status(200).json({ status: 200, data: clinicData, doctorData });
 
   } catch (err) {
     res.status(500).json({ status: 500, message: err.message });
