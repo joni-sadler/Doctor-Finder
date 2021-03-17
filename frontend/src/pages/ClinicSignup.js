@@ -8,43 +8,7 @@ const ClinicSignup = () => {
   const [canBookAppointments, setCanBookAppointments] = useState(false);
   const [hasSubmittedInfo, setHasSubmittedInfo] = useState(false);
 
-  const clinicNameHandler = (name) => {
-    return ({ target: {value} }) => {
-      setSignupInfo((signupInfo) => ({ ...signupInfo, [name]: value }));
-    }
-  }
-
-  const clinicAddressHandler = (name) => {
-    return ({ target: {value} }) => {
-      setSignupInfo((signupInfo) => ({ ...signupInfo, [name]: value }));
-    }
-  }
-
-  const emailHandler = (name) => {
-    return ({ target: {value} }) => {
-      setSignupInfo((signupInfo) => ({ ...signupInfo, [name]: value }));
-    }
-  }
-
-  const phoneNumberHandler = (name) => {
-    return ({ target: {value} }) => {
-      setSignupInfo((signupInfo) => ({ ...signupInfo, [name]: value }));
-    }
-  }
-
-  const openingHoursHandler = (name) => {
-    return ({ target: {value} }) => {
-      setSignupInfo((signupInfo) => ({ ...signupInfo, [name]: value }));
-    }
-  }
-
-  const specialtiesHandler = (name) => {
-    return ({ target: {value} }) => {
-      setSignupInfo((signupInfo) => ({ ...signupInfo, [name]: value }));
-    }
-  }
-
-  const passwordHandler = (name) => {
+  const signupInfoHandler = (name) => {
     return ({ target: {value} }) => {
       setSignupInfo((signupInfo) => ({ ...signupInfo, [name]: value }));
     }
@@ -69,9 +33,9 @@ const ClinicSignup = () => {
       method: "POST",
       body: JSON.stringify({
           ...signupInfo, 
-          acceptsPatients: acceptsPatients,
-          acceptsWalkIns: acceptsWalkIns,
-          canBookAppointments: canBookAppointments
+          acceptsPatients,
+          acceptsWalkIns,
+          canBookAppointments,
         }),
       headers: {"Accept": "application/json", "Content-type": "application/json"},
     })
@@ -98,7 +62,7 @@ const ClinicSignup = () => {
             placeholder="Name of your clinic"
             type="text"
             value={signupInfo.clinicName}
-            onChange={clinicNameHandler("clinicName")}
+            onChange={signupInfoHandler("clinicName")}
             style={{ height: "25px", width: "400px"}}
           />
         </Field>
@@ -108,7 +72,7 @@ const ClinicSignup = () => {
             placeholder="Address of your clinic"
             type="text"
             value={signupInfo.clinicAddress}
-            onChange={clinicAddressHandler("clinicAddress")}
+            onChange={signupInfoHandler("clinicAddress")}
             style={{ height: "25px", width: "400px"}}
           />
         </Field>
@@ -118,7 +82,7 @@ const ClinicSignup = () => {
             placeholder="Email"
             type="text"
             value={signupInfo.email}
-            onChange={emailHandler("email")}
+            onChange={signupInfoHandler("email")}
             style={{ height: "25px", width: "400px"}}
           />
         </Field>
@@ -129,7 +93,7 @@ const ClinicSignup = () => {
             type="text"
             required
             value={signupInfo.phoneNumber}
-            onChange={phoneNumberHandler("phoneNumber")}
+            onChange={signupInfoHandler("phoneNumber")}
             style={{ height: "25px", width: "400px"}}
           />
         </Field>
@@ -139,7 +103,7 @@ const ClinicSignup = () => {
             placeholder="What are your opening hours?"
             type="text"
             value={signupInfo.hours}
-            onChange={openingHoursHandler("hours")}
+            onChange={signupInfoHandler("hours")}
             style={{ height: "25px", width: "400px"}}
           />
         </Field>
@@ -149,7 +113,7 @@ const ClinicSignup = () => {
             placeholder="Does your clinic offer any special services? Please list them."
             type="text"
             value={signupInfo.specialties}
-            onChange={specialtiesHandler("specialties")}
+            onChange={signupInfoHandler("specialties")}
             style={{ height: "25px", width: "400px"}}
           />
         </Field>
@@ -159,7 +123,7 @@ const ClinicSignup = () => {
             placeholder="Set your password"
             type="password"
             value={signupInfo.password}
-            onChange={passwordHandler("password")}
+            onChange={signupInfoHandler("password")}
             style={{ height: "25px", width: "400px"}}
           />
         </Field>
