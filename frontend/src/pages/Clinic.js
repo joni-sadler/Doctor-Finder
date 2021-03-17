@@ -20,13 +20,6 @@ const Clinic = () => {
     });
   }, [clinic]);
 
-  // useEffect(() => {
-  //   fetch(`/doctors`, {
-  //       method: "GET",
-  //     })
-  //       .then((res) => res.json())
-  //       .then((res) => setClinicDoctors(res.data));
-  // }, [])
 
   console.log(clinicDoctors);
 
@@ -40,12 +33,18 @@ const Clinic = () => {
       {clinicDoctors.length > 0 &&
       <DoctorsDiv>
         <Title>Doctors at this clinic:</Title>
-        <DoctorInfo 
-          to={`/doctors/${clinicDoctors[0]._id}`}
-          key={clinicDoctors[0]._id}
-        >
-          {clinicDoctors[0].title} {clinicDoctors[0].firstName} {clinicDoctors[0].lastName}
-        </DoctorInfo>
+        {clinicDoctors.map((clinicDoctor) => {
+          return (
+          <DoctorInfo
+            to={`/doctors/${clinicDoctor._id}`}
+            key={clinicDoctor._id}
+          >
+            {clinicDoctor.title} {clinicDoctor.firstName} {clinicDoctor.lastName}
+          </DoctorInfo>
+          )
+        })}
+
+
       </DoctorsDiv>
       }
     </Container>
@@ -85,7 +84,7 @@ const Title = styled.p`
 const DoctorInfo = styled(NavLink)` 
   font-size: 24px;
   font-weight: 500;
-  margin: 0px;
+  margin: 10px;
   padding: 0px;
   color: black;
   text-decoration: none;
