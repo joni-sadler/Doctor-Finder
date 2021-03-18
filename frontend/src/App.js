@@ -15,6 +15,7 @@ import Clinic from "./pages/Clinic";
 import ClinicList from "./pages/ClinicList";
 import DoctorList from "./pages/DoctorList";
 import Doctor from "./pages/Doctor";
+import DoctorHomePage from "./pages/DoctorHomePage";
 
 const App = () => {
   return (
@@ -62,6 +63,9 @@ const App = () => {
           </Route>
           <Route path="/doctors/:doctor">
             <Doctor />
+          </Route>
+          <Route path="/:doctor/home">
+            <DoctorHomePage />
           </Route>
         </Switch>
       </Main>

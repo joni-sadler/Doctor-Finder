@@ -1,73 +1,80 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import styled from "styled-components";
-import {NavLink} from "react-router-dom";
+import {Redirect, NavLink} from "react-router-dom";
 
 const HealthcareLogin = () => {
   const [displayDoctorLogin, setDisplayDoctorLogin] = useState(false);
   const [displayClinicLogin, setDisplayClinicLogin] = useState(false);
+  const [doctorLoginInfo, setDoctorLoginInfo] = useState({});
+  const [clinicLoginInfo, setClinicLoginInfo] = useState({});
+  const [doctorArray, setDoctorArray] = useState([]);
+  const [clinicArray, setClinicArray] = useState([]);
+  const [selectedDoctor, setSelectedDoctor] = useState();
+  const [selectedClinic, setSelectedClinic] = useState();
 
-  const [doctorLoginInfo, setDoctorLoginInfo] = useState({
-    email: "",
-    password: "",
-  });
+  useEffect(() => {
+    fetch(`/doctors`, {
+        method: "GET",
+      })
+        .then((res) => res.json())
+        .then((res) => setDoctorArray(res.data));
+  }, [])
 
-  const [clinicLoginInfo, setClinicLoginInfo] = useState({
-    email: "",
-    password: "",
-  });
+  useEffect(() => {
+    fetch(`/clinics`, {
+        method: "GET",
+      })
+        .then((res) => res.json())
+        .then((res) => setClinicArray(res.data));
+  }, [])
 
-  const handleDoctorLogin = () => {
+  const displayDoctorLoginFunction = () => {
     setDisplayDoctorLogin(!displayDoctorLogin);
     setDisplayClinicLogin(false);
   }
 
-  const handleClinicLogin = () => {
+  const displayClinicLoginFunction = () => {
     setDisplayClinicLogin(!displayClinicLogin);
     setDisplayDoctorLogin(false);
   }
 
-  const doctorEmailHandler = (name) => {
+  const doctorLoginHandler = (name) => {
     return ({ target: {value} }) => {
-      setDoctorLoginInfo((oldValues) => ({ ...oldValues, [name]: value }));
+      setDoctorLoginInfo((signupInfo) => ({ ...signupInfo, [name]: value }));
     }
   }
 
-  const doctorPasswordHandler = (name) => {
+
+  const clinicLoginHandler = (name) => {
     return ({ target: {value} }) => {
-      setDoctorLoginInfo((oldValues) => ({ ...oldValues, [name]: value }));
+      setClinicLoginInfo((signupInfo) => ({ ...signupInfo, [name]: value }));
     }
   }
 
-  const clinicEmailHandler = (name) => {
-    return ({ target: {value} }) => {
-      setClinicLoginInfo((oldValues) => ({ ...oldValues, [name]: value }));
-    }
-  }
-
-  const clinicPasswordHandler = (name) => {
-    return ({ target: {value} }) => {
-      setClinicLoginInfo((oldValues) => ({ ...oldValues, [name]: value }));
-    }
-  }
 
   const doctorSubmitFunction = () => {
-    // submit info
-    console.log(doctorLoginInfo);
-
-    // determine if login info is in database
+    doctorArray.forEach((doctor) => {
+      if (doctorLoginInfo.email === doctor.email && doctorLoginInfo.password === doctor.password) {
+        setSelectedDoctor(doctor);
+      }
+    })
   }
 
+
   const clinicSubmitFunction = () => {
-    // submit info
-    console.log(clinicLoginInfo);
-    // determine if login info is in database
+    clinicArray.forEach((clinic) => {
+      if (clinicLoginInfo.email === clinic.email && clinicLoginInfo.password === clinic.password) {
+        setSelectedClinic(clinic);
+        console.log(selectedClinic);
+      }
+    })
   }
 
   return (
     <Container>
       <LoginDiv>
         <Dropdown>
-          <Title onClick={handleDoctorLogin}>Doctor Login</Title>
+          <Title onClick={displayDoctorLoginFunction}>Doctor Login</Title>
           {displayDoctorLogin &&
             <LoginWrapper>
               <Field>
@@ -77,7 +84,7 @@ const HealthcareLogin = () => {
                   type="text"
                   required
                   value={doctorLoginInfo.email}
-                  onChange={doctorEmailHandler("email")}
+                  onChange={doctorLoginHandler("email")}
                   style={{ height: "25px", width: "200px"}}
                 />
               </Field>
@@ -85,22 +92,28 @@ const HealthcareLogin = () => {
                 <input
                   name="password"
                   placeholder="Password"
-                  type="text"
+                  type="password"
                   required
                   value={doctorLoginInfo.password}
-                  onChange={doctorPasswordHandler("password")}
+                  onChange={doctorLoginHandler("password")}
                   style={{ height: "25px", width: "200px"}}
                 />
-              </Field>
+              </Field>   
+
               <SubmitWrapper>
                 <SubmitButton onClick={doctorSubmitFunction}>Submit</SubmitButton>
               </SubmitWrapper>
+
+              {selectedDoctor &&
+              <Redirect to={`/${selectedDoctor._id}/home`}/>     
+              }
+
             </LoginWrapper>
           }
         </Dropdown>
 
         <Dropdown>
-          <Title onClick={handleClinicLogin}>Clinic Administrator Login</Title>
+          <Title onClick={displayClinicLoginFunction}>Clinic Administrator Login</Title>
           {displayClinicLogin &&
             <LoginWrapper>
               <Field>
@@ -110,7 +123,7 @@ const HealthcareLogin = () => {
                   type="text"
                   required
                   value={clinicLoginInfo.email}
-                  onChange={clinicEmailHandler("email")}
+                  onChange={clinicLoginHandler("email")}
                   style={{ height: "25px", width: "200px"}}
                 />
               </Field>
@@ -118,16 +131,18 @@ const HealthcareLogin = () => {
                 <input
                   name="password"
                   placeholder="Password"
-                  type="text"
+                  type="password"
                   required
                   value={clinicLoginInfo.password}
-                  onChange={clinicPasswordHandler("password")}
+                  onChange={clinicLoginHandler("password")}
                   style={{ height: "25px", width: "200px"}}
                 />
               </Field>
+
               <SubmitWrapper>
                 <SubmitButton onClick={clinicSubmitFunction}>Submit</SubmitButton>
               </SubmitWrapper>
+
             </LoginWrapper>
            }
         </Dropdown>
@@ -147,7 +162,7 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 40vw;
+  height: auto;
   width: 100%;
 `;
 
@@ -172,7 +187,7 @@ const LoginWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  border: 1px solid black;
+  align-items: center;
   border-radius: 3px;
   padding: 20px;
 `;
@@ -195,6 +210,7 @@ const SubmitButton = styled.button`
   padding: 5px;
   font-size: 30px;
   font-weight: 500;
+  cursor: pointer;
 `;
 
 const Signup = styled.div` 
