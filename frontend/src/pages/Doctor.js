@@ -7,9 +7,6 @@ const Doctor = () => {
   const id = useParams();
   const doctor = id.doctor;
 
-  console.log(doctor)
-
-
   useEffect(() => {
     fetch(`/doctors/${doctor}`, {
       method: "GET",
@@ -19,17 +16,27 @@ const Doctor = () => {
       console.log(res)
       setSelectedDoctor(res.data)
     });
-  }, []);
-
-  console.log(selectedDoctor);
+  }, [doctor]);
 
 
   return (
     <Container>
-      <DoctorName>{selectedDoctor.firstName} {selectedDoctor.lastName}</DoctorName>
-      <DoctorInfo>{selectedDoctor.clinicName}</DoctorInfo>
-      <DoctorInfo>{selectedDoctor.additionalClinic}</DoctorInfo>
-      <DoctorInfo>{selectedDoctor.email}</DoctorInfo>
+      <DoctorName>{selectedDoctor.title} {selectedDoctor.firstName} {selectedDoctor.lastName}</DoctorName>
+      {selectedDoctor.primaryClinic &&
+      <DoctorInfo>Primary clinic: {selectedDoctor.primaryClinic}</DoctorInfo> 
+      }
+      {selectedDoctor.secondaryClinic &&
+      <DoctorInfo>Secondary clinic: {selectedDoctor.secondaryClinic}</DoctorInfo>
+      }
+      {selectedDoctor.email &&
+      <DoctorInfo>Email: {selectedDoctor.email}</DoctorInfo>
+      }
+      {selectedDoctor.phoneNumber &&
+      <DoctorInfo>Phone number: {selectedDoctor.phoneNumber}</DoctorInfo>
+      }
+      {selectedDoctor.specialty &&
+      <DoctorInfo>Specialty: {selectedDoctor.specialty}</DoctorInfo>
+      }
     </Container>
   )
 }
@@ -50,6 +57,8 @@ const DoctorName = styled.p`
 const DoctorInfo = styled.p` 
   font-size: 24px;
   font-weight: 500;
+  margin: 5px;
+  padding: 0px;
 `;
 
 export default Doctor;

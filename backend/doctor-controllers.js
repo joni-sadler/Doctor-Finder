@@ -27,6 +27,7 @@ const addDoctor = async (req, res) => {
   console.log("disconnected");
 }
 
+
 const getDoctorsAcceptingPatients = async (req, res) => {
   const client = await MongoClient(MONGO_URI, options);
   await client.connect();
@@ -64,6 +65,7 @@ const getAllDoctors = async (req, res) => {
   console.log("disconnected");
 }
 
+
 const getSingleDoctor = async (req, res) => {
   const client = await MongoClient(MONGO_URI, options);
   await client.connect();
@@ -84,4 +86,24 @@ const getSingleDoctor = async (req, res) => {
   console.log("disconnected");
 }
 
-module.exports = { addDoctor, getDoctorsAcceptingPatients, getAllDoctors, getSingleDoctor };
+const updateDoctor = async (req, res) => {
+  const client = await MongoClient(MONGO_URI, options);
+  await client.connect();
+
+  try {
+    const db = client.db("healthcare_database");
+    console.log("connected!");
+    console.log("updateDoctorFunction");
+    delete req.body._id;
+    await db.collection("doctors").updateOne({"_id": ObjectId(req.params.id)}, { $set: {...req.body}});
+    res.status(201).json({ status: 201, data: req.body });
+
+  } catch (err) {
+    res.status(500).json({ status: 500, message: err.message });
+  }
+
+  client.close();
+  console.log("disconnected");
+}
+
+module.exports = { addDoctor, getDoctorsAcceptingPatients, getAllDoctors, getSingleDoctor, updateDoctor };

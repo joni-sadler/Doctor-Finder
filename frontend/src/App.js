@@ -64,7 +64,7 @@ const App = () => {
           <Route path="/doctors/:doctor">
             <Doctor />
           </Route>
-          <Route path="/:doctor/home">
+          <Route path="/doctor_profile/:doctor">
             <DoctorHomePage />
           </Route>
         </Switch>
