@@ -3,198 +3,178 @@ import styled, {keyframes} from "styled-components";
 import {fadeInDown, fadeOutUp} from "react-animations";
 
 const UpdateClinic = ({selectedClinic}) => {
-    const [currentInfo, setCurrentInfo] = useState(selectedClinic);
-    const [hasSubmittedInfo, setHasSubmittedInfo] = useState(false);
-
-    const [acceptsPatients, setAcceptsPatients] = useState(false);
-    const [acceptsWalkIns, setAcceptsWalkIns] = useState(false);
-    const [canBookAppointments, setCanBookAppointments] = useState(false);
+  const [currentInfo, setCurrentInfo] = useState(selectedClinic);
+  const [hasSubmittedInfo, setHasSubmittedInfo] = useState(false);
+  const [acceptsPatients, setAcceptsPatients] = useState(false);
+  const [acceptsWalkIns, setAcceptsWalkIns] = useState(false);
+  const [canBookAppointments, setCanBookAppointments] = useState(false);
   
-    // useEffect(() => {
-    //   fetch(`/clinics`, {
-    //     method: "GET",
-    //   })
-    //   .then((res) => res.json())
-    //    .then((res) => setClinics(res.data));
-    // }, [])
-
-    // // console.log(selectedDoctor);
-    // console.log(selectedDoctor._id);
-  
-  
-    const updateInfoHandler = (name) => {
-        return ({ target: {value} }) => {
-          setCurrentInfo((selectedDoctor) => ({ ...selectedDoctor, [name]: value }));
-        }
-      }
-  
-      const acceptingPatientsHandlerTrue = () => {
-        setAcceptsPatients(true)
-      }
-    
-      const acceptingWalkInHandlerTrue = () => {
-        setAcceptsWalkIns(true)
-      }
-    
-      const acceptingAppointmentsHandlerTrue = () => {
-          setCanBookAppointments(true)
-      }
-
-    console.log(currentInfo);
-  
-  
-    const submitFunction = () => {
-      setHasSubmittedInfo(true);
-      fetch(`/clinic_profile/${selectedClinic._id}`, {
-        method: "PUT",
-        body: JSON.stringify({
-            ...currentInfo, 
-            acceptsPatients,
-            acceptsWalkIns,
-            canBookAppointments,
-        }),
-        headers: {"Accept": "application/json", "Content-type": "application/json"},
-      })
-      .then((res) => res.json())
-      .then((res) => {
-        console.log(res);
-        if (res.status === 201) {
-          console.log(res.data)
-          setCurrentInfo(res.data)
-        } else {
-          console.log("There is an error with the post request.")
-        }
-      })
+  const updateInfoHandler = (name) => {
+    return ({ target: {value} }) => {
+      setCurrentInfo((selectedDoctor) => ({ ...selectedDoctor, [name]: value }));
     }
-
-    return (
-        <Container>
-            <SignupWrapper>
+  }
+  
+  const acceptingPatientsHandlerTrue = () => {
+    setAcceptsPatients(true)
+  }
     
-            <Field>
-              <input
-                name="clinicName"
-                placeholder="Name of your clinic"
-                type="text"
-                value={currentInfo.clinicName}
-                onChange={updateInfoHandler("clinicName")}
-                style={{ height: "25px", width: "400px"}}
-              />
-            </Field>
-            <Field>
-              <input
-                name="clinicAddress"
-                placeholder="Address of your clinic"
-                type="text"
-                value={currentInfo.clinicAddress}
-                onChange={updateInfoHandler("clinicAddress")}
-                style={{ height: "25px", width: "400px"}}
-              />
-            </Field>
-            <Field>
-              <input
-                name="email"
-                placeholder="Email"
-                type="text"
-                value={currentInfo.email}
-                onChange={updateInfoHandler("email")}
-                style={{ height: "25px", width: "400px"}}
-              />
-            </Field>
-            <Field>
-              <input
-                name="phoneNumber"
-                placeholder="Phone number"
-                type="text"
-                required
-                value={currentInfo.phoneNumber}
-                onChange={updateInfoHandler("phoneNumber")}
-                style={{ height: "25px", width: "400px"}}
-              />
-            </Field>
-            <Field>
-              <input
-                name="hours"
-                placeholder="What are your opening hours?"
-                type="text"
-                value={currentInfo.hours}
-                onChange={updateInfoHandler("hours")}
-                style={{ height: "25px", width: "400px"}}
-              />
-            </Field>
-            <Field>
-              <input
-                name="specialties"
-                placeholder="Does your clinic offer any special services? Please list them."
-                type="text"
-                value={currentInfo.specialties}
-                onChange={updateInfoHandler("specialties")}
-                style={{ height: "25px", width: "400px"}}
-              />
-            </Field>
-            <Field>
-              <input
-                name="password"
-                placeholder="Set your password"
-                type="password"
-                value={currentInfo.password}
-                onChange={updateInfoHandler("password")}
-                style={{ height: "25px", width: "400px"}}
-              />
-            </Field>
-            <Field>
-              <p>Are any of your doctors accepting new patients?</p>
-              <input 
-                name="acceptsPatients"
-                type="radio"
-                value="True"
-                onChange={acceptingPatientsHandlerTrue}
-              /> Yes
-              <input 
-                name="acceptsPatients"
-                type="radio"
-                value="False"
-              /> No
-            </Field>
-            <Field>
-              <p>Do you accept walk-ins?</p>
-              <input 
-                name="acceptsWalkins"
-                type="radio"
-                value="True"
-                onChange={acceptingWalkInHandlerTrue}
-              /> Yes
-              <input 
-                name="acceptsWalkins"
-                type="radio"
-                value="False"
-              /> No
-            </Field>
-            <Field>
-              <p>Can patients book an appointment in advance at your clinic?</p>
-              <input 
-                name="acceptsAppointments"
-                type="radio"
-                value="True"
-                onChange={acceptingAppointmentsHandlerTrue}
-              /> Yes
-              <input 
-                name="acceptsAppointments"
-                type="radio"
-                value="False"
-              /> No
-            </Field>
-            <SubmitWrapper>
-              <SubmitButton onClick={submitFunction}>
-                Submit
-              </SubmitButton>
+  const acceptingWalkInHandlerTrue = () => {
+    setAcceptsWalkIns(true)
+  }
+    
+  const acceptingAppointmentsHandlerTrue = () => {
+    setCanBookAppointments(true)
+  }
+  
+  const submitFunction = () => {
+    setHasSubmittedInfo(true);
+    fetch(`/clinic_profile/${selectedClinic._id}`, {
+      method: "PUT",
+      body: JSON.stringify({
+        ...currentInfo, 
+        acceptsPatients,
+        acceptsWalkIns,
+        canBookAppointments,
+    }),
+    headers: {"Accept": "application/json", "Content-type": "application/json"},
+    })
+    .then((res) => res.json())
+    .then((res) => {
+      console.log(res);
+      if (res.status === 201) {
+        setCurrentInfo(res.data)
+      } else {
+        console.log("There is an error with the post request.")
+      }
+    })
+  }
+
+  return (
+    <Container>
+      <SignupWrapper>
+        <Field>
+          <input
+            name="clinicName"
+            placeholder="Name of your clinic"
+            type="text"
+            value={currentInfo.clinicName}
+            onChange={updateInfoHandler("clinicName")}
+            style={{ height: "25px", width: "400px"}}
+          />
+        </Field>
+        <Field>
+          <input
+            name="clinicAddress"
+            placeholder="Address of your clinic"
+            type="text"
+            value={currentInfo.clinicAddress}
+            onChange={updateInfoHandler("clinicAddress")}
+            style={{ height: "25px", width: "400px"}}
+          />
+        </Field>
+        <Field>
+          <input
+            name="email"
+            placeholder="Email"
+            type="text"
+            value={currentInfo.email}
+            onChange={updateInfoHandler("email")}
+            style={{ height: "25px", width: "400px"}}
+          />
+        </Field>
+        <Field>
+          <input
+            name="phoneNumber"
+            placeholder="Phone number"
+            type="text"
+            required
+            value={currentInfo.phoneNumber}
+            onChange={updateInfoHandler("phoneNumber")}
+            style={{ height: "25px", width: "400px"}}
+          />
+        </Field>
+        <Field>
+          <input
+            name="hours"
+            placeholder="What are your opening hours?"
+            type="text"
+            value={currentInfo.hours}
+            onChange={updateInfoHandler("hours")}
+            style={{ height: "25px", width: "400px"}}
+          />
+        </Field>
+        <Field>
+          <input
+            name="specialties"
+            placeholder="Does your clinic offer any special services? Please list them."
+            type="text"
+            value={currentInfo.specialties}
+            onChange={updateInfoHandler("specialties")}
+            style={{ height: "25px", width: "400px"}}
+          />
+        </Field>
+        <Field>
+          <input
+            name="password"
+            placeholder="Set your password"
+            type="password"
+            value={currentInfo.password}
+            onChange={updateInfoHandler("password")}
+            style={{ height: "25px", width: "400px"}}
+          />
+        </Field>
+        <Field>
+          <p>Are any of your doctors accepting new patients?</p>
+          <input 
+            name="acceptsPatients"
+            type="radio"
+            value="True"
+            onChange={acceptingPatientsHandlerTrue}
+          /> Yes
+          <input 
+            name="acceptsPatients"
+            type="radio"
+            value="False"
+          /> No
+        </Field>
+        <Field>
+          <p>Do you accept walk-ins?</p>
+          <input 
+            name="acceptsWalkins"
+            type="radio"
+            value="True"
+            onChange={acceptingWalkInHandlerTrue}
+          /> Yes
+          <input 
+            name="acceptsWalkins"
+            type="radio"
+            value="False"
+          /> No
+        </Field>
+        <Field>
+          <p>Can patients book an appointment in advance at your clinic?</p>
+          <input 
+            name="acceptsAppointments"
+            type="radio"
+            value="True"
+            onChange={acceptingAppointmentsHandlerTrue}
+          /> Yes
+          <input 
+            name="acceptsAppointments"
+            type="radio"
+            value="False"
+          /> No
+        </Field>
+          <SubmitWrapper>
+            <SubmitButton onClick={submitFunction}>Submit</SubmitButton>
             </SubmitWrapper>
           </SignupWrapper>
           {hasSubmittedInfo &&
-              <div>
-                <RegistrationMessaging>Your account has been updated.</RegistrationMessaging>
-              </div>
-            }
+            <div>
+              <RegistrationMessaging>Your account has been updated.</RegistrationMessaging>
+            </div>
+          }
         </Container>
       )
     }
