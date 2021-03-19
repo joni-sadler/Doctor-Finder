@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
 const PORT = 8000;
-const { addDoctor, getDoctorsAcceptingPatients, getAllDoctors, getSingleDoctor } = require("./doctor-controllers");
+const { addDoctor, getDoctorsAcceptingPatients, getAllDoctors, getSingleDoctor, updateDoctor } = require("./doctor-controllers");
 const { addClinic, getWalkInClinics, getAppointmentClinics, getAllClinics, getSingleClinic } = require("./clinic-controllers");
 
 app.use(express.urlencoded({extended: true})); 
@@ -40,6 +40,9 @@ app.get("/doctors/:id", getSingleDoctor)
 // Add a doctor
 app.post("/doctor_signup", addDoctor)
 
+// Update doctor profile
+app.put("/doctor_profile/:id", updateDoctor)
+
 // Catch-all endpoint
 app.get("*", (req, res) => {
     res.status(404).json({
@@ -49,4 +52,5 @@ app.get("*", (req, res) => {
   })
 
 .listen(PORT, () => console.info(`Listening on port ${PORT}`));
+
 
