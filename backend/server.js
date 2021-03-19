@@ -3,7 +3,7 @@ const app = express();
 const bodyParser = require("body-parser");
 const PORT = 8000;
 const { addDoctor, getDoctorsAcceptingPatients, getAllDoctors, getSingleDoctor, updateDoctor } = require("./doctor-controllers");
-const { addClinic, getWalkInClinics, getAppointmentClinics, getAllClinics, getSingleClinic } = require("./clinic-controllers");
+const { addClinic, getWalkInClinics, getAppointmentClinics, getAllClinics, getSingleClinic, updateClinic } = require("./clinic-controllers");
 
 app.use(express.urlencoded({extended: true})); 
 app.use(express.json()); 
@@ -27,6 +27,9 @@ app.get("/clinics/:id", getSingleClinic)
 
 // Add a clinic
 app.post("/clinic_signup", addClinic)
+
+// Update clinic profile
+app.put("/clinic_profile/:id", updateClinic)
 
 // Get list of all doctors accepting patients
 app.get("/doctor_finder", getDoctorsAcceptingPatients)
