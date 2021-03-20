@@ -17,10 +17,10 @@ const ClinicHomePage = () => {
     })
     .then((res) => res.json())
     .then((res) => {
-      console.log(res)
       setSelectedClinic(res.data)
     });
   }, [clinic]);
+  
   
   const deleteFunction = () => {
     fetch(`/clinic_profile/${clinic}`, {
@@ -29,15 +29,12 @@ const ClinicHomePage = () => {
     .then((res) => res.json())
     .then((res) => {
       if (res.status === 201) {
-        console.log(res.data)
         setHasDeletedProfile(true);
       } else {
-        console.log("There is an error with the post request.")
+        console.log("There is an error with the delete request.")
       }
     })
   }
-
-  console.log(hasDeletedProfile);
 
   const updateProfileDropDownTrigger = () => {
     setUpdateProfileDropdown(!updateProfileDropdown);
