@@ -9,15 +9,13 @@ const DoctorSignup = () => {
   const [clinics, setClinics] = useState([]);
   const [primaryClinic, setPrimaryClinic] = useState();
   const [secondaryClinic, setSecondaryClinic] = useState();
-  // const [displayPrimaryClinicMenu, setDisplayPrimaryClinicMenu] = useState(false);
-  // const [displaySecondaryClinicMenu, setDisplaySecondaryClinicMenu] = useState(false);
 
   useEffect(() => {
     fetch(`/clinics`, {
       method: "GET",
     })
     .then((res) => res.json())
-     .then((res) => setClinics(res.data));
+    .then((res) => setClinics(res.data));
   }, [])
 
 
@@ -26,16 +24,6 @@ const DoctorSignup = () => {
       setSignupInfo((signupInfo) => ({ ...signupInfo, [name]: value }));
     }
   }
-
-  // const primaryClinicMenuHandler = () => {
-  //   setDisplayPrimaryClinicMenu(!displayPrimaryClinicMenu);
-    
-  // }
-
-  // const secondaryClinicMenuHandler = () => {
-  //   setDisplaySecondaryClinicMenu(!displaySecondaryClinicMenu);
-  // }
-
 
   const submitFunction = () => {
     setHasSubmittedInfo(true);
@@ -271,7 +259,7 @@ const RegistrationMessaging = styled.p`
 const LoginPrompt = styled(NavLink)` 
   font-size: 30px;
   font-weight: 600;
-  margin: 20px;
+  margin: 50px;
   text-decoration: none;
   color: black;
 `;
