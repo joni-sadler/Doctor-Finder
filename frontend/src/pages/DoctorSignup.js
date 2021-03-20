@@ -9,8 +9,8 @@ const DoctorSignup = () => {
   const [clinics, setClinics] = useState([]);
   const [primaryClinic, setPrimaryClinic] = useState();
   const [secondaryClinic, setSecondaryClinic] = useState();
-  const [displayPrimaryClinicMenu, setDisplayPrimaryClinicMenu] = useState(false);
-  const [displaySecondaryClinicMenu, setDisplaySecondaryClinicMenu] = useState(false);
+  // const [displayPrimaryClinicMenu, setDisplayPrimaryClinicMenu] = useState(false);
+  // const [displaySecondaryClinicMenu, setDisplaySecondaryClinicMenu] = useState(false);
 
   useEffect(() => {
     fetch(`/clinics`, {
@@ -27,14 +27,14 @@ const DoctorSignup = () => {
     }
   }
 
-  const primaryClinicMenuHandler = () => {
-    setDisplayPrimaryClinicMenu(!displayPrimaryClinicMenu);
+  // const primaryClinicMenuHandler = () => {
+  //   setDisplayPrimaryClinicMenu(!displayPrimaryClinicMenu);
     
-  }
+  // }
 
-  const secondaryClinicMenuHandler = () => {
-    setDisplaySecondaryClinicMenu(!displaySecondaryClinicMenu);
-  }
+  // const secondaryClinicMenuHandler = () => {
+  //   setDisplaySecondaryClinicMenu(!displaySecondaryClinicMenu);
+  // }
 
 
   const submitFunction = () => {
@@ -117,28 +117,24 @@ const DoctorSignup = () => {
           />
         </Field>
         <ClinicDropdown>
-          <Text onClick={primaryClinicMenuHandler}>Name of the clinic you are based at:</Text>
-            {displayPrimaryClinicMenu &&
-              <CategoryNav>
-                {clinics.map((clinic) => {
-                  return (
-                    <ClinicList onClick={() => setPrimaryClinic(clinic.clinicName)}>{clinic.clinicName}</ClinicList>
-                  )
-                })}
-              </CategoryNav>
-            }
+          <Text>Name of the clinic you are based at:</Text>
+            <CategoryNav>
+              {clinics.map((clinic) => {
+                return (
+                  <ClinicList onClick={() => setPrimaryClinic(clinic.clinicName)}>{clinic.clinicName}</ClinicList>
+                )
+              })}
+            </CategoryNav>
         </ClinicDropdown>        
         <ClinicDropdown>
-          <Text onClick={secondaryClinicMenuHandler}>If you work at an additional clinic, please select it:</Text>
-            {displaySecondaryClinicMenu &&
-              <CategoryNav>
-                {clinics.map((clinic) => {
-                  return (
-                    <ClinicList onClick={() => setSecondaryClinic(clinic.clinicName)}>{clinic.clinicName}</ClinicList>
-                  ) 
-                })}
-              </CategoryNav>
-            }
+          <Text>If you work at an additional clinic, please select it:</Text>
+            <CategoryNav>
+              {clinics.map((clinic) => {
+                return (
+                  <ClinicList onClick={() => setSecondaryClinic(clinic.clinicName)}>{clinic.clinicName}</ClinicList>
+                ) 
+              })}
+            </CategoryNav>
         </ClinicDropdown>
         <Field>
           <input
@@ -234,7 +230,7 @@ const CategoryNav = styled.nav`
   opacity: 1;
   padding-left: 5px;
   margin: 0px 0px 10px 10px;
-  max-height: 300px;
+  max-height: 100px;
   border: 1px solid black;
   overflow-y: auto;
   display: flex;
