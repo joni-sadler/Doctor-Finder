@@ -1,9 +1,21 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 import Map from "../components/Map";
 
 const HealthcareFinder = () => {
+  // const [clinics, setClinics] = useState([]);
+
+  //   useEffect(() => {
+  //     fetch(`/healthcare_finder`, {
+  //         method: "GET",
+  //       })
+  //         .then((res) => res.json())
+  //         .then((res) => setClinics(res.data));
+  //   }, [])
+
+  //   console.log(clinics);
+
   return (
     <Container>
       <MenuWrapper>
@@ -15,7 +27,7 @@ const HealthcareFinder = () => {
         <ListItem to={`/clinics`}>See all clinics in my area</ListItem>
       </MenuWrapper>
       <MapWrapper>
-        <Map />
+        {/* <Map /> */}
       </MapWrapper>
     </Container>
   )

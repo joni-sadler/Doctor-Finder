@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from "react";
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
+import Map from "../components/Map";
 
 const ClinicList = () => {
   const [clinics, setClinics] = useState([]);
@@ -31,7 +32,7 @@ const ClinicList = () => {
     
               </MenuWrapper>
               <MapWrapper>
-                Map goes here
+                <Map clinics={clinics}/>
               </MapWrapper>
             </Container>
           )
