@@ -3,7 +3,7 @@ const app = express();
 const bodyParser = require("body-parser");
 const PORT = 8000;
 const { addDoctor, getDoctorsAcceptingPatients, getAllDoctors, getSingleDoctor, updateDoctor, deleteDoctor } = require("./doctor-controllers");
-const { addClinic, getWalkInClinics, getAppointmentClinics, getAllClinics, getSingleClinic, updateClinic } = require("./clinic-controllers");
+const { addClinic, getWalkInClinics, getAppointmentClinics, getAllClinics, getSingleClinic, updateClinic, deleteClinic } = require("./clinic-controllers");
 
 app.use(express.urlencoded({extended: true})); 
 app.use(express.json()); 
@@ -31,6 +31,9 @@ app.post("/clinic_signup", addClinic)
 // Update clinic profile
 app.put("/clinic_profile/:id", updateClinic)
 
+// Delete a clinic
+app.delete("/clinic_profile/:id", deleteClinic)
+
 // Get list of all doctors accepting patients
 app.get("/doctor_finder", getDoctorsAcceptingPatients)
 
@@ -46,6 +49,7 @@ app.post("/doctor_signup", addDoctor)
 // Update doctor profile
 app.put("/doctor_profile/:id", updateDoctor)
 
+// Delete a doctor
 app.delete("/doctor_profile/:id", deleteDoctor)
 
 // Catch-all endpoint
