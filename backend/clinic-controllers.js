@@ -129,4 +129,21 @@ const updateClinic = async (req, res) => {
 }
 
 
-module.exports = { addClinic, getWalkInClinics, getAppointmentClinics, getAllClinics, getSingleClinic, updateClinic };
+const deleteClinic = async (req, res) => {
+  const client = await MongoClient(MONGO_URI, options);
+  await client.connect();
+
+  try {
+    const db = client.db("healthcare_database");
+    console.log("connected!");
+    await db.collection("clinics").deleteOne({"_id": ObjectId(req.params.id)})
+    res.status(201).json({ status: 201, data: req.body });
+  } catch (err) {
+    res.status(500).json({ status: 500, message: err.message });
+  }
+
+  client.close();
+  console.log("disconnected");
+}
+
+module.exports = { addClinic, getWalkInClinics, getAppointmentClinics, getAllClinics, getSingleClinic, updateClinic, deleteClinic };
