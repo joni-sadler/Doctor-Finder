@@ -1,4 +1,5 @@
 import React, {useState} from "react";
+import {NavLink} from "react-router-dom";
 import styled from "styled-components";
 
 const ClinicSignup = () => {
@@ -179,7 +180,8 @@ const ClinicSignup = () => {
           <div>
             <RegistrationMessaging>Thank you for registering! Your info is now securely stored in our database.</RegistrationMessaging>
           </div>
-        }
+      }
+      <LoginPrompt to={`/login`}>Return to the login page</LoginPrompt>
     </Container>
   )
 }
@@ -231,6 +233,14 @@ const SubmitButton = styled.button`
 const RegistrationMessaging = styled.p` 
   font-size: 20px;
   font-weight: 600;
+`;
+
+const LoginPrompt = styled(NavLink)` 
+  font-size: 30px;
+  font-weight: 600;
+  margin: 20px;
+  text-decoration: none;
+  color: black;
 `;
 
 export default ClinicSignup;

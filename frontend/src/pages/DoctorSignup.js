@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from "react";
+import {NavLink} from "react-router-dom";
 import styled, {keyframes} from "styled-components";
 import {fadeInDown, fadeOutUp} from "react-animations";
 
@@ -19,8 +20,6 @@ const DoctorSignup = () => {
      .then((res) => setClinics(res.data));
   }, [])
 
-    console.log(clinics);
-
 
   const signupInfoHandler = (name) => {
     return ({ target: {value} }) => {
@@ -40,7 +39,6 @@ const DoctorSignup = () => {
 
   const submitFunction = () => {
     setHasSubmittedInfo(true);
-    console.log(signupInfo);
     fetch("/doctor_signup", {
       method: "POST",
       body: JSON.stringify({...signupInfo, primaryClinic, secondaryClinic}),
@@ -50,6 +48,7 @@ const DoctorSignup = () => {
     .then((res) => {
       console.log(res);
       if (res.status === 201) {
+        console.log(res.data)
         setSignupInfo(res.data)
       } else {
         console.log("There is an error with the post request.")
@@ -173,7 +172,8 @@ const DoctorSignup = () => {
           <div>
             <RegistrationMessaging>Thank you for registering! Your info is now securely stored in our database.</RegistrationMessaging>
           </div>
-        }
+      }
+      <LoginPrompt to={`/login`}>Return to the login page</LoginPrompt>
     </Container>
   )
 }
@@ -183,7 +183,7 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  height: 50vw;
+  height: 100%;
   width: 100%;
 `;
 
@@ -270,6 +270,14 @@ const SubmitButton = styled.button`
 const RegistrationMessaging = styled.p` 
   font-size: 20px;
   font-weight: 600;
+`;
+
+const LoginPrompt = styled(NavLink)` 
+  font-size: 30px;
+  font-weight: 600;
+  margin: 20px;
+  text-decoration: none;
+  color: black;
 `;
 
 export default DoctorSignup;
