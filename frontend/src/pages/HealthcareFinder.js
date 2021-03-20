@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
+import Map from "../components/Map";
 
 const HealthcareFinder = () => {
   return (
@@ -14,7 +15,7 @@ const HealthcareFinder = () => {
         <ListItem to={`/clinics`}>See all clinics in my area</ListItem>
       </MenuWrapper>
       <MapWrapper>
-        Map goes here
+        <Map />
       </MapWrapper>
     </Container>
   )
