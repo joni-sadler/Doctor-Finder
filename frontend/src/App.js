@@ -17,6 +17,7 @@ import DoctorList from "./pages/DoctorList";
 import Doctor from "./pages/Doctor";
 import DoctorHomePage from "./pages/DoctorHomePage";
 import ClinicHomePage from "./pages/ClinicHomePage";
+import DeleteAccount from "./pages/DeleteAccount";
 
 const App = () => {
   return (
@@ -70,6 +71,9 @@ const App = () => {
           </Route>
           <Route path="/doctor_profile/:doctor">
             <DoctorHomePage />
+          </Route>
+          <Route path="/account_deleted">
+            <DeleteAccount />
           </Route>
         </Switch>
       </Main>

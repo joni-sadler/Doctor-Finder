@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
 const PORT = 8000;
-const { addDoctor, getDoctorsAcceptingPatients, getAllDoctors, getSingleDoctor, updateDoctor } = require("./doctor-controllers");
+const { addDoctor, getDoctorsAcceptingPatients, getAllDoctors, getSingleDoctor, updateDoctor, deleteDoctor } = require("./doctor-controllers");
 const { addClinic, getWalkInClinics, getAppointmentClinics, getAllClinics, getSingleClinic, updateClinic } = require("./clinic-controllers");
 
 app.use(express.urlencoded({extended: true})); 
@@ -45,6 +45,8 @@ app.post("/doctor_signup", addDoctor)
 
 // Update doctor profile
 app.put("/doctor_profile/:id", updateDoctor)
+
+app.delete("/doctor_profile/:id", deleteDoctor)
 
 // Catch-all endpoint
 app.get("*", (req, res) => {
