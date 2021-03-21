@@ -4,6 +4,7 @@ import { NavLink } from "react-router-dom";
 import Map from "../components/Map";
 
 const HealthcareFinder = () => {
+  const [displaySpecialties, setDisplaySpecialties] = useState(false)
   // const [clinics, setClinics] = useState([]);
 
   //   useEffect(() => {
@@ -16,6 +17,31 @@ const HealthcareFinder = () => {
 
   //   console.log(clinics);
 
+  const [doctors, setDoctors] = useState([]);
+
+  useEffect(() => {
+    fetch(`/doctors`, {
+        method: "GET",
+      })
+        .then((res) => res.json())
+        .then((res) => setDoctors(res.data));
+  }, [])
+
+  // doctors.forEach(doctor => console.log(doctor.specialty))
+  
+  const onClickSpecialties = () => {
+    setDisplaySpecialties(!displaySpecialties);
+    console.log("display specialties")
+  }
+
+  console.log(displaySpecialties);
+
+  const doctorSpecialties = doctors.map(doctor => doctor.specialty).filter((value, index, self) => self.indexOf(value) === index)
+  
+  const filteredDoctorSpecialties = doctorSpecialties.filter(function(element) {
+    return element !== undefined;
+  })
+
   return (
     <Container>
       <MenuWrapper>
@@ -25,6 +51,24 @@ const HealthcareFinder = () => {
         <ListItem to={`/clinic_appointments`}>Find a clinic that accepts appointments</ListItem>
         <ListItem to={`/doctors`}>See all doctors in my area</ListItem>
         <ListItem to={`/clinics`}>See all clinics in my area</ListItem>
+        <SearchBySpeciality onClick={onClickSpecialties}>Search by specialty</SearchBySpeciality>
+          {displaySpecialties &&
+            <div>
+              {filteredDoctorSpecialties.map((specialty) => {
+                return (
+                  <div>
+                    <Specialty 
+                      to={`/`}
+                      key={specialty}
+                    >
+                      {specialty}
+                    </Specialty>
+                  </div>
+                )
+              })}
+            </div>
+          }
+
       </MenuWrapper>
       <MapWrapper>
         {/* <Map /> */}
@@ -67,7 +111,24 @@ const ListItem = styled(NavLink)`
   color: black;
   text-decoration: none;
   cursor: pointer;
-  
+`;
+
+const SearchBySpeciality = styled.div` 
+  font-size: 18px;
+  font-weight: 600;
+  padding: 0px 20px;
+  margin: 10px 0px;
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+`;
+
+const Specialty = styled(NavLink)` 
+  font-size: 18px;
+  font-weight: 500;
+  margin: 30px;
+  text-decoration: none;
+  color: black;
 `;
 
 export default HealthcareFinder;
