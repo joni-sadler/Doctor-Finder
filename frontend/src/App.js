@@ -18,6 +18,7 @@ import Doctor from "./pages/Doctor";
 import DoctorHomePage from "./pages/DoctorHomePage";
 import ClinicHomePage from "./pages/ClinicHomePage";
 import DeleteAccount from "./pages/DeleteAccount";
+import Specialty from "./pages/Specialty";
 
 const App = () => {
   return (
@@ -54,7 +55,7 @@ const App = () => {
           <Route path="/clinics/:clinic">
             <Clinic />
           </Route>
-          <Route path="/clinics">
+          <Route exact path="/clinics">
             <ClinicList />
           </Route>
           <Route path="/clinic_profile/:clinic">
@@ -72,7 +73,10 @@ const App = () => {
           <Route path="/doctor_profile/:doctor">
             <DoctorHomePage />
           </Route>
-          <Route path="/account_deleted">
+          <Route path="/specialty/:specialty">
+            <Specialty />
+          </Route>
+          <Route exact path="/account_deleted">
             <DeleteAccount />
           </Route>
         </Switch>

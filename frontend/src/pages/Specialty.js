@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {useParams} from "react-router-dom";
+import {useParams, NavLink} from "react-router-dom";
 import styled from "styled-components";
 
 const Specialty = () => {
@@ -28,7 +28,12 @@ const Specialty = () => {
       {specialtyDoctors.map((specialtyDoctor) => {
         return (
           <DoctorInfoWrapper>
-            <DoctorName>{specialtyDoctor.title} {specialtyDoctor.firstName} {specialtyDoctor.lastName}</DoctorName>
+            <DoctorName
+              to={`/doctors/${specialtyDoctor._id}`}
+              key={specialtyDoctor._id}
+            >
+              {specialtyDoctor.title} {specialtyDoctor.firstName} {specialtyDoctor.lastName}
+            </DoctorName>
             {specialtyDoctor.primaryClinic &&
               <DoctorInfo>Primary clinic: {specialtyDoctor.primaryClinic}</DoctorInfo>
             }
@@ -70,10 +75,13 @@ const DoctorInfoWrapper = styled.div`
   align-items: center;
 `;
 
-const DoctorName = styled.p` 
+const DoctorName = styled(NavLink)` 
   font-size: 22px;
   font-weight: 600;
   margin: 30px 0px 10px 0px;
+  text-decoration: none;
+  color: black;
+
 `;
 
 const DoctorInfo = styled.p` 
