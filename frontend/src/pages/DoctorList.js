@@ -5,27 +5,31 @@ import { NavLink } from "react-router-dom";
 const DoctorList = () => {
   const [doctors, setDoctors] = useState([]);
 
-    useEffect(() => {
-      fetch(`/doctors`, {
-          method: "GET",
-        })
-          .then((res) => res.json())
-          .then((res) => setDoctors(res.data));
-    }, [])
-
-    console.log(doctors);
+  useEffect(() => {
+    fetch(`/doctors`, {
+        method: "GET",
+      })
+        .then((res) => res.json())
+        .then((res) => setDoctors(res.data));
+  }, [])
+  
+  doctors.sort(function(a, b) {
+    if (a.lastName < b.lastName) {return -1;}
+    if (a.lastName > b.lastName) {return 1;}
+    return 0;
+  })
 
   return (
     <Container>
       <MenuWrapper>
-        <MenuText>All registered doctors in Montreal:</MenuText>
+        <MenuText>All registered doctors in my area:</MenuText>
               {doctors.map((doctor) => {
                 return (
                   <ListItem
                     to={`/doctors/${doctor._id}`}
                     key={doctor._id}
                   >
-                    {doctor.firstName} {doctor.lastName}</ListItem>
+                    {doctor.title} {doctor.firstName} {doctor.lastName}</ListItem>
                 )
             })}
     

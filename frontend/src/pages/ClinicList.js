@@ -14,7 +14,12 @@ const ClinicList = () => {
           .then((res) => setClinics(res.data));
     }, [])
 
-    console.log(clinics);
+    clinics.sort(function(a, b) {
+      if (a.clinicName < b.clinicName) {return -1;}
+      if (a.clinicName > b.clinicName) {return 1;}
+      return 0;
+    })
+
 
   return (
     <Container>

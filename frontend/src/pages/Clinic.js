@@ -21,9 +21,6 @@ const Clinic = () => {
   }, [clinic]);
 
 
-  console.log(clinicDoctors);
-
-
   return (
     <Container>
       <ClinicName>{selectedClinic.clinicName}</ClinicName>

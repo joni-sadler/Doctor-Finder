@@ -14,7 +14,11 @@ const AppointmentClinics = () => {
         .then((res) => setAppointmentClinics(res.data));
   }, [])
 
-  console.log(appointmentClinics);
+  appointmentClinics.sort(function(a, b) {
+    if (a.clinicName < b.clinicName) {return -1;}
+    if (a.clinicName > b.clinicName) {return 1;}
+    return 0;
+  })
 
 
   return (
