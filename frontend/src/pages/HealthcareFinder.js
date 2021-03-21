@@ -58,7 +58,7 @@ const HealthcareFinder = () => {
                 return (
                   <div>
                     <Specialty 
-                      to={`/`}
+                      to={`/specialty/${specialty}`}
                       key={specialty}
                     >
                       {specialty}
