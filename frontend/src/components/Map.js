@@ -61,12 +61,6 @@ const Map = ({acceptingPatients, walkInClinics, appointmentClinics, clinics}) =>
     return;
   }
 
-  // const divStyle = {
-  //   background: `white`,
-  //   border: `1px solid #ccc`,
-  //   padding: 15
-  // }
-
   const onClickMapHandler = (marker) => {
     console.log(marker.clinicName);
     setInfoWindowMarker(marker);
@@ -87,13 +81,10 @@ const Map = ({acceptingPatients, walkInClinics, appointmentClinics, clinics}) =>
           onCloseClick={() => setInfoWindowMarker(null)}
           options={{pixelOffset: new window.google.maps.Size(0,-30)}}
         >
-          {/* <div style={divStyle}> */}
           <InfoWindowContainer>
-            <p>{infoWindowMarker.clinicName}</p>
-            <p>{infoWindowMarker.clinicAddress}</p>
+            <InfoWindowText>{infoWindowMarker.clinicName}</InfoWindowText>
+            <InfoWindowText>{infoWindowMarker.clinicAddress}</InfoWindowText>
           </InfoWindowContainer>
-
-          {/* </div> */}
         </InfoWindow>
       }
 
@@ -120,5 +111,9 @@ const InfoWindowContainer = styled.div`
   margin: 0px;
 `;
 
-// export default React.memo(Map);
+const InfoWindowText = styled.p` 
+  font-size: 12px;
+  font-weight: 400;
+`;
+
 export default Map;
