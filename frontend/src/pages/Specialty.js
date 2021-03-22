@@ -6,6 +6,7 @@ const Specialty = () => {
   const specialtyObject = useParams();
   const specialty = Object.values(specialtyObject)
   const [allDoctors, setAllDoctors] = useState([]);
+  const [displayDoctorInfo, setDisplayDoctorInfo] = useState(false);
   const specialtyDoctors = [];
 
   useEffect(() => {
@@ -28,6 +29,9 @@ const Specialty = () => {
     return 0;
   })
 
+  const handleDisplayInfo = () => {
+    setDisplayDoctorInfo(!displayDoctorInfo);
+  }
 
   return (
     <Container>
@@ -36,22 +40,27 @@ const Specialty = () => {
         return (
           <DoctorInfoWrapper>
             <DoctorName
-              to={`/doctors/${specialtyDoctor._id}`}
               key={specialtyDoctor._id}
+              onClick={handleDisplayInfo}
             >
-              {specialtyDoctor.title} {specialtyDoctor.firstName} {specialtyDoctor.lastName}
+              {specialtyDoctor.title} {specialtyDoctor.firstName} {specialtyDoctor.lastName}     
             </DoctorName>
-            {specialtyDoctor.primaryClinic &&
-              <DoctorInfo>Primary clinic: {specialtyDoctor.primaryClinic}</DoctorInfo>
-            }
-            {specialtyDoctor.secondaryClinic &&
-              <DoctorInfo>Additional clinic: {specialtyDoctor.secondaryClinic}</DoctorInfo>
-            }
-            {specialtyDoctor.phoneNumber &&
-              <DoctorInfo>Phone number: {specialtyDoctor.phoneNumber}</DoctorInfo>
-            }
-             {specialtyDoctor.email &&
-              <DoctorInfo>Email: {specialtyDoctor.email}</DoctorInfo>
+            {displayDoctorInfo &&
+              <DropdownDoctorInfo>
+                {specialtyDoctor.primaryClinic &&
+                  <DoctorInfo>Primary clinic: {specialtyDoctor.primaryClinic}</DoctorInfo>
+                }
+                {specialtyDoctor.secondaryClinic &&
+                  <DoctorInfo>Additional clinic: {specialtyDoctor.secondaryClinic}</DoctorInfo>
+                } 
+                {specialtyDoctor.phoneNumber &&
+                  <DoctorInfo>Phone number: {specialtyDoctor.phoneNumber}</DoctorInfo>
+                }
+                {specialtyDoctor.email &&
+                  <DoctorInfo>Email: {specialtyDoctor.email}</DoctorInfo>
+                }
+                <DoctorPageLink to={`/doctors/${specialtyDoctor._id}`}>View full doctor profile</DoctorPageLink>
+              </DropdownDoctorInfo>
             }
           </DoctorInfoWrapper>
         )
@@ -82,13 +91,20 @@ const DoctorInfoWrapper = styled.div`
   align-items: center;
 `;
 
-const DoctorName = styled(NavLink)` 
+const DoctorName = styled.p` 
   font-size: 22px;
   font-weight: 600;
   margin: 30px 0px 10px 0px;
   text-decoration: none;
   color: black;
+  cursor: pointer;
+`;
 
+const DropdownDoctorInfo = styled.div` 
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `;
 
 const DoctorInfo = styled.p` 
@@ -96,6 +112,16 @@ const DoctorInfo = styled.p`
   font-weight: 500;
   margin: 0px;
   padding: 5px;
+`;
+
+const DoctorPageLink = styled(NavLink)` 
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0px;
+  padding: 5px;
+  text-decoration: none;
+  color: black;
+  cursor: pointer;
 `;
 
 export default Specialty;
