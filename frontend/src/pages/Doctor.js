@@ -17,7 +17,8 @@ const Doctor = () => {
       setSelectedDoctor(res.data)
     });
   }, [doctor]);
-
+  
+  console.log(doctor);
 
   return (
     <Container>
@@ -28,10 +29,10 @@ const Doctor = () => {
       {selectedDoctor.secondaryClinic &&
       <DoctorInfo>Secondary clinic: {selectedDoctor.secondaryClinic}</DoctorInfo>
       }
-      {selectedDoctor.email &&
+      {selectedDoctor.showEmail &&
       <DoctorInfo>Email: {selectedDoctor.email}</DoctorInfo>
       }
-      {selectedDoctor.phoneNumber &&
+      {selectedDoctor.showPhoneNumber &&
       <DoctorInfo>Phone number: {selectedDoctor.phoneNumber}</DoctorInfo>
       }
       {selectedDoctor.specialty &&

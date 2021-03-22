@@ -10,6 +10,8 @@ const UpdateDoctor = ({selectedDoctor}) => {
     const [secondaryClinic, setSecondaryClinic] = useState();
     const [displayPrimaryClinicMenu, setDisplayPrimaryClinicMenu] = useState(false);
     const [displaySecondaryClinicMenu, setDisplaySecondaryClinicMenu] = useState(false);
+    const [showEmail, setShowEmail] = useState(false);
+    const [showPhoneNumber, setShowPhoneNumber] = useState(false);
   
     useEffect(() => {
       fetch(`/clinics`, {
@@ -39,13 +41,21 @@ const UpdateDoctor = ({selectedDoctor}) => {
     }
 
     console.log(currentInfo);
+
+    const showEmailHandlerTrue = () => {
+      setShowEmail(true);
+    }
+  
+    const showPhoneNumberHandlerTrue = () => {
+      setShowPhoneNumber(true);
+    }
   
   
     const submitFunction = () => {
       setHasSubmittedInfo(true);
       fetch(`/doctor_profile/${selectedDoctor._id}`, {
         method: "PUT",
-        body: JSON.stringify({...currentInfo, primaryClinic, secondaryClinic}),
+        body: JSON.stringify({...currentInfo, primaryClinic, secondaryClinic, showEmail, showPhoneNumber}),
         headers: {"Accept": "application/json", "Content-type": "application/json"},
       })
       .then((res) => res.json())
@@ -108,6 +118,20 @@ const UpdateDoctor = ({selectedDoctor}) => {
           />
         </Field>
         <Field>
+          <p>Show my email as part of my public doctor profile?</p>
+          <input 
+            name="showEmail"
+            type="radio"
+            value="True"
+            onChange={showEmailHandlerTrue}
+          /> Yes
+          <input 
+            name="showEmail"
+            type="radio"
+            value="False"
+          /> No
+        </Field>
+        <Field>
           <input
             name="phoneNumber"
             placeholder="Phone number"
@@ -117,6 +141,20 @@ const UpdateDoctor = ({selectedDoctor}) => {
             onChange={updateInfoHandler("phoneNumber")}
             style={{ height: "25px", width: "400px"}}
           />
+        </Field>
+        <Field>
+          <p>Show my phone number as part of my public doctor profile?</p>
+          <input 
+            name="showPhoneNumber"
+            type="radio"
+            value="True"
+            onChange={showPhoneNumberHandlerTrue}
+          /> Yes
+          <input 
+            name="showPhoneNumber"
+            type="radio"
+            value="False"
+          /> No
         </Field>
         <ClinicDropdown>
           <Text onClick={primaryClinicMenuHandler}>Name of the clinic you are based at:</Text>
@@ -169,6 +207,11 @@ const UpdateDoctor = ({selectedDoctor}) => {
             Submit
           </SubmitButton>
         </SubmitWrapper>
+        {hasSubmittedInfo &&
+          <SubmitConfirmation>
+            <SubmitMessage>Your profile has been updated.</SubmitMessage>
+          </SubmitConfirmation>
+        }
       </SignupWrapper>
     </Container>
   )
@@ -257,9 +300,15 @@ const SubmitButton = styled.button`
   font-weight: 500;
 `;
 
-const RegistrationMessaging = styled.p` 
-  font-size: 20px;
-  font-weight: 600;
+const SubmitConfirmation = styled.div` 
+  display: flex;
+  justify-content: center;
+  width: 100%;
+`;
+
+const SubmitMessage = styled.p` 
+  font-size: 18px;
+  font-weight: 500;
   margin: 20px;
 `;
 

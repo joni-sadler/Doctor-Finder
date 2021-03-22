@@ -9,6 +9,8 @@ const DoctorSignup = () => {
   const [clinics, setClinics] = useState([]);
   const [primaryClinic, setPrimaryClinic] = useState();
   const [secondaryClinic, setSecondaryClinic] = useState();
+  const [showEmail, setShowEmail] = useState(false);
+  const [showPhoneNumber, setShowPhoneNumber] = useState(false);
 
   useEffect(() => {
     fetch(`/clinics`, {
@@ -25,11 +27,19 @@ const DoctorSignup = () => {
     }
   }
 
+  const showEmailHandlerTrue = () => {
+    setShowEmail(true);
+  }
+
+  const showPhoneNumberHandlerTrue = () => {
+    setShowPhoneNumber(true);
+  }
+
   const submitFunction = () => {
     setHasSubmittedInfo(true);
     fetch("/doctor_signup", {
       method: "POST",
-      body: JSON.stringify({...signupInfo, primaryClinic, secondaryClinic}),
+      body: JSON.stringify({...signupInfo, primaryClinic, secondaryClinic, showEmail, showPhoneNumber}),
       headers: {"Accept": "application/json", "Content-type": "application/json"},
     })
     .then((res) => res.json())
@@ -94,6 +104,20 @@ const DoctorSignup = () => {
           />
         </Field>
         <Field>
+          <p>Show my email as part of my public doctor profile?</p>
+          <input 
+            name="showEmail"
+            type="radio"
+            value="True"
+            onChange={showEmailHandlerTrue}
+          /> Yes
+          <input 
+            name="showEmail"
+            type="radio"
+            value="False"
+          /> No
+        </Field>
+        <Field>
           <input
             name="phoneNumber"
             placeholder="Phone number"
@@ -103,6 +127,20 @@ const DoctorSignup = () => {
             onChange={signupInfoHandler("phoneNumber")}
             style={{ height: "25px", width: "400px"}}
           />
+        </Field>
+        <Field>
+          <p>Show my phone number as part of my public doctor profile?</p>
+          <input 
+            name="showPhoneNumber"
+            type="radio"
+            value="True"
+            onChange={showPhoneNumberHandlerTrue}
+          /> Yes
+          <input 
+            name="showPhoneNumber"
+            type="radio"
+            value="False"
+          /> No
         </Field>
         <ClinicDropdown>
           <Text>Name of the clinic you are based at:</Text>
