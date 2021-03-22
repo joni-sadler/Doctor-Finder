@@ -17,6 +17,7 @@ const Map = ({acceptingPatients, walkInClinics, appointmentClinics, clinics}) =>
   const [markers, setMarkers] = useState([])
   const [infoWindowMarker, setInfoWindowMarker] = useState(null);
   const [showingInfoWindow, setShowingInfoWindow] = useState(false);
+  const [userPosition, setUserPosition] = useState({});
 
  
   useEffect(() => {
@@ -50,6 +51,9 @@ const Map = ({acceptingPatients, walkInClinics, appointmentClinics, clinics}) =>
     }
   }, [clinics]);
 
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition(success);
+  })
 
   const center = {
     lat: 45.522944,
@@ -66,6 +70,15 @@ const Map = ({acceptingPatients, walkInClinics, appointmentClinics, clinics}) =>
     setInfoWindowMarker(marker);
     setShowingInfoWindow(true);
   }
+
+  const success = (position) => {
+    const currentPosition = {
+      lat: position.coords.latitude,
+      lng: position.coords.longitude
+    }
+    setUserPosition(currentPosition);
+  };
+
 
   return isLoaded ? (
       <GoogleMap
