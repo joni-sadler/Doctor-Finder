@@ -5,6 +5,7 @@ import Map from "../components/Map";
 
 const ClinicList = () => {
   const [clinics, setClinics] = useState([]);
+  const [postalCodeStorage, setPostalCodeStorage] = useState();
   const [postalCode, setPostalCode] = useState();
 
   useEffect(() => {
@@ -40,16 +41,21 @@ const ClinicList = () => {
         <PostalCodePrompt>
           Enter your postal code to find your nearest clinic:
         </PostalCodePrompt>
-        <Field>
-          <input
-            name="postalCode"
-            placeholder="Enter your postal code"
-            type="text"
-            value={postalCode}
-            onChange={(e) => setPostalCode(e.target.value)}
-            style={{ height: "30px", width: "150px" }}
-          />
-        </Field>
+        <PostalCodeWrapper>
+          <Field>
+            <input
+              name="postalCode"
+              placeholder="Enter your postal code"
+              type="text"
+              value={postalCodeStorage}
+              onChange={(e) => setPostalCodeStorage(e.target.value)}
+              style={{ height: "30px", width: "150px" }}
+            />
+          </Field>
+          <SubmitPostalCode onClick={() => setPostalCode(postalCodeStorage)}>
+            Submit
+          </SubmitPostalCode>
+        </PostalCodeWrapper>
       </MenuWrapper>
       <MapWrapper>
         <Map clinics={clinics} postalCode={postalCode} />
@@ -102,6 +108,21 @@ const PostalCodePrompt = styled.p`
 
 const Field = styled.div`
   padding: 0px 20px;
+`;
+
+const PostalCodeWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  padding-left: 20px;
+`;
+
+const SubmitPostalCode = styled.button`
+  padding: 5px;
+  background-color: black;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  width: 100px;
 `;
 
 export default ClinicList;
