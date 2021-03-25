@@ -5,6 +5,7 @@ import {
   Marker,
   InfoWindow,
 } from "@react-google-maps/api";
+import Geocode from "react-geocode";
 import styled from "styled-components";
 
 const containerStyle = {
@@ -17,16 +18,18 @@ const Map = ({
   walkInClinics,
   appointmentClinics,
   clinics,
+  postalCode,
 }) => {
   const { isLoaded, loadError } = useJsApiLoader({
     id: "google-map-script",
     googleMapsApiKey: process.env.REACT_APP_MAP_KEY,
   });
 
+  Geocode.setApiKey(process.env.REACT_APP_GEOCODING_API_KEY);
+
   const [markers, setMarkers] = useState([]);
   const [infoWindowMarker, setInfoWindowMarker] = useState(null);
   const [showingInfoWindow, setShowingInfoWindow] = useState(false);
-  const [userPosition, setUserPosition] = useState({});
 
   useEffect(() => {
     if (walkInClinics) {
@@ -56,71 +59,71 @@ const Map = ({
     }
   }, [clinics]);
 
-  useEffect(() => {
-    if (navigator.geolocation) {
-      navigator.permissions
-        .query({ name: "geolocation" })
-        .then(function (result) {
-          if (result.state === "granted") {
-            console.log(result.state);
-            //If granted then you can directly call your function here
-            navigator.geolocation.getCurrentPosition(success);
-          } else if (result.state === "prompt") {
-            navigator.geolocation.getCurrentPosition(success, errors, options);
-          } else if (result.state === "denied") {
-            //If denied then you have to show instructions to enable location
-          }
-          result.onchange = function () {
-            console.log(result.state);
-          };
-        });
-    } else {
-      alert("Sorry Not available!");
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (navigator.geolocation) {
+  //     navigator.permissions
+  //       .query({ name: "geolocation" })
+  //       .then(function (result) {
+  //         if (result.state === "granted") {
+  //           console.log(result.state);
+  //           //If granted then you can directly call your function here
+  //           navigator.geolocation.getCurrentPosition(success);
+  //         } else if (result.state === "prompt") {
+  //           navigator.geolocation.getCurrentPosition(success, errors, options);
+  //         } else if (result.state === "denied") {
+  //           //If denied then you have to show instructions to enable location
+  //         }
+  //         result.onchange = function () {
+  //           console.log(result.state);
+  //         };
+  //       });
+  //   } else {
+  //     alert("Sorry Not available!");
+  //   }
+  // }, []);
 
-  function geoFindMe() {
-    function success(position) {
-      const latitude = position.coords.latitude;
-      const longitude = position.coords.longitude;
-      const mapLink = `https://www.openstreetmap.org/#map=18/${latitude}/${longitude}`;
-      console.log(`Latitude: ${latitude} °, Longitude: ${longitude} °`);
-      console.log(mapLink);
-    }
-    function error(err) {
-      console.log(err);
-      console.log("Unable to retrieve your location");
-    }
-    if (!navigator.geolocation) {
-      console.log("Geolocation is not supported by your browser");
-    } else {
-      console.log("Locating…");
-      var options = {
-        enableHighAccuracy: false,
-        timeout: 10000,
-        maximumAge: 1000000,
-      };
-      navigator.geolocation.getCurrentPosition(success, error, options);
-    }
-  }
+  // function geoFindMe() {
+  //   function success(position) {
+  //     const latitude = position.coords.latitude;
+  //     const longitude = position.coords.longitude;
+  //     const mapLink = `https://www.openstreetmap.org/#map=18/${latitude}/${longitude}`;
+  //     console.log(`Latitude: ${latitude} °, Longitude: ${longitude} °`);
+  //     console.log(mapLink);
+  //   }
+  //   function error(err) {
+  //     console.log(err);
+  //     console.log("Unable to retrieve your location");
+  //   }
+  //   if (!navigator.geolocation) {
+  //     console.log("Geolocation is not supported by your browser");
+  //   } else {
+  //     console.log("Locating…");
+  //     var options = {
+  //       enableHighAccuracy: false,
+  //       timeout: 10000,
+  //       maximumAge: 1000000,
+  //     };
+  //     navigator.geolocation.getCurrentPosition(success, error, options);
+  //   }
+  // }
 
-  console.log(navigator);
+  // console.log(navigator);
 
-  navigator.geolocation.getCurrentPosition((position) => console.log(position));
+  // navigator.geolocation.getCurrentPosition((position) => console.log(position));
 
-  function success(position) {
-    console.log(position);
-  }
+  // function success(position) {
+  //   console.log(position);
+  // }
 
-  function errors(err) {
-    console.warn(`ERROR(${err.code}): ${err.message}`);
-  }
+  // function errors(err) {
+  //   console.warn(`ERROR(${err.code}): ${err.message}`);
+  // }
 
-  const options = {
-    enableHighAccuracy: true,
-    timeout: 5000,
-    maximumAge: 0,
-  };
+  // const options = {
+  //   enableHighAccuracy: true,
+  //   timeout: 5000,
+  //   maximumAge: 0,
+  // };
 
   const center = {
     lat: 45.522944,
@@ -138,13 +141,18 @@ const Map = ({
     setShowingInfoWindow(true);
   };
 
+  Geocode.fromAddress(postalCode).then(
+    (response) => {
+      const { lat, lng } = response.results[0].geometry.location;
+      console.log(postalCode, lat, lng);
+    },
+    (error) => {
+      console.error(error);
+    }
+  );
+
   return isLoaded ? (
-    <GoogleMap
-      mapContainerStyle={containerStyle}
-      center={center}
-      zoom={12}
-      onClick={geoFindMe}
-    >
+    <GoogleMap mapContainerStyle={containerStyle} center={center} zoom={12}>
       {infoWindowMarker && (
         <InfoWindow
           position={{
