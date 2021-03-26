@@ -8,6 +8,8 @@ import {
 import Geocode from "react-geocode";
 import styled from "styled-components";
 
+// const sortByDistance = require("sort-by-distance");
+
 const containerStyle = {
   width: "100%",
   height: "100%",
@@ -28,8 +30,14 @@ const Map = ({
   Geocode.setApiKey(process.env.REACT_APP_GEOCODING_API_KEY);
 
   const [markers, setMarkers] = useState([]);
+  const [originMarker, setOriginMarker] = useState({});
   const [infoWindowMarker, setInfoWindowMarker] = useState(null);
   const [showingInfoWindow, setShowingInfoWindow] = useState(false);
+  const [originPoint, setOriginPoint] = useState({});
+  // const [clinicCoordinates, setClinicCoordinates] = useState([]);
+  const [closestClinic, setClosestClinic] = useState([]);
+
+  const clinicCoordinates = [];
 
   useEffect(() => {
     if (walkInClinics) {
@@ -59,71 +67,12 @@ const Map = ({
     }
   }, [clinics]);
 
-  // useEffect(() => {
-  //   if (navigator.geolocation) {
-  //     navigator.permissions
-  //       .query({ name: "geolocation" })
-  //       .then(function (result) {
-  //         if (result.state === "granted") {
-  //           console.log(result.state);
-  //           //If granted then you can directly call your function here
-  //           navigator.geolocation.getCurrentPosition(success);
-  //         } else if (result.state === "prompt") {
-  //           navigator.geolocation.getCurrentPosition(success, errors, options);
-  //         } else if (result.state === "denied") {
-  //           //If denied then you have to show instructions to enable location
-  //         }
-  //         result.onchange = function () {
-  //           console.log(result.state);
-  //         };
-  //       });
-  //   } else {
-  //     alert("Sorry Not available!");
-  //   }
-  // }, []);
-
-  // function geoFindMe() {
-  //   function success(position) {
-  //     const latitude = position.coords.latitude;
-  //     const longitude = position.coords.longitude;
-  //     const mapLink = `https://www.openstreetmap.org/#map=18/${latitude}/${longitude}`;
-  //     console.log(`Latitude: ${latitude} °, Longitude: ${longitude} °`);
-  //     console.log(mapLink);
-  //   }
-  //   function error(err) {
-  //     console.log(err);
-  //     console.log("Unable to retrieve your location");
-  //   }
-  //   if (!navigator.geolocation) {
-  //     console.log("Geolocation is not supported by your browser");
-  //   } else {
-  //     console.log("Locating…");
-  //     var options = {
-  //       enableHighAccuracy: false,
-  //       timeout: 10000,
-  //       maximumAge: 1000000,
-  //     };
-  //     navigator.geolocation.getCurrentPosition(success, error, options);
-  //   }
-  // }
-
-  // console.log(navigator);
-
-  // navigator.geolocation.getCurrentPosition((position) => console.log(position));
-
-  // function success(position) {
-  //   console.log(position);
-  // }
-
-  // function errors(err) {
-  //   console.warn(`ERROR(${err.code}): ${err.message}`);
-  // }
-
-  // const options = {
-  //   enableHighAccuracy: true,
-  //   timeout: 5000,
-  //   maximumAge: 0,
-  // };
+  useEffect(() => {
+    if (originPoint) {
+      setOriginMarker(originPoint);
+      return originMarker;
+    }
+  }, [originPoint]);
 
   const center = {
     lat: 45.522944,
@@ -144,12 +93,16 @@ const Map = ({
   Geocode.fromAddress(postalCode).then(
     (response) => {
       const { lat, lng } = response.results[0].geometry.location;
-      console.log(postalCode, lat, lng);
+      setOriginPoint({ latitude: lat, longitude: lng });
     },
     (error) => {
       console.error(error);
     }
   );
+
+  clinics.forEach((clinic) => {
+    clinicCoordinates.push({ latitude: clinic.lat, longitude: clinic.lng });
+  });
 
   return isLoaded ? (
     <GoogleMap mapContainerStyle={containerStyle} center={center} zoom={12}>
@@ -168,6 +121,18 @@ const Map = ({
             <InfoWindowText>{infoWindowMarker.clinicAddress}</InfoWindowText>
           </InfoWindowContainer>
         </InfoWindow>
+      )}
+
+      {originPoint && (
+        <Marker
+          position={{
+            lat: Number(originPoint.latitude),
+            lng: Number(originPoint.longitude),
+          }}
+          icon={{
+            url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png",
+          }}
+        />
       )}
 
       {markers.map((marker) => {
