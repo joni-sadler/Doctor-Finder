@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Redirect, NavLink } from "react-router-dom";
+import Header from "../components/Header";
 
 const ClinicLogin = () => {
   const [clinicLoginInfo, setClinicLoginInfo] = useState({});
@@ -35,6 +36,7 @@ const ClinicLogin = () => {
 
   return (
     <Container>
+      <Header />
       <LoginDiv>
         <Dropdown>
           <Title>Clinic Administrator Login</Title>
@@ -86,8 +88,6 @@ const ClinicLogin = () => {
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
   height: auto;
   width: 100%;
   background-color: #085b67;
@@ -106,7 +106,7 @@ const Dropdown = styled.div`
 const Title = styled.p`
   font-size: 60px;
   font-weight: 600;
-  margin: 20px;
+  margin: 100px 20px 20px 20px;
   color: white;
   cursor: pointer;
   text-shadow: 1px 1px 1px #000000;
