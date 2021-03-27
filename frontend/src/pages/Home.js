@@ -1,81 +1,99 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
-import Footer from "../components/Footer";
+import Header from "../components/Header";
 
 const Home = () => {
   return (
     <Container>
-      <Title>Navigating Montreal's Health System</Title>
-      <MenuDiv>
-        <Patient to={`/healthcarefinder`}>
-          I'm seeking healthcare
-        </Patient>
-        <Provider to={`providerlogin`}>
-          I'm a healthcare provider
-        </Provider>
-      </MenuDiv>
-      <FooterDiv>
-        <Footer />  
-      </FooterDiv>
+      <Header />
+
+      <ContentWrapper>
+        <Title>Navigating Montreal's Healthcare System</Title>
+        <SubheaderText>
+          Many Montrealers do not have a family doctor and experience difficulty
+          finding appropriate care when they need it. We’re trying to make
+          things easier.
+        </SubheaderText>
+        <MenuDiv>
+          <Patient to={`/healthcare_finder`}>I'm seeking healthcare</Patient>
+          <Provider to={`/login`}>I'm a healthcare provider</Provider>
+        </MenuDiv>
+      </ContentWrapper>
     </Container>
-  )
+  );
 };
 
-const Container = styled.div` 
+const Container = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  border: 2px solid black;
-  border-radius: 3px;
-  height: 100%;
   width: 100%;
+  height: 100%;
 `;
 
-const MenuDiv = styled.div` 
+const ContentWrapper = styled.div`
   display: flex;
-  justify-content: space-around;
+  flex-direction: column;
+  justify-content: flex-start;
+  height: 100%;
+  width: auto;
+  padding-left: 50px;
+  background-color: #085b67;
 `;
 
-const Title = styled.p` 
+const MenuDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+`;
+
+const Title = styled.p`
   font-size: 60px;
   font-weight: 700;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   margin-top: 100px;
+  color: white;
+  text-shadow: 1px 1px 1px #000000;
 `;
 
-const Patient = styled(NavLink)`     
-  border-radius: 3px;
-  margin: 0px 50px;
-  padding: 10px 20px;
-  text-decoration: none;
-  color: black;
-  font-size: 32px;
+const SubheaderText = styled.p`
+  font-size: 24px;
   font-weight: 600;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  color: white;
+  text-shadow: 1px 1px 1px #000000;
+`;
+
+const Patient = styled(NavLink)`
+  margin: 50px 0px 25px 25px;
+  text-decoration: none;
+  font-size: 36px;
+  font-weight: 600;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  color: white;
+  text-shadow: 1px 1px 1px #000000;
   transition: 0.2s;
   &:hover {
-    background-color: black;
-    color: white;
+    font-size: 38px;
   }
 `;
 
-const Provider = styled(NavLink)` 
-  border-radius: 3px;
-  margin: 0px 50px;
-  padding: 10px 20px;
+const Provider = styled(NavLink)`
+  margin: 25px 0px 25px 25px;
   text-decoration: none;
-  color: black;
-  font-size: 28px;
+  font-size: 36px;
   font-weight: 600;
-  transition: 0.4s;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  color: white;
+  text-shadow: 1px 1px 1px #000000;
+  transition: 0.2s;
   &:hover {
-    background-color: black;
-    color: white;
+    font-size: 38px;
   }
-`;
-
-const FooterDiv = styled.div` 
-  /* border: 1px solid orange; */
 `;
 
 export default Home;
