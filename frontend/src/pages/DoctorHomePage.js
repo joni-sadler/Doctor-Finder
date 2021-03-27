@@ -64,7 +64,7 @@ const DoctorHomePage = () => {
         {hasDeletedProfile &&
               <Redirect to={`/account_deleted`}/>     
         }
-      {/* <ActionItem to={`/doctors/${selectedDoctor._id}`}>Logout</ActionItem> */}
+      <Logout to={`/`}>Logout</Logout>
     </Container>
   )
 }
@@ -112,6 +112,14 @@ const DeleteButton = styled.button`
   padding: 5px;
   font-size: 30px;
   font-weight: 500;
+  cursor: pointer;
+`;
+
+const Logout = styled(NavLink)` 
+  font-size: 24px;
+  text-decoration: none;
+  color: black;
+  margin: 10px;
   cursor: pointer;
 `;
 
