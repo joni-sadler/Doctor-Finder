@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import styled, { keyframes } from "styled-components";
 import { fadeInDown, fadeOutUp } from "react-animations";
+import Header from "../components/Header";
 
 const DoctorSignup = () => {
   const [signupInfo, setSignupInfo] = useState({});
@@ -11,10 +12,10 @@ const DoctorSignup = () => {
   const [secondaryClinic, setSecondaryClinic] = useState();
   const [showEmail, setShowEmail] = useState(false);
   const [showPhoneNumber, setShowPhoneNumber] = useState(false);
-  const [firstNameValidation, setFirstNameValidation] = useState(false);
-  const [lastNameValidation, setLastNameValidation] = useState(false);
-  const [emailValidation, setEmailValidation] = useState(false);
-  const [passwordValidation, setPasswordValidation] = useState(false);
+  const [firstNameValidation, setFirstNameValidation] = useState();
+  const [lastNameValidation, setLastNameValidation] = useState();
+  const [emailValidation, setEmailValidation] = useState();
+  const [passwordValidation, setPasswordValidation] = useState();
 
   useEffect(() => {
     fetch(`/clinics`, {
@@ -123,161 +124,174 @@ const DoctorSignup = () => {
 
   return (
     <Container>
-      <Title>Signup</Title>
-      <SignupWrapper>
-        <Field>
-          <input
-            name="title"
-            placeholder="Title"
-            type="text"
-            value={signupInfo.title}
-            onChange={signupInfoHandler("title")}
-            style={{ height: "25px", width: "400px" }}
-          />
-        </Field>
-        <Field>
-          <input
-            name="firstName"
-            placeholder="First name"
-            type="text"
-            value={signupInfo.firstName}
-            onChange={signupInfoHandler("firstName")}
-            style={{ height: "25px", width: "400px" }}
-          />{" "}
-          *
-          {!firstNameValidation && hasSubmittedInfo && (
-            <p>This field is required</p>
-          )}
-        </Field>
-        <Field>
-          <input
-            name="lastName"
-            placeholder="Last name"
-            type="text"
-            value={signupInfo.lastName}
-            onChange={signupInfoHandler("lastName")}
-            style={{ height: "25px", width: "400px" }}
-          />{" "}
-          *
-        </Field>
-        <Field>
-          <input
-            name="email"
-            placeholder="Email"
-            type="text"
-            value={signupInfo.email}
-            onChange={signupInfoHandler("email")}
-            style={{ height: "25px", width: "400px" }}
-          />{" "}
-          *
-        </Field>
-        <Field>
-          <p>Show my email as part of my public doctor profile?</p>
-          <input
-            name="showEmail"
-            type="radio"
-            value="True"
-            onChange={showEmailHandlerTrue}
-          />{" "}
-          Yes
-          <input name="showEmail" type="radio" value="False" /> No
-        </Field>
-        <Field>
-          <input
-            name="phoneNumber"
-            placeholder="Phone number"
-            type="text"
-            value={signupInfo.phoneNumber}
-            onChange={signupInfoHandler("phoneNumber")}
-            style={{ height: "25px", width: "400px" }}
-          />
-        </Field>
-        <Field>
-          <p>Show my phone number as part of my public doctor profile?</p>
-          <input
-            name="showPhoneNumber"
-            type="radio"
-            value="True"
-            onChange={showPhoneNumberHandlerTrue}
-          />{" "}
-          Yes
-          <input name="showPhoneNumber" type="radio" value="False" /> No
-        </Field>
-        <ClinicDropdown>
-          <Text>Name of the clinic you are based at:</Text>
-          <CategoryNav>
-            {clinics.map((clinic) => {
-              return (
-                <ClinicList onClick={() => setPrimaryClinic(clinic.clinicName)}>
-                  {clinic.clinicName}
-                </ClinicList>
-              );
-            })}
-          </CategoryNav>
-        </ClinicDropdown>
-        <ClinicDropdown>
-          <Text>If you work at an additional clinic, please select it:</Text>
-          <CategoryNav>
-            {clinics.map((clinic) => {
-              return (
-                <ClinicList
-                  onClick={() => setSecondaryClinic(clinic.clinicName)}
-                >
-                  {clinic.clinicName}
-                </ClinicList>
-              );
-            })}
-          </CategoryNav>
-        </ClinicDropdown>
-        <Field>
-          <input
-            name="specialty"
-            placeholder="If you specialize in particular type(s) of medicine, list them. "
-            type="text"
-            value={signupInfo.additionalClinicName}
-            onChange={signupInfoHandler("specialty")}
-            style={{ height: "25px", width: "400px" }}
-          />
-        </Field>
-        <Field>
-          <input
-            name="password"
-            placeholder="Set your password"
-            type="password"
-            value={signupInfo.password}
-            onChange={signupInfoHandler("password")}
-            style={{ height: "25px", width: "400px" }}
-          />{" "}
-          *
-        </Field>
-        <RequiredFields>* Required fields</RequiredFields>
-        <SubmitWrapper>
-          {firstNameValidation &&
-          lastNameValidation &&
-          emailValidation &&
-          passwordValidation ? (
-            <SubmitButton onClick={submitFunction}>Submit</SubmitButton>
-          ) : (
-            <SubmitButtonInactive>
-              Please complete all required fields
-            </SubmitButtonInactive>
-          )}
-        </SubmitWrapper>
-      </SignupWrapper>
-      {hasSubmittedInfo && (
-        <div>
-          <RegistrationMessaging>
-            Thank you for registering! Your info is now securely stored in our
-            database.
-          </RegistrationMessaging>
-        </div>
-      )}
-      <LoginPrompt to={`/login`}>Return to the login page</LoginPrompt>
+      <Header />
+      <ContentWrapper>
+        <Title>Create a new doctor account</Title>
+        <SignupWrapper>
+          <Field>
+            <input
+              name="title"
+              placeholder="Title"
+              type="text"
+              value={signupInfo.title}
+              onChange={signupInfoHandler("title")}
+              style={{ height: "25px", width: "400px" }}
+            />
+          </Field>
+          <Field>
+            <input
+              name="firstName"
+              placeholder="First name"
+              type="text"
+              value={signupInfo.firstName}
+              onChange={signupInfoHandler("firstName")}
+              style={{ height: "25px", width: "400px" }}
+            />{" "}
+            *
+            {!firstNameValidation && hasSubmittedInfo && (
+              <p>This field is required</p>
+            )}
+          </Field>
+          <Field>
+            <input
+              name="lastName"
+              placeholder="Last name"
+              type="text"
+              value={signupInfo.lastName}
+              onChange={signupInfoHandler("lastName")}
+              style={{ height: "25px", width: "400px" }}
+            />{" "}
+            *
+          </Field>
+          <Field>
+            <input
+              name="email"
+              placeholder="Email"
+              type="text"
+              value={signupInfo.email}
+              onChange={signupInfoHandler("email")}
+              style={{ height: "25px", width: "400px" }}
+            />{" "}
+            *
+          </Field>
+          <Field>
+            <Text>Show my email as part of my public doctor profile?</Text>
+            <input
+              name="showEmail"
+              type="radio"
+              value="True"
+              onChange={showEmailHandlerTrue}
+            />{" "}
+            Yes
+            <input name="showEmail" type="radio" value="False" /> No
+          </Field>
+          <Field>
+            <input
+              name="phoneNumber"
+              placeholder="Phone number"
+              type="text"
+              value={signupInfo.phoneNumber}
+              onChange={signupInfoHandler("phoneNumber")}
+              style={{ height: "25px", width: "400px" }}
+            />
+          </Field>
+          <Field>
+            <Text>
+              Show my phone number as part of my public doctor profile?
+            </Text>
+            <input
+              name="showPhoneNumber"
+              type="radio"
+              value="True"
+              onChange={showPhoneNumberHandlerTrue}
+            />{" "}
+            Yes
+            <input name="showPhoneNumber" type="radio" value="False" /> No
+          </Field>
+          <ClinicDropdown>
+            <Text>Name of the clinic you are based at:</Text>
+            <CategoryNav>
+              {clinics.map((clinic) => {
+                return (
+                  <ClinicList
+                    onClick={() => setPrimaryClinic(clinic.clinicName)}
+                  >
+                    {clinic.clinicName}
+                  </ClinicList>
+                );
+              })}
+            </CategoryNav>
+          </ClinicDropdown>
+          <ClinicDropdown>
+            <Text>If you work at an additional clinic, please select it:</Text>
+            <CategoryNav>
+              {clinics.map((clinic) => {
+                return (
+                  <ClinicList
+                    onClick={() => setSecondaryClinic(clinic.clinicName)}
+                  >
+                    {clinic.clinicName}
+                  </ClinicList>
+                );
+              })}
+            </CategoryNav>
+          </ClinicDropdown>
+          <Field>
+            <input
+              name="specialty"
+              placeholder="If you specialize in particular type(s) of medicine, list them. "
+              type="text"
+              value={signupInfo.additionalClinicName}
+              onChange={signupInfoHandler("specialty")}
+              style={{ height: "25px", width: "400px" }}
+            />
+          </Field>
+          <Field>
+            <input
+              name="password"
+              placeholder="Set your password"
+              type="password"
+              value={signupInfo.password}
+              onChange={signupInfoHandler("password")}
+              style={{ height: "25px", width: "400px" }}
+            />{" "}
+            *
+          </Field>
+          <RequiredFields>* Required fields</RequiredFields>
+          <SubmitWrapper>
+            {firstNameValidation &&
+            lastNameValidation &&
+            emailValidation &&
+            passwordValidation ? (
+              <SubmitButton onClick={submitFunction}>Submit</SubmitButton>
+            ) : (
+              <SubmitButtonInactive>
+                Please complete all required fields
+              </SubmitButtonInactive>
+            )}
+          </SubmitWrapper>
+        </SignupWrapper>
+        {hasSubmittedInfo && (
+          <div>
+            <RegistrationMessaging>
+              Thank you for registering! Your info is now securely stored in our
+              database.
+            </RegistrationMessaging>
+          </div>
+        )}
+        <LoginPrompt to={`/login`}>Return to the login page</LoginPrompt>
+      </ContentWrapper>
     </Container>
   );
 };
 
 const Container = styled.div`
+  height: 100vw;
+  width: 100%;
+  background-color: #085b67;
+`;
+
+const ContentWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -289,13 +303,16 @@ const Container = styled.div`
 const Title = styled.p`
   font-size: 40px;
   font-weight: 600;
-  margin: 10px;
+  margin: 40px;
+  color: white;
+  text-shadow: 1px 1px 1px #000000;
 `;
 
 const SignupWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  background-color: white;
   border: 1px solid black;
   border-radius: 3px;
   padding: 20px;
@@ -307,6 +324,7 @@ const Field = styled.div`
 
 const Text = styled.p`
   margin-left: 10px;
+  /* color: white; */
   cursor: pointer;
 `;
 
@@ -373,13 +391,13 @@ const SubmitButton = styled.button`
 
 const SubmitButtonInactive = styled.div`
   display: flex;
-  text-align: center;
+  justify-content: center;
   background-color: grey;
   color: white;
   border-radius: 3px;
-  width: 300px;
-  padding: 5px;
-  font-size: 30px;
+  width: 90%;
+  padding: 10px 5px;
+  font-size: 24px;
   font-weight: 500;
 `;
 
@@ -393,7 +411,8 @@ const LoginPrompt = styled(NavLink)`
   font-weight: 600;
   margin: 50px;
   text-decoration: none;
-  color: black;
+  color: white;
+  text-shadow: 1px 1px 1px #000000;
 `;
 
 export default DoctorSignup;
