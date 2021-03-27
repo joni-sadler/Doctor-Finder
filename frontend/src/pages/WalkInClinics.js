@@ -30,18 +30,20 @@ const WalkInClinics = () => {
     <Container>
       <MenuWrapper>
         <MenuText>Walk-In Clinics:</MenuText>
-        {walkInClinics.map((walkInClinic) => {
-          return (
-            <ListItem
-              to={`/clinics/${walkInClinic._id}`}
-              key={walkInClinic._id}
-            >
-              {walkInClinic.clinicName}
-            </ListItem>
-          );
-        })}
+        <ListItemContainer>
+          {walkInClinics.map((walkInClinic) => {
+            return (
+              <ListItem
+                to={`/clinics/${walkInClinic._id}`}
+                key={walkInClinic._id}
+              >
+                {walkInClinic.clinicName}
+              </ListItem>
+            );
+          })}
+        </ListItemContainer>
         <PostalCodePrompt>
-          Enter your postal code to find your nearest clinic:
+          Enter your postal code to find the nearest clinic:
         </PostalCodePrompt>
         <PostalCodeWrapper>
           <Field>
@@ -58,6 +60,11 @@ const WalkInClinics = () => {
             Submit
           </SubmitPostalCode>
         </PostalCodeWrapper>
+        {postalCode && (
+          <PostalCodeText>
+            The blue marker on the map indicates your location.
+          </PostalCodeText>
+        )}
       </MenuWrapper>
       <MapWrapper>
         <Map walkInClinics={walkInClinics} postalCode={postalCode} />
@@ -69,47 +76,62 @@ const WalkInClinics = () => {
 const Container = styled.div`
   display: flex;
   justify-content: space-between;
-  border: 1px solid blue;
   width: 100%;
   height: 100%;
+  background-color: #085b67;
 `;
 
 const MenuWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  border: 1px solid green;
   width: 500px;
 `;
 
 const MenuText = styled.p`
-  font-size: 24px;
+  font-size: 40px;
   font-weight: 600;
   padding: 0px 20px;
+  color: white;
+  text-shadow: 1px 1px 1px #000000;
 `;
 
 const MapWrapper = styled.div`
-  border: 1px solid purple;
-  width: 70%;
+  border: 1px solid black;
+  width: 60%;
+  height: 80%;
+  margin: 20px;
+`;
+
+const ListItemContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  max-height: 300px;
+  background-color: white;
+  border-radius: 3px;
+  overflow-y: auto;
+  margin-left: 20px;
 `;
 
 const ListItem = styled(NavLink)`
   font-size: 16px;
   font-weight: 600;
-  padding: 0px 10px;
-  margin: 10px 20px;
+  padding: 10px 0px 10px 25px;
   color: black;
   text-decoration: none;
   cursor: pointer;
 `;
 
 const PostalCodePrompt = styled.p`
-  font-size: 16px;
+  font-size: 20px;
   font-weight: 600;
-  padding: 40px 20px 0px 20px;
+  padding: 40px 20px 20px 20px;
+  color: white;
+  text-shadow: 1px 1px 1px #000000;
 `;
 
 const Field = styled.div`
-  padding: 0px 20px;
+  border-radius: 3px;
+  padding-right: 20px;
 `;
 
 const PostalCodeWrapper = styled.div`
@@ -121,10 +143,18 @@ const PostalCodeWrapper = styled.div`
 const SubmitPostalCode = styled.button`
   padding: 5px;
   background-color: black;
+  border-radius: 3px;
   color: white;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 600;
   width: 100px;
+`;
+
+const PostalCodeText = styled.p`
+  font-size: 18px;
+  color: white;
+  text-shadow: 1px 1px 1px #000000;
+  margin: 40px 20px;
 `;
 
 export default WalkInClinics;
