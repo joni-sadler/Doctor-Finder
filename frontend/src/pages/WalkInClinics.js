@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 import Map from "../components/Map";
+import Header from "../components/Header";
 
 const WalkInClinics = () => {
   const [walkInClinics, setWalkInClinics] = useState([]);
@@ -27,51 +28,59 @@ const WalkInClinics = () => {
   });
 
   return (
-    <Container>
-      <MenuWrapper>
-        <MenuText>Walk-In Clinics:</MenuText>
-        <ListItemContainer>
-          {walkInClinics.map((walkInClinic) => {
-            return (
-              <ListItem
-                to={`/clinics/${walkInClinic._id}`}
-                key={walkInClinic._id}
-              >
-                {walkInClinic.clinicName}
-              </ListItem>
-            );
-          })}
-        </ListItemContainer>
-        <PostalCodePrompt>
-          Enter your postal code to find the nearest clinic:
-        </PostalCodePrompt>
-        <PostalCodeWrapper>
-          <Field>
-            <input
-              name="postalCode"
-              placeholder="Enter your postal code"
-              type="text"
-              value={postalCodeStorage}
-              onChange={(e) => setPostalCodeStorage(e.target.value)}
-              style={{ height: "30px", width: "150px" }}
-            />
-          </Field>
-          <SubmitPostalCode onClick={() => setPostalCode(postalCodeStorage)}>
-            Submit
-          </SubmitPostalCode>
-        </PostalCodeWrapper>
-        {postalCode && (
-          <PostalCodeText>
-            The blue marker on the map indicates your location.
-          </PostalCodeText>
-        )}
-      </MenuWrapper>
-      <MapWrapper>
-        <Map walkInClinics={walkInClinics} postalCode={postalCode} />
-      </MapWrapper>
-    </Container>
+    <PageWrapper>
+      <Header />
+      <Container>
+        <MenuWrapper>
+          <MenuText>Walk-In Clinics:</MenuText>
+          <ListItemContainer>
+            {walkInClinics.map((walkInClinic) => {
+              return (
+                <ListItem
+                  to={`/clinics/${walkInClinic._id}`}
+                  key={walkInClinic._id}
+                >
+                  {walkInClinic.clinicName}
+                </ListItem>
+              );
+            })}
+          </ListItemContainer>
+          <PostalCodePrompt>
+            Enter your postal code to find the nearest clinic:
+          </PostalCodePrompt>
+          <PostalCodeWrapper>
+            <Field>
+              <input
+                name="postalCode"
+                placeholder="Enter your postal code"
+                type="text"
+                value={postalCodeStorage}
+                onChange={(e) => setPostalCodeStorage(e.target.value)}
+                style={{ height: "30px", width: "150px" }}
+              />
+            </Field>
+            <SubmitPostalCode onClick={() => setPostalCode(postalCodeStorage)}>
+              Submit
+            </SubmitPostalCode>
+          </PostalCodeWrapper>
+          {postalCode && (
+            <PostalCodeText>
+              The blue marker on the map indicates your location.
+            </PostalCodeText>
+          )}
+        </MenuWrapper>
+        <MapWrapper>
+          <Map walkInClinics={walkInClinics} postalCode={postalCode} />
+        </MapWrapper>
+      </Container>
+    </PageWrapper>
   );
 };
+
+const PageWrapper = styled.div`
+  height: 100%;
+  width: 100%;
+`;
 
 const Container = styled.div`
   display: flex;
