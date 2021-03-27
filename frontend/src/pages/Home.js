@@ -5,9 +5,18 @@ import Header from "../components/Header";
 
 const Home = () => {
   const [displayProviderDropdown, setDisplayProviderDropdown] = useState(false);
+  const [displayHealthcareDropdown, setDisplayHealthcareDropdown] = useState(
+    false
+  );
 
   const handleProviderDropdown = () => {
     setDisplayProviderDropdown(!displayProviderDropdown);
+    setDisplayHealthcareDropdown(false);
+  };
+
+  const handleSeekingHealthcareDropdown = () => {
+    setDisplayHealthcareDropdown(!displayHealthcareDropdown);
+    setDisplayProviderDropdown(false);
   };
 
   return (
@@ -22,18 +31,39 @@ const Home = () => {
         </SubheaderText>
         <MenuDiv>
           <PatientContainer>
-            <Patient to={`/healthcare_finder`}>I'm seeking healthcare</Patient>
+            {/* <Patient to={`/healthcare_finder`}>I'm seeking healthcare</Patient> */}
+            <Patient onClick={handleSeekingHealthcareDropdown}>
+              I'm seeking healthcare
+            </Patient>
           </PatientContainer>
-          {/* <Provider to={`/login`}>I'm a healthcare provider</Provider> */}
+          {displayHealthcareDropdown && (
+            <DropdownContainer>
+              <DropdownText to={`/doctor_finder`}>
+                Find a family doctor
+              </DropdownText>
+              <DropdownText to={`/walk_in_clinics`}>
+                Find a walk-in clinic
+              </DropdownText>
+              <DropdownText to={`/clinic_appointments`}>
+                Find a clinic that accepts appointments
+              </DropdownText>
+              <DropdownText to={`/doctors`}>
+                See all doctors in my area
+              </DropdownText>
+              <DropdownText to={`/clinics`}>
+                See all clinics in my area
+              </DropdownText>
+            </DropdownContainer>
+          )}
           <Provider onClick={handleProviderDropdown}>
             <ProviderText>I'm a healthcare provider</ProviderText>
           </Provider>
           {displayProviderDropdown && (
             <DropdownContainer>
-              <DropdownText to={`/login`}>Doctor Login</DropdownText>
-              <DropdownText to={`/login`}>Doctor Signup</DropdownText>
-              <DropdownText to={`/login`}>Clinic Login</DropdownText>
-              <DropdownText to={`/login`}>Clinic Signup</DropdownText>
+              <DropdownText to={`/doctor_login`}>Doctor Login</DropdownText>
+              <DropdownText to={`/doctor_signup`}>Doctor Signup</DropdownText>
+              <DropdownText to={`/clinic_login`}>Clinic Login</DropdownText>
+              <DropdownText to={`/clinic_signup`}>Clinic Signup</DropdownText>
             </DropdownContainer>
           )}
         </MenuDiv>
@@ -53,9 +83,9 @@ const ContentWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  height: 100%;
-  width: auto;
   padding-left: 50px;
+  width: 100%;
+  height: 100%;
   background-color: #085b67;
 `;
 
@@ -74,8 +104,10 @@ const Title = styled.p`
 `;
 
 const SubheaderText = styled.p`
+  width: 90%;
   font-size: 24px;
   font-weight: 500;
+  line-height: 35px;
   margin: 0px 0px 50px 0px;
   color: white;
   text-shadow: 1px 1px 1px #000000;
@@ -92,7 +124,7 @@ const PatientContainer = styled.div`
   width: 40%;
 `;
 
-const Patient = styled(NavLink)`
+const Patient = styled.div`
   margin: 8px 0px;
   padding: 5px;
   text-decoration: none;
@@ -135,8 +167,8 @@ const DropdownContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  margin-left: 50px;
-  width: 15%;
+  margin: 0px 0px 50px 50px;
+  width: auto;
 `;
 
 const DropdownText = styled(NavLink)`
