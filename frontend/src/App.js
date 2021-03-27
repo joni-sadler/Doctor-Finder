@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
+import GlobalStyles from "./components/GlobalStyles";
 import styled from "styled-components";
 import Home from "./pages/Home";
 import About from "./pages/About";
@@ -23,6 +24,7 @@ import Specialty from "./pages/Specialty";
 const App = () => {
   return (
     <BrowserRouter>
+      <GlobalStyles />
       <Main>
         <Switch>
           <Route exact path="/">
@@ -83,9 +85,9 @@ const App = () => {
       </Main>
     </BrowserRouter>
   );
-}
+};
 
-const Main = styled.div` 
+const Main = styled.div`
   display: flex;
   height: 60vw;
 `;
