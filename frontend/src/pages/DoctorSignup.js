@@ -78,22 +78,6 @@ const DoctorSignup = () => {
     setShowPhoneNumber(true);
   };
 
-  console.log(signupInfo);
-
-  // const handleValidation = () => {
-  //   if (signupInfo.firstName !== "") {
-  //     setFirstNameValidation(true);
-  //   } else if (signupInfo.lastName !== "") {
-  //     setLastNameValidation(true);
-  //   } else if (signupInfo.email.includes("@")) {
-  //     setEmailValidation(true);
-  //   } else if (signupInfo.password !== "") {
-  //     setPasswordValidation(true);
-  //   } else {
-  //     submitFunction();
-  //   }
-  // }
-
   const submitFunction = () => {
     setHasSubmittedInfo(true);
     fetch("/doctor_signup", {
@@ -128,41 +112,43 @@ const DoctorSignup = () => {
       <ContentWrapper>
         <Title>Create a new doctor account</Title>
         <SignupWrapper>
-          <Field>
-            <input
-              name="title"
-              placeholder="Title"
-              type="text"
-              value={signupInfo.title}
-              onChange={signupInfoHandler("title")}
-              style={{ height: "25px", width: "400px" }}
-            />
-          </Field>
-          <Field>
-            <input
-              name="firstName"
-              placeholder="First name"
-              type="text"
-              value={signupInfo.firstName}
-              onChange={signupInfoHandler("firstName")}
-              style={{ height: "25px", width: "400px" }}
-            />{" "}
-            *
-            {!firstNameValidation && hasSubmittedInfo && (
-              <p>This field is required</p>
-            )}
-          </Field>
-          <Field>
-            <input
-              name="lastName"
-              placeholder="Last name"
-              type="text"
-              value={signupInfo.lastName}
-              onChange={signupInfoHandler("lastName")}
-              style={{ height: "25px", width: "400px" }}
-            />{" "}
-            *
-          </Field>
+          <NameDiv>
+            <Field>
+              <input
+                name="title"
+                placeholder="Title"
+                type="text"
+                value={signupInfo.title}
+                onChange={signupInfoHandler("title")}
+                style={{ height: "25px", width: "30px" }}
+              />
+            </Field>
+            <Field>
+              <input
+                name="firstName"
+                placeholder="First name"
+                type="text"
+                value={signupInfo.firstName}
+                onChange={signupInfoHandler("firstName")}
+                style={{ height: "25px", width: "150px" }}
+              />{" "}
+              *
+              {!firstNameValidation && hasSubmittedInfo && (
+                <p>This field is required</p>
+              )}
+            </Field>
+            <Field>
+              <input
+                name="lastName"
+                placeholder="Last name"
+                type="text"
+                value={signupInfo.lastName}
+                onChange={signupInfoHandler("lastName")}
+                style={{ height: "25px", width: "150px" }}
+              />{" "}
+              *
+            </Field>
+          </NameDiv>
           <Field>
             <input
               name="email"
@@ -215,6 +201,10 @@ const DoctorSignup = () => {
                 return (
                   <ClinicList
                     onClick={() => setPrimaryClinic(clinic.clinicName)}
+                    style={{
+                      backgroundColor:
+                        primaryClinic === clinic.clinicName ? "#B8D0D3" : "",
+                    }}
                   >
                     {clinic.clinicName}
                   </ClinicList>
@@ -229,6 +219,10 @@ const DoctorSignup = () => {
                 return (
                   <ClinicList
                     onClick={() => setSecondaryClinic(clinic.clinicName)}
+                    style={{
+                      backgroundColor:
+                        secondaryClinic === clinic.clinicName ? "#B8D0D3" : "",
+                    }}
                   >
                     {clinic.clinicName}
                   </ClinicList>
@@ -324,8 +318,12 @@ const Field = styled.div`
   padding: 10px;
 `;
 
+const NameDiv = styled.div`
+  display: flex;
+`;
+
 const Text = styled.p`
-  margin-left: 10px;
+  margin: 5px 0px 5px 10px;
   cursor: pointer;
 `;
 
@@ -352,10 +350,10 @@ const CategoryNav = styled.nav`
   position: inherit;
   top: 10%;
   right: 10px;
-  width: 80%;
+  width: 400px;
   opacity: 1;
   padding-left: 5px;
-  margin: 0px 0px 10px 10px;
+  margin: 5px 0px 15px 10px;
   max-height: 100px;
   border: 1px solid black;
   overflow-y: auto;
@@ -370,6 +368,9 @@ const ClinicList = styled.p`
   &:hover {
     cursor: pointer;
     background-color: lightgray;
+  }
+  &:active {
+    background-color: skyblue;
   }
 `;
 
@@ -415,7 +416,7 @@ const HomepagePrompt = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-top: 50px;
+  margin-top: 25px;
 `;
 
 const HomePageText = styled(NavLink)`
