@@ -246,7 +246,7 @@ const ClinicSignup = () => {
             </RegistrationMessaging>
           </div>
         )}
-        <LoginPrompt to={`/login`}>Return to the login page</LoginPrompt>
+        <LoginPrompt to={`/`}>Return to the home page</LoginPrompt>
       </ContentWrapper>
     </Container>
   );
