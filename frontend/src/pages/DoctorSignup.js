@@ -273,13 +273,15 @@ const DoctorSignup = () => {
         </SignupWrapper>
         {hasSubmittedInfo && (
           <div>
-            <RegistrationMessaging>
+            <ConfirmationText>
               Thank you for registering! Your info is now securely stored in our
               database.
-            </RegistrationMessaging>
+            </ConfirmationText>
           </div>
         )}
-        <LoginPrompt to={`/`}>Return to the home page</LoginPrompt>
+        <HomepagePrompt>
+          <HomePageText to={`/`}>Return to the home page</HomePageText>
+        </HomepagePrompt>
       </ContentWrapper>
     </Container>
   );
@@ -324,7 +326,6 @@ const Field = styled.div`
 
 const Text = styled.p`
   margin-left: 10px;
-  /* color: white; */
   cursor: pointer;
 `;
 
@@ -392,7 +393,7 @@ const SubmitButton = styled.button`
 const SubmitButtonInactive = styled.div`
   display: flex;
   justify-content: center;
-  background-color: grey;
+  background-color: #606060;
   color: white;
   border-radius: 3px;
   width: 90%;
@@ -401,18 +402,32 @@ const SubmitButtonInactive = styled.div`
   font-weight: 500;
 `;
 
-const RegistrationMessaging = styled.p`
-  font-size: 20px;
+const ConfirmationText = styled.p`
+  font-size: 24px;
   font-weight: 600;
-`;
-
-const LoginPrompt = styled(NavLink)`
-  font-size: 30px;
-  font-weight: 600;
-  margin: 50px;
-  text-decoration: none;
+  padding-top: 20px;
   color: white;
   text-shadow: 1px 1px 1px #000000;
+`;
+
+const HomepagePrompt = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50px;
+`;
+
+const HomePageText = styled(NavLink)`
+  background-color: black;
+  padding: 10px;
+  border-radius: 3px;
+  font-size: 30px;
+  font-weight: 600;
+  margin: 15px;
+  color: white;
+  text-decoration: none;
+  cursor: pointer;
 `;
 
 export default DoctorSignup;
