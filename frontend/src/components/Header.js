@@ -10,30 +10,43 @@ import {
 const Header = () => {
   return (
     <Container>
-      <MenuItem>About</MenuItem>
-      <MenuItem>FAQ</MenuItem>
-      <MenuItemLink to={`/`}>Home</MenuItemLink>
+      <MenuWrapper>
+        <MenuItem>About</MenuItem>
+        <MenuItem>FAQ</MenuItem>
+        <MenuItemLink to={`/`}>Home</MenuItemLink>
+      </MenuWrapper>
     </Container>
   );
 };
 
 const Container = styled.div`
   display: flex;
-  align-items: center;
   justify-content: flex-end;
-  height: 60px;
-  width: 100vw;
+  min-height: 60px;
+  min-width: 100vw;
   background-color: black;
   margin: 0px;
   padding: 0px;
   ${onDesktopMediaQuery()} {
-    height: 60px;
+    min-height: 60px;
   }
   ${onTabletMediaQuery()} {
-    height: 50px;
+    min-height: 50px;
   }
   ${onSmallPhoneMediaQuery()} {
-    height: 45px;
+    min-height: 45px;
+  }
+`;
+
+const MenuWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 20%;
+  margin-right: 10%;
+  ${onSmallPhoneMediaQuery()} {
+    margin-right: 20%;
   }
 `;
 
@@ -41,7 +54,7 @@ const MenuItem = styled.p`
   color: white;
   font-size: 24px;
   font-weight: 500;
-  margin: 0px 25px;
+  margin: 10px 25px;
   font-family: "Montserrat", sans-serif;
   color: white;
   cursor: pointer;
@@ -59,18 +72,18 @@ const MenuItemLink = styled(NavLink)`
   color: white;
   font-size: 24px;
   font-weight: 500;
-  margin: 0px 25px;
+  margin: 10px 40px 10px 25px;
   font-family: "Montserrat", sans-serif;
   color: white;
   text-decoration: none;
   cursor: pointer;
   ${onTabletMediaQuery()} {
     font-size: 20px;
-    margin: 0px 15px;
+    margin: 10px 15px;
   }
   ${onSmallPhoneMediaQuery()} {
     font-size: 18px;
-    margin: 0px 10px;
+    margin: 10px 10px;
   }
 `;
 

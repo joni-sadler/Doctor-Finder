@@ -79,8 +79,10 @@ const Home = () => {
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  width: 100vw;
   height: 100vh;
+  width: 100vw;
+  background-color: #085b67;
+  overflow: scroll;
 `;
 
 const ContentWrapper = styled.div`
@@ -90,7 +92,6 @@ const ContentWrapper = styled.div`
   padding-left: 50px;
   width: 100vw;
   height: 100vh;
-  background-color: #085b67;
   ${onDesktopMediaQuery()} {
     padding-left: 35px;
     width: 100vw;
@@ -117,7 +118,7 @@ const MenuDiv = styled.div`
 const Title = styled.p`
   font-size: 60px;
   font-weight: 700;
-  margin-top: 100px;
+  margin: 100px 30px 50px 0px;
   color: white;
   text-shadow: 1px 1px 1px #000000;
   ${onTabletMediaQuery()} {
@@ -167,7 +168,6 @@ const Patient = styled.div`
   font-size: 40px;
   font-weight: 600;
   color: white;
-  transition: 0.2s;
   cursor: pointer;
   ${onTabletMediaQuery()} {
     font-size: 35px;
@@ -221,6 +221,12 @@ const DropdownContainer = styled.div`
   justify-content: flex-start;
   margin: 0px 0px 50px 50px;
   width: auto;
+  ${onTabletMediaQuery()} {
+    margin: 0px 0px 25px 25px;
+  }
+  ${onSmallPhoneMediaQuery()} {
+    margin: 0px 0px 25px 10px;
+  }
 `;
 
 const DropdownText = styled(NavLink)`
@@ -232,6 +238,12 @@ const DropdownText = styled(NavLink)`
   text-decoration: none;
   cursor: pointer;
   text-shadow: 1px 1px 1px #000000;
+  ${onTabletMediaQuery()} {
+    margin: 0px 0px 25px 25px;
+  }
+  ${onSmallPhoneMediaQuery()} {
+    margin: 0px 0px 25px 10px;
+  }
 `;
 
 export default Home;
