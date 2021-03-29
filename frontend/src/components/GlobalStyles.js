@@ -12,11 +12,12 @@ export default createGlobalStyle`
     input, button, select, option,
     h1, h2, h3, h4, h5, h6, p,
     text {
-        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     }
 
     html, body {
         max-width: 100vw;
+        max-height: 100vh;
     }
 
     html, body, div, span, applet, object, iframe,

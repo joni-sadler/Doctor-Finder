@@ -1,6 +1,11 @@
 import React from "react";
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
+import {
+  onSmallPhoneMediaQuery,
+  onDesktopMediaQuery,
+  onTabletMediaQuery,
+} from "../utils/responsive";
 
 const Header = () => {
   return (
@@ -17,11 +22,19 @@ const Container = styled.div`
   align-items: center;
   justify-content: flex-end;
   height: 60px;
-  width: 100%;
+  width: 100vw;
   background-color: black;
   margin: 0px;
   padding: 0px;
-  z-index: 5;
+  ${onDesktopMediaQuery()} {
+    height: 60px;
+  }
+  ${onTabletMediaQuery()} {
+    height: 50px;
+  }
+  ${onSmallPhoneMediaQuery()} {
+    height: 45px;
+  }
 `;
 
 const MenuItem = styled.p`
@@ -32,9 +45,13 @@ const MenuItem = styled.p`
   font-family: "Montserrat", sans-serif;
   color: white;
   cursor: pointer;
-  transition: 0.2s;
-  &:hover {
-    font-size: 26px;
+  ${onTabletMediaQuery()} {
+    font-size: 20px;
+    margin: 0px 15px;
+  }
+  ${onSmallPhoneMediaQuery()} {
+    font-size: 18px;
+    margin: 0px 10px;
   }
 `;
 
@@ -47,9 +64,13 @@ const MenuItemLink = styled(NavLink)`
   color: white;
   text-decoration: none;
   cursor: pointer;
-  transition: 0.2s;
-  &:hover {
-    font-size: 26px;
+  ${onTabletMediaQuery()} {
+    font-size: 20px;
+    margin: 0px 15px;
+  }
+  ${onSmallPhoneMediaQuery()} {
+    font-size: 18px;
+    margin: 0px 10px;
   }
 `;
 

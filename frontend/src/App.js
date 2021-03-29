@@ -6,6 +6,7 @@ import Home from "./pages/Home";
 import About from "./pages/About";
 import Faq from "./pages/Faq";
 import DoctorLogin from "./pages/DoctorLogin";
+import ClinicLogin from "./pages/ClinicLogin";
 import HealthcareFinder from "./pages/HealthcareFinder";
 import DoctorSignup from "./pages/DoctorSignup";
 import ClinicSignup from "./pages/ClinicSignup";
@@ -36,8 +37,11 @@ const App = () => {
           <Route exact path="/faq">
             <Faq />
           </Route>
-          <Route exact path="/login">
+          <Route exact path="/doctor_login">
             <DoctorLogin />
+          </Route>
+          <Route exact path="/clinic_login">
+            <ClinicLogin />
           </Route>
           <Route exact path="/healthcare_finder">
             <HealthcareFinder />
@@ -89,7 +93,8 @@ const App = () => {
 
 const Main = styled.div`
   display: flex;
-  height: 60vw;
+  height: 100vh;
+  width: 100vw;
 `;
 
 export default App;

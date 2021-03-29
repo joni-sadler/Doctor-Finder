@@ -2,6 +2,11 @@ import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import Header from "../components/Header";
+import {
+  onSmallPhoneMediaQuery,
+  onDesktopMediaQuery,
+  onTabletMediaQuery,
+} from "../utils/responsive";
 
 const Home = () => {
   const [displayProviderDropdown, setDisplayProviderDropdown] = useState(false);
@@ -21,7 +26,7 @@ const Home = () => {
 
   return (
     <Container>
-      <Header />
+      <Header style={{ minWidth: "100vw" }} />
       <ContentWrapper>
         <Title>Navigating Montreal's Healthcare System</Title>
         <SubheaderText>
@@ -31,7 +36,6 @@ const Home = () => {
         </SubheaderText>
         <MenuDiv>
           <PatientContainer>
-            {/* <Patient to={`/healthcare_finder`}>I'm seeking healthcare</Patient> */}
             <Patient onClick={handleSeekingHealthcareDropdown}>
               I'm seeking healthcare
             </Patient>
@@ -75,8 +79,8 @@ const Home = () => {
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
 `;
 
 const ContentWrapper = styled.div`
@@ -84,9 +88,24 @@ const ContentWrapper = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   padding-left: 50px;
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   background-color: #085b67;
+  ${onDesktopMediaQuery()} {
+    padding-left: 35px;
+    width: 100vw;
+    height: 100vh;
+  }
+  ${onTabletMediaQuery()} {
+    padding-left: 25px;
+    width: 100vw;
+    height: 100vh;
+  }
+  ${onSmallPhoneMediaQuery()} {
+    padding-left: 15px;
+    width: 100vw;
+    height: 100vh;
+  }
 `;
 
 const MenuDiv = styled.div`
@@ -101,6 +120,14 @@ const Title = styled.p`
   margin-top: 100px;
   color: white;
   text-shadow: 1px 1px 1px #000000;
+  ${onTabletMediaQuery()} {
+    font-size: 50px;
+    margin-top: 70px;
+  }
+  ${onSmallPhoneMediaQuery()} {
+    font-size: 50px;
+    margin-top: 50px;
+  }
 `;
 
 const SubheaderText = styled.p`
@@ -122,6 +149,15 @@ const PatientContainer = styled.div`
   margin-bottom: 25px;
   height: 50%;
   width: 40%;
+  ${onDesktopMediaQuery()} {
+    width: 50%;
+  }
+  ${onTabletMediaQuery()} {
+    width: 60%;
+  }
+  ${onSmallPhoneMediaQuery()} {
+    width: 90%;
+  }
 `;
 
 const Patient = styled.div`
@@ -133,8 +169,11 @@ const Patient = styled.div`
   color: white;
   transition: 0.2s;
   cursor: pointer;
-  &:hover {
-    font-size: 42px;
+  ${onTabletMediaQuery()} {
+    font-size: 35px;
+  }
+  ${onSmallPhoneMediaQuery()} {
+    font-size: 30px;
   }
 `;
 
@@ -147,19 +186,32 @@ const Provider = styled.div`
   margin-bottom: 25px;
   height: 50%;
   width: 40%;
+  ${onDesktopMediaQuery()} {
+    width: 50%;
+  }
+  ${onTabletMediaQuery()} {
+    width: 60%;
+  }
+  ${onSmallPhoneMediaQuery()} {
+    width: 90%;
+  }
 `;
 
 const ProviderText = styled.p`
   margin: 8px 0px;
   padding: 10px;
   text-decoration: none;
+  text-align: center;
   font-size: 40px;
   font-weight: 600;
   color: white;
   transition: 0.2s;
   cursor: pointer;
-  &:hover {
-    font-size: 42px;
+  ${onTabletMediaQuery()} {
+    font-size: 35px;
+  }
+  ${onSmallPhoneMediaQuery()} {
+    font-size: 30px;
   }
 `;
 
