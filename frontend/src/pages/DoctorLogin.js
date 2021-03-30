@@ -87,9 +87,10 @@ const DoctorLogin = () => {
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  height: auto;
-  width: 100%;
+  height: 100vh;
+  width: 100vw;
   background-color: #085b67;
+  overflow: auto;
 `;
 
 const LoginDiv = styled.div`
@@ -103,6 +104,7 @@ const Dropdown = styled.div`
 `;
 
 const Title = styled.p`
+  text-align: center;
   font-size: 60px;
   font-weight: 600;
   margin: 100px 20px 20px 20px;
@@ -157,6 +159,7 @@ const SignupTitle = styled.p`
 `;
 
 const SignupText = styled(NavLink)`
+  text-align: center;
   background-color: black;
   padding: 10px;
   border-radius: 3px;

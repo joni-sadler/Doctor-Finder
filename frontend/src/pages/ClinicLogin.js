@@ -78,7 +78,7 @@ const ClinicLogin = () => {
       <Signup>
         <SignupTitle>Not registered yet? </SignupTitle>
         <SignupText to={`/clinic_signup`}>
-          Click here to create a new clinic account
+          Create a new clinic account
         </SignupText>
       </Signup>
     </Container>
@@ -91,6 +91,7 @@ const Container = styled.div`
   height: auto;
   width: 100%;
   background-color: #085b67;
+  overflow: auto;
 `;
 
 const LoginDiv = styled.div`
@@ -104,6 +105,7 @@ const Dropdown = styled.div`
 `;
 
 const Title = styled.p`
+  text-align: center;
   font-size: 60px;
   font-weight: 600;
   margin: 100px 20px 20px 20px;
@@ -158,6 +160,7 @@ const SignupTitle = styled.p`
 `;
 
 const SignupText = styled(NavLink)`
+  text-align: center;
   background-color: black;
   padding: 10px;
   border-radius: 3px;
@@ -168,4 +171,5 @@ const SignupText = styled(NavLink)`
   text-decoration: none;
   cursor: pointer;
 `;
+
 export default ClinicLogin;
