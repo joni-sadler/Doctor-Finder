@@ -2,6 +2,11 @@ import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import Header from "../components/Header";
+import {
+  onSmallPhoneMediaQuery,
+  onDesktopMediaQuery,
+  onTabletMediaQuery,
+} from "../utils/responsive";
 
 const ClinicSignup = () => {
   const [signupInfo, setSignupInfo] = useState({});
@@ -14,7 +19,6 @@ const ClinicSignup = () => {
   const [emailValidation, setEmailValidation] = useState();
   const [phoneNumberValidation, setPhoneNumberValidation] = useState();
   const [passwordValidation, setPasswordValidation] = useState();
-  const [openingHoursValidation, setOpeningHoursValidation] = useState();
 
   const signupInfoHandler = (name) => {
     return ({ target: { value } }) => {
@@ -113,116 +117,153 @@ const ClinicSignup = () => {
       <ContentWrapper>
         <Title>Create a new clinic account</Title>
         <SignupWrapper>
-          <Field>
-            <input
-              name="clinicName"
-              placeholder="Name of your clinic"
-              type="text"
-              value={signupInfo.clinicName}
-              onChange={signupInfoHandler("clinicName")}
-              style={{ height: "25px", width: "400px" }}
-            />{" "}
-            *
-          </Field>
-          <Field>
-            <input
-              name="clinicAddress"
-              placeholder="Address of your clinic"
-              type="text"
-              value={signupInfo.clinicAddress}
-              onChange={signupInfoHandler("clinicAddress")}
-              style={{ height: "25px", width: "400px" }}
-            />{" "}
-            *
-          </Field>
-          <Field>
-            <input
-              name="email"
-              placeholder="Email"
-              type="text"
-              value={signupInfo.email}
-              onChange={signupInfoHandler("email")}
-              style={{ height: "25px", width: "400px" }}
-            />{" "}
-            *
-          </Field>
-          <Field>
-            <input
-              name="phoneNumber"
-              placeholder="Phone number"
-              type="text"
-              required
-              value={signupInfo.phoneNumber}
-              onChange={signupInfoHandler("phoneNumber")}
-              style={{ height: "25px", width: "400px" }}
-            />{" "}
-            *
-          </Field>
-          <Field>
-            <input
-              name="hours"
-              placeholder="What are your opening hours?"
-              type="text"
-              value={signupInfo.hours}
-              onChange={signupInfoHandler("hours")}
-              style={{ height: "25px", width: "400px" }}
-            />{" "}
-            *
-          </Field>
-          <Field>
-            <input
-              name="specialties"
-              placeholder="Does your clinic offer any special services? Please list them."
-              type="text"
-              value={signupInfo.specialties}
-              onChange={signupInfoHandler("specialties")}
-              style={{ height: "25px", width: "400px" }}
-            />
-          </Field>
-          <Field>
-            <input
-              name="password"
-              placeholder="Set your password"
-              type="password"
-              value={signupInfo.password}
-              onChange={signupInfoHandler("password")}
-              style={{ height: "25px", width: "400px" }}
-            />{" "}
-            *
-          </Field>
-          <Field>
-            <p>Are any of your doctors accepting new patients?</p>
-            <input
-              name="acceptsPatients"
-              type="radio"
-              value="True"
-              onChange={acceptingPatientsHandlerTrue}
-            />{" "}
-            Yes
-            <input name="acceptsPatients" type="radio" value="False" /> No
-          </Field>
-          <Field>
-            <p>Do you accept walk-ins?</p>
-            <input
-              name="acceptsWalkins"
-              type="radio"
-              value="True"
-              onChange={acceptingWalkInHandlerTrue}
-            />{" "}
-            Yes
-            <input name="acceptsWalkins" type="radio" value="False" /> No
-          </Field>
-          <Field>
-            <p>Can patients book an appointment in advance at your clinic?</p>
-            <input
-              name="acceptsAppointments"
-              type="radio"
-              value="True"
-              onChange={acceptingAppointmentsHandlerTrue}
-            />{" "}
-            Yes
-            <input name="acceptsAppointments" type="radio" value="False" /> No
-          </Field>
+          <InputDiv>
+            <Field>
+              <input
+                name="clinicName"
+                placeholder="Name of your clinic"
+                type="text"
+                value={signupInfo.clinicName}
+                onChange={signupInfoHandler("clinicName")}
+                style={{
+                  height: "25px",
+                  width: "90%",
+                  marginTop: "10px",
+                  marginLeft: "5px",
+                }}
+              />{" "}
+              *
+            </Field>
+            <Field>
+              <input
+                name="clinicAddress"
+                placeholder="Address of your clinic"
+                type="text"
+                value={signupInfo.clinicAddress}
+                onChange={signupInfoHandler("clinicAddress")}
+                style={{
+                  height: "25px",
+                  width: "90%",
+                  marginTop: "5px",
+                  marginLeft: "5px",
+                }}
+              />{" "}
+              *
+            </Field>
+            <Field>
+              <input
+                name="email"
+                placeholder="Email"
+                type="text"
+                value={signupInfo.email}
+                onChange={signupInfoHandler("email")}
+                style={{
+                  height: "25px",
+                  width: "90%",
+                  marginTop: "5px",
+                  marginLeft: "5px",
+                }}
+              />{" "}
+              *
+            </Field>
+            <Field>
+              <input
+                name="phoneNumber"
+                placeholder="Phone number"
+                type="text"
+                required
+                value={signupInfo.phoneNumber}
+                onChange={signupInfoHandler("phoneNumber")}
+                style={{
+                  height: "25px",
+                  width: "90%",
+                  marginTop: "5px",
+                  marginLeft: "5px",
+                }}
+              />{" "}
+              *
+            </Field>
+            <Field>
+              <input
+                name="hours"
+                placeholder="What are your opening hours?"
+                type="text"
+                value={signupInfo.hours}
+                onChange={signupInfoHandler("hours")}
+                style={{
+                  height: "25px",
+                  width: "90%",
+                  marginTop: "5px",
+                  marginLeft: "5px",
+                }}
+              />{" "}
+              *
+            </Field>
+            <Field>
+              <input
+                name="specialties"
+                placeholder="List any special services"
+                type="text"
+                value={signupInfo.specialties}
+                onChange={signupInfoHandler("specialties")}
+                style={{
+                  height: "25px",
+                  width: "90%",
+                  marginTop: "5px",
+                  marginLeft: "5px",
+                }}
+              />
+            </Field>
+            <Field>
+              <input
+                name="password"
+                placeholder="Set your password"
+                type="password"
+                value={signupInfo.password}
+                onChange={signupInfoHandler("password")}
+                style={{
+                  height: "25px",
+                  width: "90%",
+                  marginTop: "5px",
+                  marginLeft: "5px",
+                }}
+              />{" "}
+              *
+            </Field>
+            <Field>
+              <p>Are any of your doctors accepting new patients?</p>
+              <input
+                name="acceptsPatients"
+                type="radio"
+                value="True"
+                onChange={acceptingPatientsHandlerTrue}
+              />{" "}
+              Yes
+              <input name="acceptsPatients" type="radio" value="False" /> No
+            </Field>
+            <Field>
+              <p>Do you accept walk-ins?</p>
+              <input
+                name="acceptsWalkins"
+                type="radio"
+                value="True"
+                onChange={acceptingWalkInHandlerTrue}
+              />{" "}
+              Yes
+              <input name="acceptsWalkins" type="radio" value="False" /> No
+            </Field>
+            <Field>
+              <p>Can patients book an appointment at your clinic?</p>
+              <input
+                name="acceptsAppointments"
+                type="radio"
+                value="True"
+                onChange={acceptingAppointmentsHandlerTrue}
+              />{" "}
+              Yes
+              <input name="acceptsAppointments" type="radio" value="False" /> No
+            </Field>
+          </InputDiv>
           <RequiredFields>* Required fields</RequiredFields>
           <SubmitWrapper>
             {clinicNameValidation &&
@@ -255,9 +296,13 @@ const ClinicSignup = () => {
 };
 
 const Container = styled.div`
-  height: 100vw;
-  width: 100%;
+  height: 100vh;
+  width: 100vw;
   background-color: #085b67;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 const ContentWrapper = styled.div`
@@ -265,8 +310,9 @@ const ContentWrapper = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  height: 100%;
-  width: 100%;
+  ${onSmallPhoneMediaQuery()} {
+    margin: 10px;
+  }
 `;
 
 const Title = styled.p`
@@ -278,17 +324,27 @@ const Title = styled.p`
 `;
 
 const SignupWrapper = styled.div`
+  background: #ffffff;
+  border-radius: 3px;
+  position: inherit;
+  top: 10%;
+  right: 10px;
+  width: 90%;
+  opacity: 1;
+  padding-left: 5px;
+  margin: 5px 10px 15px 10px;
+  border: 1px solid black;
+  overflow-y: auto;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  background-color: white;
-  border: 1px solid black;
-  border-radius: 3px;
-  padding: 20px;
 `;
 
 const Field = styled.div`
   padding: 10px;
+`;
+
+const InputDiv = styled.div`
+  padding-top: 10px;
 `;
 
 const RequiredFields = styled.p`
@@ -314,14 +370,19 @@ const SubmitButton = styled.button`
 
 const SubmitButtonInactive = styled.div`
   display: flex;
+  text-align: center;
   justify-content: center;
   background-color: #606060;
   color: white;
   border-radius: 3px;
   width: 90%;
   padding: 10px 5px;
+  margin-bottom: 25px;
   font-size: 24px;
   font-weight: 500;
+  ${onSmallPhoneMediaQuery()} {
+    font-size: 18px;
+  }
 `;
 
 const RegistrationMessaging = styled.p`
@@ -342,19 +403,28 @@ const HomepagePrompt = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-top: 50px;
+  margin-top: 25px;
 `;
 
 const HomePageText = styled(NavLink)`
   background-color: black;
-  padding: 10px;
+  padding: 15px;
   border-radius: 3px;
   font-size: 30px;
   font-weight: 600;
-  margin: 15px;
+  margin: 15px 15px 50px 15px;
   color: white;
   text-decoration: none;
   cursor: pointer;
+  ${onDesktopMediaQuery()} {
+    font-size: 28px;
+  }
+  ${onTabletMediaQuery()} {
+    font-size: 24px;
+  }
+  ${onSmallPhoneMediaQuery()} {
+    font-size: 20px;
+  }
 `;
 
 export default ClinicSignup;
