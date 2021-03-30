@@ -26,7 +26,7 @@ const Home = () => {
 
   return (
     <Container>
-      <Header style={{ minWidth: "100vw" }} />
+      <Header />
       <ContentWrapper>
         <Title>Navigating Montreal's Healthcare System</Title>
         <SubheaderText>
@@ -82,7 +82,6 @@ const Container = styled.div`
   height: 100vh;
   width: 100vw;
   background-color: #085b67;
-  overflow: scroll;
 `;
 
 const ContentWrapper = styled.div`

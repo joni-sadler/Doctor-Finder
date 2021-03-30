@@ -7,8 +7,11 @@ import {
 } from "@react-google-maps/api";
 import Geocode from "react-geocode";
 import styled from "styled-components";
-
-// const sortByDistance = require("sort-by-distance");
+import {
+  onSmallPhoneMediaQuery,
+  onDesktopMediaQuery,
+  onTabletMediaQuery,
+} from "../utils/responsive";
 
 const containerStyle = {
   width: "100%",
@@ -34,8 +37,6 @@ const Map = ({
   const [infoWindowMarker, setInfoWindowMarker] = useState(null);
   const [showingInfoWindow, setShowingInfoWindow] = useState(false);
   const [originPoint, setOriginPoint] = useState({});
-  // const [clinicCoordinates, setClinicCoordinates] = useState([]);
-  const [closestClinic, setClosestClinic] = useState([]);
 
   const clinicCoordinates = [];
 
@@ -100,58 +101,88 @@ const Map = ({
     }
   );
 
-  clinics.forEach((clinic) => {
-    clinicCoordinates.push({ latitude: clinic.lat, longitude: clinic.lng });
-  });
+  if (clinics) {
+    clinics.forEach((clinic) => {
+      clinicCoordinates.push({ latitude: clinic.lat, longitude: clinic.lng });
+    });
+  }
+
+  if (walkInClinics) {
+    walkInClinics.forEach((clinic) => {
+      clinicCoordinates.push({ latitude: clinic.lat, longitude: clinic.lng });
+    });
+  }
+
+  if (appointmentClinics) {
+    appointmentClinics.forEach((clinic) => {
+      clinicCoordinates.push({ latitude: clinic.lat, longitude: clinic.lng });
+    });
+  }
 
   return isLoaded ? (
-    <GoogleMap mapContainerStyle={containerStyle} center={center} zoom={12}>
-      {infoWindowMarker && (
-        <InfoWindow
-          position={{
-            lat: Number(infoWindowMarker.lat),
-            lng: Number(infoWindowMarker.lng),
-          }}
-          visible={showingInfoWindow}
-          onCloseClick={() => setInfoWindowMarker(null)}
-          options={{ pixelOffset: new window.google.maps.Size(0, -30) }}
-        >
-          <InfoWindowContainer>
-            <InfoWindowText>{infoWindowMarker.clinicName}</InfoWindowText>
-            <InfoWindowText>{infoWindowMarker.clinicAddress}</InfoWindowText>
-          </InfoWindowContainer>
-        </InfoWindow>
-      )}
+    <MapContainer>
+      <GoogleMap mapContainerStyle={containerStyle} center={center} zoom={12}>
+        {infoWindowMarker && (
+          <InfoWindow
+            position={{
+              lat: Number(infoWindowMarker.lat),
+              lng: Number(infoWindowMarker.lng),
+            }}
+            visible={showingInfoWindow}
+            onCloseClick={() => setInfoWindowMarker(null)}
+            options={{
+              pixelOffset: new window.google.maps.Size(0, -30),
+            }}
+          >
+            <InfoWindowContainer>
+              <InfoWindowText>{infoWindowMarker.clinicName}</InfoWindowText>
+              <InfoWindowText>{infoWindowMarker.clinicAddress}</InfoWindowText>
+            </InfoWindowContainer>
+          </InfoWindow>
+        )}
 
-      {originPoint && (
-        <Marker
-          position={{
-            lat: Number(originPoint.latitude),
-            lng: Number(originPoint.longitude),
-          }}
-          icon={{
-            url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png",
-          }}
-        />
-      )}
+        {originPoint && (
+          <Marker
+            position={{
+              lat: Number(originPoint.latitude),
+              lng: Number(originPoint.longitude),
+            }}
+            icon={{
+              url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png",
+            }}
+          />
+        )}
 
-      {markers.map((marker) => {
-        return (
-          <div>
-            <Marker
-              position={{ lat: Number(marker.lat), lng: Number(marker.lng) }}
-              onClick={() => onClickMapHandler(marker)}
-            />
-          </div>
-        );
-      })}
+        {markers.map((marker) => {
+          return (
+            <div>
+              <Marker
+                position={{ lat: Number(marker.lat), lng: Number(marker.lng) }}
+                onClick={() => onClickMapHandler(marker)}
+              />
+            </div>
+          );
+        })}
 
-      <></>
-    </GoogleMap>
-  ) : (
-    <></>
-  );
+        <></>
+      </GoogleMap>
+    </MapContainer>
+  ) : null;
 };
+
+const MapContainer = styled.div`
+  height: 100%;
+  position: relative;
+  & *:focus {
+    outline: none;
+  }
+  ${onTabletMediaQuery()} {
+    height: 50%;
+  }
+  ${onSmallPhoneMediaQuery()} {
+    height: 50%;
+  }
+`;
 
 const InfoWindowContainer = styled.div`
   text-align: center;

@@ -44,9 +44,15 @@ const MenuWrapper = styled.div`
   align-items: center;
   justify-content: center;
   width: 20%;
-  margin-right: 10%;
+  margin-right: 5%;
+  ${onDesktopMediaQuery()} {
+    margin-right: 10%;
+  }
+  ${onTabletMediaQuery()} {
+    margin-right: 15%;
+  }
   ${onSmallPhoneMediaQuery()} {
-    margin-right: 20%;
+    margin-right: 17%;
   }
 `;
 
@@ -60,7 +66,7 @@ const MenuItem = styled.p`
   cursor: pointer;
   ${onTabletMediaQuery()} {
     font-size: 20px;
-    margin: 0px 15px;
+    margin: 5px 10px;
   }
   ${onSmallPhoneMediaQuery()} {
     font-size: 18px;
@@ -79,7 +85,7 @@ const MenuItemLink = styled(NavLink)`
   cursor: pointer;
   ${onTabletMediaQuery()} {
     font-size: 20px;
-    margin: 10px 15px;
+    margin: 5px 0px 5px 10px;
   }
   ${onSmallPhoneMediaQuery()} {
     font-size: 18px;
