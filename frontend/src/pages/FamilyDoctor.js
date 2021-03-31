@@ -11,6 +11,8 @@ import {
 
 const FamilyDoctor = () => {
   const [acceptingPatients, setAcceptingPatients] = useState([]);
+  const [postalCodeStorage, setPostalCodeStorage] = useState();
+  const [postalCode, setPostalCode] = useState();
 
   useEffect(() => {
     fetch(`/doctor_finder`, {
@@ -26,19 +28,39 @@ const FamilyDoctor = () => {
       <ContentWrapper>
         <MenuWrapper>
           <MenuText>Clinics with doctors accepting new patients:</MenuText>
-          {acceptingPatients.map((acceptingPatients) => {
-            return (
-              <ListItem
-                to={`/clinics/${acceptingPatients._id}`}
-                key={acceptingPatients._id}
-              >
-                {acceptingPatients.clinicName}
-              </ListItem>
-            );
-          })}
+          <ListItemContainer>
+            {acceptingPatients.map((acceptingPatients) => {
+              return (
+                <ListItem
+                  to={`/clinics/${acceptingPatients._id}`}
+                  key={acceptingPatients._id}
+                >
+                  {acceptingPatients.clinicName}
+                </ListItem>
+              );
+            })}
+          </ListItemContainer>
+          <PostalCodePrompt>
+            Enter your postal code to find the nearest clinic:
+          </PostalCodePrompt>
+          <PostalCodeWrapper>
+            <Field>
+              <input
+                name="postalCode"
+                placeholder="Enter your postal code"
+                type="text"
+                value={postalCodeStorage}
+                onChange={(e) => setPostalCodeStorage(e.target.value)}
+                style={{ height: "30px", width: "150px" }}
+              />
+            </Field>
+            <SubmitPostalCode onClick={() => setPostalCode(postalCodeStorage)}>
+              Submit
+            </SubmitPostalCode>
+          </PostalCodeWrapper>
         </MenuWrapper>
         <MapWrapper>
-          <Map acceptingPatients={acceptingPatients} />
+          <Map acceptingPatients={acceptingPatients} postalCode={postalCode} />
         </MapWrapper>
       </ContentWrapper>
     </Container>
@@ -78,14 +100,27 @@ const MenuWrapper = styled.div`
 `;
 
 const MenuText = styled.p`
-  font-size: 24px;
+  font-size: 40px;
   font-weight: 600;
   padding: 0px 20px;
+  width: 100%;
   color: white;
   text-shadow: 1px 1px 1px #000000;
+  ${onDesktopMediaQuery()} {
+    margin-left: 5%;
+  }
+  ${onTabletMediaQuery()} {
+    margin-left: 5%;
+  }
+  ${onSmallPhoneMediaQuery()} {
+    font-size: 30px;
+    margin-left: 5%;
+    padding: 0px;
+  }
 `;
 
 const MapWrapper = styled.div`
+  border: 1px solid black;
   width: 100%;
   height: 80%;
   margin: 20px;
@@ -106,15 +141,97 @@ const MapWrapper = styled.div`
   }
 `;
 
+const ListItemContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  max-height: 300px;
+  width: 70%;
+  background-color: white;
+  border-radius: 3px;
+  overflow-y: auto;
+  margin-left: 5%;
+  ${onDesktopMediaQuery()} {
+    margin-left: 5%;
+  }
+  ${onTabletMediaQuery()} {
+    max-height: 250px;
+    margin-left: 5%;
+  }
+  ${onSmallPhoneMediaQuery()} {
+    max-height: 150px;
+    margin-left: 5%;
+    width: 100%;
+  }
+`;
+
 const ListItem = styled(NavLink)`
   font-size: 16px;
   font-weight: 600;
   padding: 0px 10px;
   margin: 10px 20px;
-  color: white;
-  text-shadow: 1px 1px 1px #000000;
+  color: black;
   text-decoration: none;
   cursor: pointer;
+`;
+
+const Field = styled.div`
+  border-radius: 3px;
+  padding-right: 20px;
+  margin-left: 5%;
+  ${onDesktopMediaQuery()} {
+    margin-left: 5%;
+  }
+  ${onTabletMediaQuery()} {
+    margin-left: 5%;
+  }
+  ${onSmallPhoneMediaQuery()} {
+    margin-left: 5%;
+  }
+`;
+
+const PostalCodePrompt = styled.p`
+  font-size: 20px;
+  font-weight: 600;
+  padding: 40px 20px 20px 20px;
+  color: white;
+  text-shadow: 1px 1px 1px #000000;
+  ${onDesktopMediaQuery()} {
+    margin-left: 5%;
+  }
+  ${onTabletMediaQuery()} {
+    margin-left: 5%;
+  }
+  ${onSmallPhoneMediaQuery()} {
+    margin-left: 5%;
+    padding: 0px;
+    font-size: 18px;
+  }
+`;
+
+const PostalCodeWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  ${onDesktopMediaQuery()} {
+    margin-left: 5%;
+  }
+  ${onTabletMediaQuery()} {
+    margin-left: 5%;
+  }
+  ${onSmallPhoneMediaQuery()} {
+    padding-left: 0px;
+    margin-left: 0px;
+  }
+`;
+
+const SubmitPostalCode = styled.button`
+  padding: 5px;
+  background-color: black;
+  border-radius: 3px;
+  color: white;
+  font-size: 18px;
+  font-weight: 600;
+  width: 100px;
 `;
 
 export default FamilyDoctor;

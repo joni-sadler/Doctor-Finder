@@ -2,6 +2,11 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import Header from "../components/Header";
+import {
+  onSmallPhoneMediaQuery,
+  onDesktopMediaQuery,
+  onTabletMediaQuery,
+} from "../utils/responsive";
 
 const Doctor = () => {
   const [selectedDoctor, setSelectedDoctor] = useState({});
@@ -72,6 +77,16 @@ const ContentWrapper = styled.div`
   align-items: center;
   height: 100%;
   width: 100%;
+  ${onDesktopMediaQuery()} {
+  }
+  ${onTabletMediaQuery()} {
+    padding-top: 10%;
+    text-align: center;
+  }
+  ${onSmallPhoneMediaQuery()} {
+    padding-top: 10%;
+    text-align: center;
+  }
 `;
 
 const Title = styled.p`
