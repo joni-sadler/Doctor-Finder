@@ -136,16 +136,19 @@ const ListItemContainer = styled.div`
   border-radius: 3px;
   overflow-y: auto;
   margin-left: 20px;
+  width: 80%;
   ${onDesktopMediaQuery()} {
     margin-left: 5%;
   }
   ${onTabletMediaQuery()} {
     max-height: 250px;
     margin-left: 5%;
+    width: 100%;
   }
   ${onSmallPhoneMediaQuery()} {
     max-height: 125px;
     margin-left: 5%;
+    width: 100%;
   }
 `;
 
@@ -182,6 +185,7 @@ const PostalCodePrompt = styled.p`
   ${onSmallPhoneMediaQuery()} {
     margin-left: 5%;
     padding: 0px;
+    font-size: 18px;
   }
 `;
 
@@ -203,6 +207,7 @@ const PostalCodeWrapper = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
+  margin-left: 3%;
   ${onDesktopMediaQuery()} {
     margin-left: 5%;
   }

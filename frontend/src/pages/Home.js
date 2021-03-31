@@ -82,6 +82,7 @@ const Container = styled.div`
   height: 100vh;
   width: 100vw;
   background-color: #085b67;
+  overflow: auto;
 `;
 
 const ContentWrapper = styled.div`

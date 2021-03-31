@@ -65,11 +65,6 @@ const ClinicList = () => {
               Submit
             </SubmitPostalCode>
           </PostalCodeWrapper>
-          {postalCode && (
-            <PostalCodeText>
-              The blue marker on the map indicates your location.
-            </PostalCodeText>
-          )}
         </MenuWrapper>
         <MapWrapper>
           <Map clinics={clinics} postalCode={postalCode} />
@@ -232,13 +227,6 @@ const SubmitPostalCode = styled.button`
   font-size: 18px;
   font-weight: 600;
   width: 100px;
-`;
-
-const PostalCodeText = styled.p`
-  font-size: 18px;
-  color: white;
-  text-shadow: 1px 1px 1px #000000;
-  margin: 40px 20px;
 `;
 
 export default ClinicList;
