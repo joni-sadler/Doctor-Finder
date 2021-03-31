@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
-import styled, { keyframes } from "styled-components";
-import { fadeInDown, fadeOutUp } from "react-animations";
+import styled from "styled-components";
 import {
   onSmallPhoneMediaQuery,
   onDesktopMediaQuery,
@@ -91,6 +90,7 @@ const UpdateDoctor = ({ selectedDoctor }) => {
   return (
     <Container>
       <SignupWrapper>
+        <Title>Update Your Profile</Title>
         <Field>
           <input
             name="title"
@@ -240,25 +240,29 @@ const UpdateDoctor = ({ selectedDoctor }) => {
 };
 
 const Container = styled.div`
+  position: inherit;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  max-height: 50%;
+  height: 100%;
   width: 100%;
-  margin: 20px;
-  overflow-y: scroll;
+`;
+
+const Title = styled.p`
+  font-size: 40px;
+  font-weight: 600;
+  text-align: center;
+  margin: 20% 0px 0px 0px;
+  padding: 20px;
   ${onDesktopMediaQuery()} {
-    flex-direction: column;
-    justify-content: flex-start;
+    margin: 10px 0px 0px 0px;
   }
   ${onTabletMediaQuery()} {
-    height: 70%;
-    width: 70%;
+    margin: 10px 0px 0px 0px;
   }
   ${onSmallPhoneMediaQuery()} {
-    height: 100%;
-    width: 90%;
+    margin: 10px 0px 0px 0px;
   }
 `;
 
@@ -301,14 +305,6 @@ const ClinicDropdown = styled.div`
   flex-direction: column;
 `;
 
-const slideDown = keyframes`
-  ${fadeInDown};
-`;
-
-const slideUp = keyframes`
-  ${fadeOutUp};
-`;
-
 const CategoryNav = styled.nav`
   background: #ffffff;
   border-radius: 3px;
@@ -319,12 +315,10 @@ const CategoryNav = styled.nav`
   opacity: 1;
   padding-left: 5px;
   margin: 0px 0px 10px 10px;
-  max-height: 300px;
   border: 1px solid black;
-  overflow-y: auto;
+  height: 100%;
   display: flex;
   flex-direction: column;
-  /* animation: 0.3s ${slideDown}; */
 `;
 
 const ClinicList = styled.p`

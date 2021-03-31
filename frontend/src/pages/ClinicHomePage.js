@@ -1,7 +1,12 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import {NavLink, useParams, Redirect} from "react-router-dom";
+import { NavLink, useParams, Redirect } from "react-router-dom";
 import UpdateClinic from "../components/UpdateClinic";
+import {
+  onSmallPhoneMediaQuery,
+  onDesktopMediaQuery,
+  onTabletMediaQuery,
+} from "../utils/responsive";
 
 const ClinicHomePage = () => {
   const [updateProfileDropdown, setUpdateProfileDropdown] = useState();
@@ -15,86 +20,116 @@ const ClinicHomePage = () => {
     fetch(`/clinics/${clinic}`, {
       method: "GET",
     })
-    .then((res) => res.json())
-    .then((res) => {
-      setSelectedClinic(res.data)
-    });
+      .then((res) => res.json())
+      .then((res) => {
+        setSelectedClinic(res.data);
+      });
   }, [clinic]);
-  
-  
+
   const deleteFunction = () => {
     fetch(`/clinic_profile/${clinic}`, {
       method: "DELETE",
     })
-    .then((res) => res.json())
-    .then((res) => {
-      if (res.status === 201) {
-        setHasDeletedProfile(true);
-      } else {
-        console.log("There is an error with the delete request.")
-      }
-    })
-  }
+      .then((res) => res.json())
+      .then((res) => {
+        if (res.status === 201) {
+          setHasDeletedProfile(true);
+        } else {
+          console.log("There is an error with the delete request.");
+        }
+      });
+  };
 
   const updateProfileDropDownTrigger = () => {
     setUpdateProfileDropdown(!updateProfileDropdown);
-  }
+  };
 
   const deleteProfileDropdownTrigger = () => {
     setDeleteProfileDropdown(!deleteProfileDropdown);
-  }
-
+  };
 
   return (
     <Container>
-      <h2>Hello {selectedClinic.clinicName}!</h2>
-      <ViewProfile to={`/clinics/${selectedClinic._id}`}>View Profile</ViewProfile>
-      <UpdateProfile onClick={updateProfileDropDownTrigger}>Update Profile</UpdateProfile>
-        {updateProfileDropdown &&
+      <HelloText>Hello {selectedClinic.clinicName}!</HelloText>
+      <ViewProfile to={`/clinics/${selectedClinic._id}`}>
+        View Profile
+      </ViewProfile>
+      <ActionItem onClick={updateProfileDropDownTrigger}>
+        Update Profile
+      </ActionItem>
+      {updateProfileDropdown && (
+        <UpdateClinicContainer>
           <UpdateClinic selectedClinic={selectedClinic} />
-        }
+        </UpdateClinicContainer>
+      )}
 
-      <ActionItem onClick={deleteProfileDropdownTrigger}>Delete Profile</ActionItem>
-        {deleteProfileDropdown &&
-          <DeleteContainer>
-            <DeleteText>Are you sure you want to delete your profile?</DeleteText>
-            <DeleteButton onClick={deleteFunction}>DELETE</DeleteButton>
-          </DeleteContainer>
-        }
+      <ActionItem onClick={deleteProfileDropdownTrigger}>
+        Delete Profile
+      </ActionItem>
+      {deleteProfileDropdown && (
+        <DeleteContainer>
+          <DeleteText>Are you sure you want to delete your profile?</DeleteText>
+          <DeleteButton onClick={deleteFunction}>DELETE</DeleteButton>
+        </DeleteContainer>
+      )}
 
-        {hasDeletedProfile &&
-          <Redirect to={`/account_deleted`}/>     
-        }
+      {hasDeletedProfile && <Redirect to={`/account_deleted`} />}
+      <Logout to={`/`}>Logout</Logout>
     </Container>
-  )
-}
+  );
+};
 
-const Container = styled.div` 
+const Container = styled.div`
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: 100vw;
+  height: 100vh;
   justify-content: center;
   align-items: center;
+  background-color: #085b67;
+  overflow-y: scroll;
 `;
 
-const ViewProfile = styled(NavLink)` 
+const HelloText = styled.p`
+  font-size: 40px;
+  color: white;
+  text-shadow: 1px 1px 1px #000000;
+  margin-top: 10%;
+  text-align: center;
+`;
+
+const ViewProfile = styled(NavLink)`
   font-size: 24px;
   text-decoration: none;
-  color: black;
+  color: white;
+  text-shadow: 1px 1px 1px #000000;
   margin: 10px;
   cursor: pointer;
 `;
 
-const ActionItem = styled.p` 
-  font-size: 24px;
-  color: black;
-  margin: 10px;
-  cursor: pointer;
+const UpdateClinicContainer = styled.div`
+  border: 1px solid black;
+  border-radius: 3px;
+  ${onDesktopMediaQuery()} {
+    height: 100%;
+  }
+  ${onTabletMediaQuery()} {
+    height: 60%;
+    margin: 20px;
+  }
+  ${onSmallPhoneMediaQuery()} {
+    height: 50%;
+    width: 90%;
+    margin: 20px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+  }
 `;
 
-const UpdateProfile = styled.p` 
+const ActionItem = styled.p`
   font-size: 24px;
-  color: black;
+  color: white;
+  text-shadow: 1px 1px 1px #000000;
   margin: 10px;
   cursor: pointer;
 `;
@@ -106,12 +141,12 @@ const DeleteContainer = styled.div`
   align-items: center;
 `;
 
-const DeleteText = styled.p` 
+const DeleteText = styled.p`
   font-size: 20px;
   font-weight: 700;
 `;
 
-const DeleteButton = styled.button` 
+const DeleteButton = styled.button`
   background-color: black;
   color: white;
   border-radius: 3px;
@@ -119,6 +154,16 @@ const DeleteButton = styled.button`
   padding: 5px;
   font-size: 30px;
   font-weight: 500;
+  cursor: pointer;
+`;
+
+const Logout = styled(NavLink)`
+  font-size: 24px;
+  text-decoration: none;
+  color: black;
+  margin: 10px;
+  color: white;
+  text-shadow: 1px 1px 1px #000000;
   cursor: pointer;
 `;
 

@@ -2,6 +2,11 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { NavLink, useParams, Redirect } from "react-router-dom";
 import UpdateDoctor from "../components/UpdateDoctor";
+import {
+  onSmallPhoneMediaQuery,
+  onDesktopMediaQuery,
+  onTabletMediaQuery,
+} from "../utils/responsive";
 
 const DoctorHomePage = () => {
   const [updateProfileDropdown, setUpdateProfileDropdown] = useState();
@@ -55,7 +60,9 @@ const DoctorHomePage = () => {
         Update Profile
       </ActionItem>
       {updateProfileDropdown && (
-        <UpdateDoctor selectedDoctor={selectedDoctor} />
+        <UpdateDoctorContainer>
+          <UpdateDoctor selectedDoctor={selectedDoctor} />
+        </UpdateDoctorContainer>
       )}
       <ActionItem onClick={deleteProfileDropdownTrigger}>
         Delete Profile
@@ -81,13 +88,15 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   background-color: #085b67;
-  overflow: auto;
+  overflow-y: scroll;
 `;
 
 const HelloText = styled.p`
   font-size: 40px;
   color: white;
   text-shadow: 1px 1px 1px #000000;
+  margin-top: 10%;
+  text-align: center;
 `;
 
 const ViewProfile = styled(NavLink)`
@@ -105,6 +114,24 @@ const ActionItem = styled.p`
   text-shadow: 1px 1px 1px #000000;
   margin: 10px;
   cursor: pointer;
+`;
+
+const UpdateDoctorContainer = styled.div`
+  border: 1px solid black;
+  border-radius: 3px;
+  ${onDesktopMediaQuery()} {
+    height: 100%;
+  }
+  ${onTabletMediaQuery()} {
+    margin: 20px;
+  }
+  ${onSmallPhoneMediaQuery()} {
+    height: 50%;
+    width: 90%;
+    margin: 20px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+  }
 `;
 
 const DeleteContainer = styled.div`
