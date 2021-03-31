@@ -11,8 +11,8 @@ const Header = () => {
   return (
     <Container>
       <MenuWrapper>
-        <MenuItem>About</MenuItem>
-        <MenuItem>FAQ</MenuItem>
+        <MenuItemLink to={`/about`}>About</MenuItemLink>
+        <MenuItemLink to={`/faq`}>FAQ</MenuItemLink>
         <MenuItemLink to={`/`}>Home</MenuItemLink>
       </MenuWrapper>
     </Container>
@@ -53,24 +53,6 @@ const MenuWrapper = styled.div`
   }
   ${onSmallPhoneMediaQuery()} {
     margin-right: 17%;
-  }
-`;
-
-const MenuItem = styled.p`
-  color: white;
-  font-size: 24px;
-  font-weight: 500;
-  margin: 10px 25px;
-  font-family: "Montserrat", sans-serif;
-  color: white;
-  cursor: pointer;
-  ${onTabletMediaQuery()} {
-    font-size: 20px;
-    margin: 5px 10px;
-  }
-  ${onSmallPhoneMediaQuery()} {
-    font-size: 18px;
-    margin: 0px 10px;
   }
 `;
 
