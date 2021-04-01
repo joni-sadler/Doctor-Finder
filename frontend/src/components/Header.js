@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import SearchBar from "../components/SearchBar";
 import { NavLink } from "react-router-dom";
 import {
   onSmallPhoneMediaQuery,
@@ -10,6 +11,7 @@ import {
 const Header = () => {
   return (
     <Container>
+      <SearchBar />
       <MenuWrapper>
         <MenuItemLink to={`/about`}>About</MenuItemLink>
         <MenuItemLink to={`/faq`}>FAQ</MenuItemLink>
@@ -21,20 +23,15 @@ const Header = () => {
 
 const Container = styled.div`
   display: flex;
-  justify-content: flex-end;
-  min-height: 60px;
-  min-width: 100vw;
+  justify-content: space-between;
+  height: 60px;
+  width: 100%;
   background-color: black;
-  margin: 0px;
-  padding: 0px;
-  ${onDesktopMediaQuery()} {
-    min-height: 60px;
-  }
   ${onTabletMediaQuery()} {
-    min-height: 50px;
+    height: 50px;
   }
   ${onSmallPhoneMediaQuery()} {
-    min-height: 45px;
+    height: 50px;
   }
 `;
 
@@ -43,16 +40,16 @@ const MenuWrapper = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  width: 20%;
-  margin-right: 5%;
+  width: 25%;
+  margin-right: 0px;
   ${onDesktopMediaQuery()} {
     margin-right: 10%;
   }
   ${onTabletMediaQuery()} {
-    margin-right: 15%;
+    /* margin-right: 15%; */
   }
   ${onSmallPhoneMediaQuery()} {
-    margin-right: 17%;
+    margin-right: 7%;
   }
 `;
 
@@ -60,18 +57,17 @@ const MenuItemLink = styled(NavLink)`
   color: white;
   font-size: 24px;
   font-weight: 500;
-  margin: 10px 40px 10px 25px;
-  font-family: "Montserrat", sans-serif;
+  margin: 10px 20px;
   color: white;
   text-decoration: none;
   cursor: pointer;
   ${onTabletMediaQuery()} {
     font-size: 20px;
-    margin: 5px 0px 5px 10px;
+    margin: 5px 10px;
   }
   ${onSmallPhoneMediaQuery()} {
-    font-size: 18px;
-    margin: 10px 10px;
+    font-size: 16px;
+    margin: 10px 5px;
   }
 `;
 

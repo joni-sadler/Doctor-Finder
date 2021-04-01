@@ -126,7 +126,7 @@ const DoctorSignup = () => {
                 onChange={signupInfoHandler("title")}
                 style={{
                   height: "25px",
-                  width: "90%",
+                  width: "80%",
                   marginTop: "5px",
                   marginLeft: "5px",
                   marginRight: "5px",
@@ -134,69 +134,77 @@ const DoctorSignup = () => {
               />
             </Field>
             <Field>
-              <input
-                name="firstName"
-                placeholder="First name"
-                type="text"
-                value={signupInfo.firstName}
-                onChange={signupInfoHandler("firstName")}
-                style={{
-                  height: "25px",
-                  width: "90%",
-                  marginTop: "5px",
-                  marginLeft: "5px",
-                  marginRight: "5px",
-                }}
-              />
-              {"  "}*
+              <div>
+                <input
+                  name="firstName"
+                  placeholder="First name"
+                  type="text"
+                  value={signupInfo.firstName}
+                  onChange={signupInfoHandler("firstName")}
+                  style={{
+                    height: "25px",
+                    width: "80%",
+                    marginTop: "5px",
+                    marginLeft: "5px",
+                    marginRight: "5px",
+                  }}
+                />
+                {"  "}*
+              </div>
               {!firstNameValidation && hasSubmittedInfo && (
                 <p>This field is required</p>
               )}
             </Field>
             <Field>
-              <input
-                name="lastName"
-                placeholder="Last name"
-                type="text"
-                value={signupInfo.lastName}
-                onChange={signupInfoHandler("lastName")}
-                style={{
-                  height: "25px",
-                  width: "90%",
-                  marginTop: "5px",
-                  marginLeft: "5px",
-                  marginRight: "5px",
-                }}
-              />
-              {"  "}*
+              <div>
+                <input
+                  name="lastName"
+                  placeholder="Last name"
+                  type="text"
+                  value={signupInfo.lastName}
+                  onChange={signupInfoHandler("lastName")}
+                  style={{
+                    height: "25px",
+                    width: "80%",
+                    marginTop: "5px",
+                    marginLeft: "5px",
+                    marginRight: "5px",
+                  }}
+                />
+                {"  "}*
+              </div>
             </Field>
             <Field>
-              <input
-                name="email"
-                placeholder="Email"
-                type="text"
-                value={signupInfo.email}
-                onChange={signupInfoHandler("email")}
-                style={{
-                  height: "25px",
-                  width: "90%",
-                  marginTop: "5px",
-                  marginLeft: "5px",
-                  marginRight: "5px",
-                }}
-              />{" "}
-              *
+              <div>
+                <input
+                  name="email"
+                  placeholder="Email"
+                  type="text"
+                  value={signupInfo.email}
+                  onChange={signupInfoHandler("email")}
+                  style={{
+                    height: "25px",
+                    width: "80%",
+                    marginTop: "5px",
+                    marginLeft: "5px",
+                    marginRight: "5px",
+                  }}
+                />{" "}
+                *
+              </div>
             </Field>
             <Field>
               <Text>Show my email as part of my public doctor profile?</Text>
-              <input
-                name="showEmail"
-                type="radio"
-                value="True"
-                onChange={showEmailHandlerTrue}
-              />{" "}
-              Yes
-              <input name="showEmail" type="radio" value="False" /> No
+              <div>
+                <input
+                  name="showEmail"
+                  type="radio"
+                  value="True"
+                  onChange={showEmailHandlerTrue}
+                />{" "}
+                Yes
+                <input name="showEmail" type="radio" value="False" /> No
+              </div>
             </Field>
             <Field>
               <input
@@ -205,21 +213,23 @@ const DoctorSignup = () => {
                 type="text"
                 value={signupInfo.phoneNumber}
                 onChange={signupInfoHandler("phoneNumber")}
-                style={{ height: "25px", width: "90%", marginTop: "5px" }}
+                style={{ height: "25px", width: "80%", marginTop: "5px" }}
               />
             </Field>
             <Field>
               <Text>
                 Show my phone number as part of my public doctor profile?
               </Text>
-              <input
-                name="showPhoneNumber"
-                type="radio"
-                value="True"
-                onChange={showPhoneNumberHandlerTrue}
-              />{" "}
-              Yes
-              <input name="showPhoneNumber" type="radio" value="False" /> No
+              <div>
+                <input
+                  name="showPhoneNumber"
+                  type="radio"
+                  value="True"
+                  onChange={showPhoneNumberHandlerTrue}
+                />{" "}
+                Yes
+                <input name="showPhoneNumber" type="radio" value="False" /> No
+              </div>
             </Field>
             <ClinicDropdown>
               <Text>Name of the clinic you are based at:</Text>
@@ -270,27 +280,29 @@ const DoctorSignup = () => {
                 onChange={signupInfoHandler("specialty")}
                 style={{
                   height: "25px",
-                  width: "90%",
+                  width: "80%",
                   marginTop: "5px",
                   marginLeft: "5px",
                 }}
               />
             </Field>
             <Field>
-              <input
-                name="password"
-                placeholder="Set your password"
-                type="password"
-                value={signupInfo.password}
-                onChange={signupInfoHandler("password")}
-                style={{
-                  height: "25px",
-                  width: "90%",
-                  marginTop: "5px",
-                  marginLeft: "5px",
-                }}
-              />{" "}
-              *
+              <div>
+                <input
+                  name="password"
+                  placeholder="Set your password"
+                  type="password"
+                  value={signupInfo.password}
+                  onChange={signupInfoHandler("password")}
+                  style={{
+                    height: "25px",
+                    width: "80%",
+                    marginTop: "5px",
+                    marginLeft: "5px",
+                  }}
+                />{" "}
+                *
+              </div>
             </Field>
           </InputDiv>
           <RequiredFields>* Required fields</RequiredFields>
@@ -327,7 +339,7 @@ const Container = styled.div`
   height: 100vh;
   width: 100vw;
   background-color: #085b67;
-  overflow: auto;
+  overflow-y: scroll;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -338,6 +350,7 @@ const ContentWrapper = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
+  overflow-y: scroll;
   ${onSmallPhoneMediaQuery()} {
     margin: 10px;
   }
@@ -368,7 +381,7 @@ const SignupWrapper = styled.div`
 
 const Field = styled.div`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   padding: 10px;
   width: 90%;
 `;
@@ -434,6 +447,7 @@ const SubmitButton = styled.button`
   padding: 5px;
   font-size: 30px;
   font-weight: 500;
+  margin-bottom: 25px;
   cursor: pointer;
 `;
 
@@ -458,6 +472,8 @@ const ConfirmationText = styled.p`
   font-size: 24px;
   font-weight: 600;
   padding-top: 20px;
+  margin: 0 5%;
+  text-align: center;
   color: white;
   text-shadow: 1px 1px 1px #000000;
 `;

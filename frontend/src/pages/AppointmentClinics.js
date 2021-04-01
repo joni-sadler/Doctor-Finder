@@ -3,6 +3,11 @@ import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 import Map from "../components/Map";
 import Header from "../components/Header";
+import {
+  onSmallPhoneMediaQuery,
+  onDesktopMediaQuery,
+  onTabletMediaQuery,
+} from "../utils/responsive";
 
 const AppointmentClinics = () => {
   const [appointmentClinics, setAppointmentClinics] = useState([]);
@@ -63,11 +68,6 @@ const AppointmentClinics = () => {
               Submit
             </SubmitPostalCode>
           </PostalCodeWrapper>
-          {postalCode && (
-            <PostalCodeText>
-              The blue marker on the map indicates your location.
-            </PostalCodeText>
-          )}
         </MenuWrapper>
         <MapWrapper>
           <Map
@@ -81,22 +81,35 @@ const AppointmentClinics = () => {
 };
 
 const PageWrapper = styled.div`
-  height: 100%;
-  width: 100%;
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+  overflow: auto;
+  background-color: #085b67;
 `;
 
 const Container = styled.div`
   display: flex;
-  justify-content: space-between;
-  width: 100%;
-  height: 100%;
-  background-color: #085b67;
+  height: 90%;
+  ${onDesktopMediaQuery()} {
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+  ${onTabletMediaQuery()} {
+    flex-direction: column;
+    height: 100%;
+  }
+  ${onSmallPhoneMediaQuery()} {
+    flex-direction: column;
+    height: 100%;
+  }
 `;
 
 const MenuWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  width: 500px;
+  width: 90%;
 `;
 
 const MenuText = styled.p`
@@ -105,13 +118,39 @@ const MenuText = styled.p`
   padding: 0px 20px;
   color: white;
   text-shadow: 1px 1px 1px #000000;
+  ${onDesktopMediaQuery()} {
+    margin-left: 5%;
+  }
+  ${onTabletMediaQuery()} {
+    margin-left: 5%;
+  }
+  ${onSmallPhoneMediaQuery()} {
+    margin-left: 5%;
+    padding: 0px;
+    font-size: 30px;
+  }
 `;
 
 const MapWrapper = styled.div`
   border: 1px solid black;
-  width: 60%;
-  height: 80%;
+  width: 100%;
+  height: 100%;
   margin: 20px;
+  ${onDesktopMediaQuery()} {
+    height: 100%;
+    width: 90%;
+    margin: 5%;
+  }
+  ${onTabletMediaQuery()} {
+    height: 100%;
+    width: 90%;
+    margin: 5%;
+  }
+  ${onSmallPhoneMediaQuery()} {
+    height: 100%;
+    width: 90%;
+    margin: 5%;
+  }
 `;
 
 const ListItemContainer = styled.div`
@@ -122,6 +161,18 @@ const ListItemContainer = styled.div`
   border-radius: 3px;
   overflow-y: auto;
   margin-left: 20px;
+  width: 100%;
+  ${onDesktopMediaQuery()} {
+    margin-left: 5%;
+  }
+  ${onTabletMediaQuery()} {
+    max-height: 250px;
+    margin-left: 5%;
+  }
+  ${onSmallPhoneMediaQuery()} {
+    max-height: 125px;
+    margin-left: 5%;
+  }
 `;
 
 const ListItem = styled(NavLink)`
@@ -131,6 +182,15 @@ const ListItem = styled(NavLink)`
   color: black;
   text-decoration: none;
   cursor: pointer;
+  ${onDesktopMediaQuery()} {
+    padding: 10px 0px 10px 15px;
+  }
+  ${onTabletMediaQuery()} {
+    padding: 10px 0px 10px 15px;
+  }
+  ${onSmallPhoneMediaQuery()} {
+    padding: 10px 0px 10px 15px;
+  }
 `;
 
 const PostalCodePrompt = styled.p`
@@ -139,6 +199,17 @@ const PostalCodePrompt = styled.p`
   padding: 40px 20px 20px 20px;
   color: white;
   text-shadow: 1px 1px 1px #000000;
+  ${onDesktopMediaQuery()} {
+    margin-left: 5%;
+  }
+  ${onTabletMediaQuery()} {
+    margin-left: 5%;
+  }
+  ${onSmallPhoneMediaQuery()} {
+    margin-left: 5%;
+    padding: 0px;
+    font-size: 18px;
+  }
 `;
 
 const Field = styled.div`
@@ -160,13 +231,6 @@ const SubmitPostalCode = styled.button`
   font-size: 18px;
   font-weight: 600;
   width: 100px;
-`;
-
-const PostalCodeText = styled.p`
-  font-size: 18px;
-  color: white;
-  text-shadow: 1px 1px 1px #000000;
-  margin: 40px 20px;
 `;
 
 export default AppointmentClinics;

@@ -122,7 +122,7 @@ const MenuText = styled.p`
 const MapWrapper = styled.div`
   border: 1px solid black;
   width: 100%;
-  height: 80%;
+  height: 100%;
   margin: 20px;
   ${onDesktopMediaQuery()} {
     height: 100%;

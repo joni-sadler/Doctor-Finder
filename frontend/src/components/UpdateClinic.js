@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react";
-import styled, { keyframes } from "styled-components";
-import { fadeInDown, fadeOutUp } from "react-animations";
+import React, { useState } from "react";
+import styled from "styled-components";
 import {
   onSmallPhoneMediaQuery,
   onDesktopMediaQuery,
