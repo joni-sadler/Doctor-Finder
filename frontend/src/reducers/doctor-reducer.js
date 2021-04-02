@@ -1,21 +1,24 @@
-const initialState = {status: 'idle'};
+const initialState = { status: "idle", doctors: null };
 
 export default function doctorReducer(state = initialState, action) {
+  console.log(action);
+
   switch (action.type) {
     case "LOADING_DOCTORS": {
-     console.log(action);
+      console.log(action);
       return {
         ...state,
         status: "loading",
-      }
+      };
     }
 
     case "RECEIVE_DOCTORS": {
       console.log(action);
-        return {
-          ...state,
-          status: "idle",
-        }
+      return {
+        ...state,
+        doctors: action.doctors,
+        status: "idle",
+      };
     }
 
     case "ERROR": {
@@ -23,7 +26,7 @@ export default function doctorReducer(state = initialState, action) {
       return {
         ...state,
         status: "error",
-      }
+      };
     }
 
     default: {

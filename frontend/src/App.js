@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import GlobalStyles from "./components/GlobalStyles";
 import styled from "styled-components";
 import Home from "./pages/Home";
@@ -21,8 +22,15 @@ import DoctorHomePage from "./pages/DoctorHomePage";
 import ClinicHomePage from "./pages/ClinicHomePage";
 import DeleteAccount from "./pages/DeleteAccount";
 import Specialty from "./pages/Specialty";
+import { handleFetchDoctors } from "./components/helpers/fetch-request-helpers";
 
 const App = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    handleFetchDoctors(dispatch);
+  }, []);
+
   return (
     <BrowserRouter>
       <GlobalStyles />

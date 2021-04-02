@@ -4,9 +4,10 @@ export const loadingDoctors = () => ({
   type: "LOADING_DOCTOR",
 });
 
-export const receiveDoctors = () => ({
+export const receiveDoctors = (doctors) => ({
   type: "RECEIVE_DOCTORS",
-})
+  doctors,
+});
 
 export const errorDoctors = () => ({
   type: "ERROR",
@@ -14,11 +15,12 @@ export const errorDoctors = () => ({
 
 export const loadingClinics = () => ({
   type: "LOADING_CLINICS",
-  });
+});
 
-export const receiveClinics = () => ({
+export const receiveClinics = (clinics) => ({
   type: "RECEIVE_CLINICS",
-})
+  clinics,
+});
 
 export const errorClinics = () => ({
   type: "ERROR",
