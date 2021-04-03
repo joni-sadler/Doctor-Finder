@@ -73,6 +73,7 @@ const Input = styled.input`
   padding: 10px;
   border: none;
   outline: none;
+  margin: 5% 5% 0 5%;
   border-bottom: 2px solid black;
   ${onSmallPhoneMediaQuery()} {
     width: 175px;
@@ -81,7 +82,6 @@ const Input = styled.input`
 `;
 
 const SearchList = styled.div`
-  max-height: 150px;
   margin-left: 15px;
   background-color: white;
   z-index: 5;
