@@ -24,6 +24,8 @@ const Header = () => {
 const Container = styled.div`
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  padding: 10px;
   height: 60px;
   width: 100%;
   background-color: black;
@@ -41,15 +43,16 @@ const MenuWrapper = styled.div`
   align-items: center;
   justify-content: center;
   width: 25%;
-  margin-right: 0px;
+  margin-left: 5%;
   ${onDesktopMediaQuery()} {
-    margin-right: 10%;
+    margin-right: 5%;
   }
   ${onTabletMediaQuery()} {
-    /* margin-right: 15%; */
+    width: 35%;
   }
   ${onSmallPhoneMediaQuery()} {
-    margin-right: 7%;
+    margin-right: 10%;
+    width: 50%;
   }
 `;
 

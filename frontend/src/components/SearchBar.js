@@ -52,7 +52,7 @@ const SearchBar = () => {
                     to={`/doctors/${doctor._id}`}
                     key={i}
                   >
-                    {doctor.firstName} {doctor.lastName}
+                    {doctor.title} {doctor.firstName} {doctor.lastName}
                   </DoctorLink>
                 </Dropdown>
               );
@@ -71,12 +71,12 @@ const Container = styled.div`
 const Input = styled.input`
   width: 300px;
   padding: 10px;
-  margin: 15px 0px 0px 15px;
   border: none;
   outline: none;
   border-bottom: 2px solid black;
   ${onSmallPhoneMediaQuery()} {
     width: 175px;
+    height: 10px;
   }
 `;
 
@@ -84,17 +84,16 @@ const SearchList = styled.div`
   max-height: 150px;
   margin-left: 15px;
   background-color: white;
+  z-index: 5;
   ${onSmallPhoneMediaQuery()} {
     width: 175px;
   }
 `;
 
 const Dropdown = styled.div`
-  padding: 10px 0px;
+  padding: 10px 5px;
   text-align: left;
   background-color: white;
-  min-width: inherit;
-  min-height: inherit;
   &:hover {
     cursor: pointer;
     background: #dbe7e9;
@@ -102,10 +101,9 @@ const Dropdown = styled.div`
 `;
 
 const DoctorLink = styled(NavLink)`
-  background: white;
-  padding: 10px;
+  padding: 10px 0px;
   text-align: left;
-  min-width: 100%;
+  height: 10px;
   color: black;
   text-decoration: none;
   &:hover {

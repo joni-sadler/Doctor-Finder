@@ -103,6 +103,8 @@ const Main = styled.div`
   display: flex;
   height: 100vh;
   width: 100vw;
+  overflow: auto;
+  background-color: #085b67;
 `;
 
 export default App;
