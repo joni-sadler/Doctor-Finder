@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from "react";
-import {
-  GoogleMap,
-  useJsApiLoader,
-  Marker,
-  InfoWindow,
-} from "@react-google-maps/api";
-import Geocode from "react-geocode";
+// import {
+//   GoogleMap,
+//   useJsApiLoader,
+//   Marker,
+//   InfoWindow,
+// } from "@react-google-maps/api";
+
+import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+
+import "leaflet/dist/leaflet.css";
+
 import styled from "styled-components";
 import {
   onSmallPhoneMediaQuery,
@@ -25,12 +29,10 @@ const Map = ({
   clinics,
   postalCode,
 }) => {
-  const { isLoaded, loadError } = useJsApiLoader({
-    id: "google-map-script",
-    googleMapsApiKey: process.env.REACT_APP_MAP_KEY,
-  });
-
-  Geocode.setApiKey(process.env.REACT_APP_GEOCODING_API_KEY);
+  // const { isLoaded, loadError } = useJsApiLoader({
+  //   id: "google-map-script",
+  //   googleMapsApiKey: process.env.REACT_APP_MAP_KEY,
+  // });
 
   const [markers, setMarkers] = useState([]);
   const [originMarker, setOriginMarker] = useState({});
@@ -80,26 +82,18 @@ const Map = ({
     lng: -73.603893,
   };
 
-  if (loadError) {
-    console.log(loadError);
-    return;
-  }
+  // if (loadError) {
+  //   console.log(loadError);
+  //   return;
+  // }
+
+  const isLoaded = true;
 
   const onClickMapHandler = (marker) => {
     console.log(marker.clinicName);
     setInfoWindowMarker(marker);
     setShowingInfoWindow(true);
   };
-
-  Geocode.fromAddress(postalCode).then(
-    (response) => {
-      const { lat, lng } = response.results[0].geometry.location;
-      setOriginPoint({ latitude: lat, longitude: lng });
-    },
-    (error) => {
-      console.error(error);
-    }
-  );
 
   if (clinics) {
     clinics.forEach((clinic) => {
@@ -120,8 +114,8 @@ const Map = ({
   }
 
   return isLoaded ? (
-    <MapContainer>
-      <GoogleMap mapContainerStyle={containerStyle} center={center} zoom={12}>
+    <MapWrapper>
+      {/* <GoogleMap mapContainerStyle={containerStyle} center={center} zoom={12}>
         {infoWindowMarker && (
           <InfoWindow
             position={{
@@ -165,22 +159,33 @@ const Map = ({
         })}
 
         <></>
-      </GoogleMap>
-    </MapContainer>
+      </GoogleMap> */}
+      <MapContainer center={[51.505, -0.09]} zoom={13} scrollWheelZoom={false}>
+        <TileLayer
+          attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        />
+        <Marker position={[51.505, -0.09]}>
+          <Popup>
+            A pretty CSS3 popup. <br /> Easily customizable.
+          </Popup>
+        </Marker>
+      </MapContainer>
+    </MapWrapper>
   ) : null;
 };
 
-const MapContainer = styled.div`
-  height: 100%;
+const MapWrapper = styled.div`
+  height: 500px;
   position: relative;
   & *:focus {
     outline: none;
   }
   ${onTabletMediaQuery()} {
-    height: 50%;
+    /* height: 50%; */
   }
   ${onSmallPhoneMediaQuery()} {
-    height: 50%;
+    /* height: 50%; */
   }
 `;
 
