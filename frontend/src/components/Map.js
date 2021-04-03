@@ -9,6 +9,9 @@ import React, { useState, useEffect } from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 
 import "leaflet/dist/leaflet.css";
+import L from "leaflet";
+import icon from "leaflet/dist/images/marker-icon.png";
+import iconShadow from "leaflet/dist/images/marker-shadow.png";
 
 import styled from "styled-components";
 import {
@@ -113,6 +116,13 @@ const Map = ({
     });
   }
 
+  let DefaultIcon = L.icon({
+    iconUrl: icon,
+    shadowUrl: iconShadow,
+  });
+
+  L.Marker.prototype.options.icon = DefaultIcon;
+
   return isLoaded ? (
     <MapWrapper>
       {/* <GoogleMap mapContainerStyle={containerStyle} center={center} zoom={12}>
@@ -164,12 +174,16 @@ const Map = ({
         <TileLayer
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        />
-        <Marker position={[51.505, -0.09]}>
-          <Popup>
-            A pretty CSS3 popup. <br /> Easily customizable.
-          </Popup>
-        </Marker>
+        />{" "}
+        {markers.map((marker) => {
+          return (
+            <div>
+              <Marker position={[Number(marker.lat), Number(marker.lng)]}>
+                <Popup>{marker.clinicName}</Popup>
+              </Marker>
+            </div>
+          );
+        })}
       </MapContainer>
     </MapWrapper>
   ) : null;
@@ -182,10 +196,11 @@ const MapWrapper = styled.div`
     outline: none;
   }
   ${onTabletMediaQuery()} {
-    /* height: 50%; */
+    height: 50%;
   }
   ${onSmallPhoneMediaQuery()} {
-    /* height: 50%; */
+    height: 70%;
+    overflow: hidden;
   }
 `;
 
