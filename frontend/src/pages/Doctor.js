@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, NavLink } from "react-router-dom";
 import styled from "styled-components";
 import Header from "../components/Header";
 import {
@@ -19,12 +19,11 @@ const Doctor = () => {
     })
       .then((res) => res.json())
       .then((res) => {
-        console.log(res);
         setSelectedDoctor(res.data);
       });
   }, [doctor]);
 
-  console.log(doctor);
+  console.log(selectedDoctor);
 
   return (
     <Container>
@@ -56,6 +55,12 @@ const Doctor = () => {
         )}
         {selectedDoctor.showPhoneNumber && (
           <DoctorInfo>Phone number: {selectedDoctor.phoneNumber}</DoctorInfo>
+        )}
+        {selectedDoctor.bio && (
+          <BioDiv>
+            <Title>Bio:</Title>
+            <DoctorInfo>{selectedDoctor.bio}</DoctorInfo>
+          </BioDiv>
         )}
       </ContentWrapper>
     </Container>
@@ -105,6 +110,13 @@ const DoctorInfo = styled.p`
   padding: 0px;
   color: white;
   text-shadow: 1px 1px 1px #000000;
+`;
+
+const BioDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  margin-bottom: 25px;
 `;
 
 export default Doctor;

@@ -51,7 +51,8 @@ const DoctorHomePage = () => {
   return (
     <Container>
       <HelloText>
-        Hello {selectedDoctor.firstName} {selectedDoctor.lastName}!
+        Hello {selectedDoctor.title} {selectedDoctor.firstName}{" "}
+        {selectedDoctor.lastName}!
       </HelloText>
       <ViewProfile to={`/doctors/${selectedDoctor._id}`}>
         View Profile

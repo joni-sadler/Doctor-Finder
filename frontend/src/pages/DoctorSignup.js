@@ -13,7 +13,6 @@ const DoctorSignup = () => {
   const [hasSubmittedInfo, setHasSubmittedInfo] = useState(false);
   const [clinics, setClinics] = useState([]);
   const [primaryClinic, setPrimaryClinic] = useState();
-  const [secondaryClinic, setSecondaryClinic] = useState();
   const [showEmail, setShowEmail] = useState(false);
   const [showPhoneNumber, setShowPhoneNumber] = useState(false);
   const [firstNameValidation, setFirstNameValidation] = useState();
@@ -89,7 +88,6 @@ const DoctorSignup = () => {
       body: JSON.stringify({
         ...signupInfo,
         primaryClinic,
-        secondaryClinic,
         showEmail,
         showPhoneNumber,
       }),
@@ -116,6 +114,9 @@ const DoctorSignup = () => {
       <ContentWrapper>
         <Title>Create a new doctor account</Title>
         <SignupWrapper>
+          <RegistrationHeader>
+            Please complete the following form:
+          </RegistrationHeader>
           <InputDiv>
             <Field>
               <input
@@ -249,40 +250,37 @@ const DoctorSignup = () => {
                 })}
               </CategoryNav>
             </ClinicDropdown>
-            <ClinicDropdown>
-              <Text>
-                If you work at an additional clinic, please select it:
-              </Text>
-              <CategoryNav>
-                {clinics.map((clinic) => {
-                  return (
-                    <ClinicList
-                      onClick={() => setSecondaryClinic(clinic.clinicName)}
-                      style={{
-                        backgroundColor:
-                          secondaryClinic === clinic.clinicName
-                            ? "#B8D0D3"
-                            : "",
-                      }}
-                    >
-                      {clinic.clinicName}
-                    </ClinicList>
-                  );
-                })}
-              </CategoryNav>
-            </ClinicDropdown>
             <Field>
               <input
                 name="specialty"
                 placeholder="List any specialty practices"
                 type="text"
-                value={signupInfo.additionalClinicName}
+                value={signupInfo.specialty}
                 onChange={signupInfoHandler("specialty")}
                 style={{
                   height: "25px",
                   width: "80%",
                   marginTop: "5px",
                   marginLeft: "5px",
+                }}
+              />
+            </Field>
+            <Field>
+              <input
+                name="bio"
+                placeholder="Add a short bio (optional)"
+                type="text"
+                value={signupInfo.bio}
+                onChange={signupInfoHandler("bio")}
+                multiline={true}
+                textAlign="top"
+                style={{
+                  height: "25px",
+                  width: "80%",
+                  marginTop: "5px",
+                  marginLeft: "5px",
+                  overflowY: "scroll",
+                  textAlign: "top",
                 }}
               />
             </Field>
@@ -379,6 +377,12 @@ const SignupWrapper = styled.div`
   flex-direction: column;
 `;
 
+const RegistrationHeader = styled.p`
+  font-size: 18px;
+  font-weight: 700;
+  text-align: center;
+`;
+
 const Field = styled.div`
   display: flex;
   flex-direction: column;
@@ -410,7 +414,7 @@ const CategoryNav = styled.nav`
   position: inherit;
   top: 10%;
   right: 10px;
-  width: 80%;
+  width: 73%;
   opacity: 1;
   padding-left: 5px;
   margin: 5px 0px 15px 10px;

@@ -217,6 +217,23 @@ const UpdateDoctor = ({ selectedDoctor }) => {
         </Field>
         <Field>
           <input
+            name="bio"
+            placeholder="Add a short bio (optional)"
+            type="text"
+            value={currentInfo.bio}
+            onChange={updateInfoHandler("bio")}
+            multiline={true}
+            textAlign="top"
+            style={{
+              height: "25px",
+              width: "90%",
+              overflowY: "scroll",
+              textAlign: "top",
+            }}
+          />
+        </Field>
+        <Field>
+          <input
             name="password"
             placeholder="Set your password"
             type="password"
