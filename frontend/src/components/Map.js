@@ -1,5 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import {
+  MapContainer,
+  TileLayer,
+  Marker,
+  Popup,
+  LayerGroup,
+  Circle,
+  FeatureGroup,
+} from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
 import icon from "leaflet/dist/images/marker-icon.png";
@@ -116,6 +124,21 @@ const Map = ({
 
   L.Marker.prototype.options.icon = DefaultIcon;
 
+  var greenIcon = new L.Icon({
+    iconUrl:
+      "https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png",
+    shadowUrl:
+      "https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png",
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+    popupAnchor: [1, -34],
+    shadowSize: [41, 41],
+  });
+
+  L.marker([51.5, -0.09], { icon: greenIcon });
+
+  const fillRedOptions = { color: "red", fillColor: "red" };
+
   return (
     <MapWrapper>
       <MapContainer center={[45.51, -73.65]} zoom={12} scrollWheelZoom={false}>
@@ -123,22 +146,28 @@ const Map = ({
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />{" "}
+        {originPoint.lat && (
+          <FeatureGroup pathOptions={fillRedOptions}>
+            <Popup>Your location</Popup>
+            <Circle
+              center={originPoint}
+              pathOptions={fillRedOptions}
+              radius={250}
+            />
+          </FeatureGroup>
+        )}
         {markers.map((marker) => {
           return (
-            <div>
-              <Marker position={[Number(marker.lat), Number(marker.lng)]}>
-                <Popup>
-                  {marker.clinicName} <br /> {marker.clinicAddress}
-                </Popup>
-              </Marker>
-            </div>
+            <FeatureGroup>
+              <Popup>
+                {marker.clinicName} <br /> {marker.clinicAddress}
+              </Popup>
+              <Marker
+                position={[Number(marker.lat), Number(marker.lng)]}
+              ></Marker>
+            </FeatureGroup>
           );
         })}
-        {originPoint.lat && (
-          <Marker position={[originPoint.lat, originPoint.lng]}>
-            <Popup>Your location</Popup>
-          </Marker>
-        )}
       </MapContainer>
     </MapWrapper>
   );
