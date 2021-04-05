@@ -29,6 +29,7 @@ const Clinic = () => {
         <ClinicInfo>{selectedClinic.clinicAddress}</ClinicInfo>
         <ClinicInfo>Hours: {selectedClinic.hours}</ClinicInfo>
         <ClinicInfo>{selectedClinic.email}</ClinicInfo>
+        <ClinicInfo>{selectedClinic.website}</ClinicInfo>
         {clinicDoctors.length > 0 && (
           <DoctorsDiv>
             <Title>Doctors at this clinic:</Title>
