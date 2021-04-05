@@ -7,6 +7,7 @@ const ClinicLogin = () => {
   const [clinicLoginInfo, setClinicLoginInfo] = useState({});
   const [clinicArray, setClinicArray] = useState([]);
   const [selectedClinic, setSelectedClinic] = useState();
+  const [incorrectLogin, setIncorrectLogin] = useState();
 
   useEffect(() => {
     fetch(`/clinics`, {
@@ -29,7 +30,8 @@ const ClinicLogin = () => {
         clinicLoginInfo.password === clinic.password
       ) {
         setSelectedClinic(clinic);
-        console.log(selectedClinic);
+      } else {
+        setIncorrectLogin(true);
       }
     });
   };
@@ -67,6 +69,14 @@ const ClinicLogin = () => {
             <SubmitWrapper>
               <SubmitButton onClick={clinicSubmitFunction}>Submit</SubmitButton>
             </SubmitWrapper>
+
+            {incorrectLogin && (
+              <IncorrectLoginDiv>
+                <IncorrectLoginText>
+                  You have entered incorrect information. Please try again.
+                </IncorrectLoginText>
+              </IncorrectLoginDiv>
+            )}
 
             {selectedClinic && (
               <Redirect to={`/clinic_profile/${selectedClinic._id}`} />
@@ -142,6 +152,26 @@ const SubmitButton = styled.button`
   font-size: 30px;
   font-weight: 500;
   cursor: pointer;
+`;
+
+const IncorrectLoginDiv = styled.div`
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 300px;
+  height: auto;
+  background-color: #7c362c;
+  border-radius: 3px;
+  border: 1px solid black;
+`;
+
+const IncorrectLoginText = styled.p`
+  font-size: 18px;
+  font-weight: 500px;
+  color: white;
+  text-shadow: 1px 1px 1px #000000;
 `;
 
 const Signup = styled.div`
