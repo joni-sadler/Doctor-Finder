@@ -168,6 +168,21 @@ const ClinicSignup = () => {
             </Field>
             <Field>
               <input
+                name="website"
+                placeholder="Website"
+                type="text"
+                value={signupInfo.website}
+                onChange={signupInfoHandler("website")}
+                style={{
+                  height: "25px",
+                  width: "90%",
+                  marginTop: "5px",
+                  marginLeft: "5px",
+                }}
+              />
+            </Field>
+            <Field>
+              <input
                 name="phoneNumber"
                 placeholder="Phone number"
                 type="text"
@@ -281,10 +296,10 @@ const ClinicSignup = () => {
         </SignupWrapper>
         {hasSubmittedInfo && (
           <div>
-            <RegistrationMessaging>
+            <ConfirmationText>
               Thank you for registering! Your info is now securely stored in our
               database.
-            </RegistrationMessaging>
+            </ConfirmationText>
           </div>
         )}
         <HomepagePrompt>
@@ -365,6 +380,7 @@ const SubmitButton = styled.button`
   padding: 5px;
   font-size: 30px;
   font-weight: 500;
+  margin-bottom: 25px;
   cursor: pointer;
 `;
 
@@ -385,15 +401,12 @@ const SubmitButtonInactive = styled.div`
   }
 `;
 
-const RegistrationMessaging = styled.p`
-  font-size: 20px;
-  font-weight: 600;
-`;
-
 const ConfirmationText = styled.p`
   font-size: 24px;
   font-weight: 600;
   padding-top: 20px;
+  margin: 0 5%;
+  text-align: center;
   color: white;
   text-shadow: 1px 1px 1px #000000;
 `;
