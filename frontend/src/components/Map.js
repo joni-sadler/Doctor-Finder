@@ -165,18 +165,14 @@ const Map = ({
 };
 
 const MapWrapper = styled.div`
-  height: 500px;
+  height: 100%;
   position: relative;
   & *:focus {
     outline: none;
   }
-  ${onTabletMediaQuery()} {
+  /* ${onTabletMediaQuery()} {
     height: 50%;
-  }
-  ${onSmallPhoneMediaQuery()} {
-    height: 70%;
-    overflow: hidden;
-  }
+  } */
 `;
 
 export default Map;

@@ -2,6 +2,11 @@ import React, { useState, useEffect } from "react";
 import { useParams, NavLink } from "react-router-dom";
 import styled from "styled-components";
 import Header from "../components/Header";
+import {
+  onSmallPhoneMediaQuery,
+  onDesktopMediaQuery,
+  onTabletMediaQuery,
+} from "../utils/responsive";
 
 const Clinic = () => {
   const [selectedClinic, setSelectedClinic] = useState({});
@@ -66,6 +71,16 @@ const ContentWrapper = styled.div`
   align-items: center;
   height: 100%;
   width: 100%;
+  ${onDesktopMediaQuery()} {
+  }
+  ${onTabletMediaQuery()} {
+    padding-top: 10%;
+    text-align: center;
+  }
+  ${onSmallPhoneMediaQuery()} {
+    padding-top: 10%;
+    text-align: center;
+  }
 `;
 
 const ClinicName = styled.p`
@@ -74,6 +89,12 @@ const ClinicName = styled.p`
   color: white;
   margin: 5% 0px 2% 0px;
   text-shadow: 1px 1px 1px #000000;
+  ${onTabletMediaQuery()} {
+    margin: 5% 0px 5% 0px;
+  }
+  ${onSmallPhoneMediaQuery()} {
+    margin: 5% 0px 10% 0px;
+  }
 `;
 
 const ClinicInfo = styled.p`
@@ -81,6 +102,14 @@ const ClinicInfo = styled.p`
   font-weight: 500;
   color: white;
   text-shadow: 1px 1px 1px #000000;
+  ${onDesktopMediaQuery()} {
+  }
+  ${onTabletMediaQuery()} {
+    font-size: 20px;
+  }
+  ${onSmallPhoneMediaQuery()} {
+    font-size: 18px;
+  }
 `;
 
 const DoctorsDiv = styled.div`

@@ -38,11 +38,6 @@ const Doctor = () => {
             Primary clinic: {selectedDoctor.primaryClinic}
           </DoctorInfo>
         )}
-        {selectedDoctor.secondaryClinic && (
-          <DoctorInfo>
-            Secondary clinic: {selectedDoctor.secondaryClinic}
-          </DoctorInfo>
-        )}
         {selectedDoctor.specialty && (
           <DoctorInfo>Specialty: {selectedDoctor.specialty}</DoctorInfo>
         )}
@@ -110,6 +105,14 @@ const DoctorInfo = styled.p`
   padding: 0px;
   color: white;
   text-shadow: 1px 1px 1px #000000;
+  ${onDesktopMediaQuery()} {
+  }
+  ${onTabletMediaQuery()} {
+    font-size: 20px;
+  }
+  ${onSmallPhoneMediaQuery()} {
+    font-size: 18px;
+  }
 `;
 
 const BioDiv = styled.div`
@@ -117,6 +120,13 @@ const BioDiv = styled.div`
   flex-direction: column;
   text-align: center;
   margin-bottom: 25px;
+  width: 70%;
+  ${onTabletMediaQuery()} {
+    width: 80%;
+  }
+  ${onSmallPhoneMediaQuery()} {
+    width: 90%;
+  }
 `;
 
 export default Doctor;

@@ -133,23 +133,24 @@ const MenuText = styled.p`
 
 const MapWrapper = styled.div`
   border: 1px solid black;
-  width: 100%;
-  height: 100%;
-  margin: 20px;
+  width: 90%;
+  height: 90%;
+  margin: 2% 2% 2% 5%;
+  overflow-y: hidden;
   ${onDesktopMediaQuery()} {
-    height: 100%;
+    height: 50%;
     width: 90%;
     margin: 5%;
   }
   ${onTabletMediaQuery()} {
-    height: 100%;
+    height: 50%;
     width: 90%;
-    margin: 5%;
+    margin-bottom: 5%;
   }
   ${onSmallPhoneMediaQuery()} {
     height: 100%;
     width: 90%;
-    margin: 5%;
+    margin-bottom: 5%;
   }
 `;
 

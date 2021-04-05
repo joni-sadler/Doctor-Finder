@@ -246,7 +246,7 @@ const MapWrapper = styled.div`
     margin: 5%;
   }
   ${onSmallPhoneMediaQuery()} {
-    height: 100%;
+    height: 70%;
     width: 90%;
     margin: 5%;
   }
