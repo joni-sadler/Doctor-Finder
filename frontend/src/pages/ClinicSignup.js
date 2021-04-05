@@ -19,6 +19,8 @@ const ClinicSignup = () => {
   const [emailValidation, setEmailValidation] = useState();
   const [phoneNumberValidation, setPhoneNumberValidation] = useState();
   const [passwordValidation, setPasswordValidation] = useState();
+  const [lat, setLat] = useState();
+  const [lng, setLng] = useState();
 
   const signupInfoHandler = (name) => {
     return ({ target: { value } }) => {
@@ -84,9 +86,24 @@ const ClinicSignup = () => {
     }
   }, [signupInfo.password]);
 
+  // Get lat and lng coordinates for new entry based on address
+  useEffect(() => {
+    fetch(
+      `http://open.mapquestapi.com/geocoding/v1/address?key=H1yZSGy8Azm4pZPGPaBiul1tm6f9pmHK&location=${signupInfo.clinicAddress}`,
+      {
+        method: "GET",
+      }
+    )
+      .then((res) => res.json())
+      .then((res) => {
+        setLat(res.results[0].locations[0].latLng.lat);
+        setLng(res.results[0].locations[0].latLng.lng);
+      });
+  }, [hasSubmittedInfo]);
+
+  // Submit new entry to database
   const submitFunction = () => {
     setHasSubmittedInfo(true);
-    console.log(signupInfo);
     fetch("/clinic_signup", {
       method: "POST",
       body: JSON.stringify({
@@ -94,6 +111,8 @@ const ClinicSignup = () => {
         acceptsPatients,
         acceptsWalkIns,
         canBookAppointments,
+        lat,
+        lng,
       }),
       headers: {
         Accept: "application/json",
