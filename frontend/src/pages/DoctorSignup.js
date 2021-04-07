@@ -372,7 +372,6 @@ const SignupWrapper = styled.div`
   padding-left: 5px;
   margin: 5px 10px 15px 10px;
   border: 1px solid black;
-  overflow-y: auto;
   display: flex;
   flex-direction: column;
 `;

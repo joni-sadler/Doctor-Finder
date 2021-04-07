@@ -11,6 +11,9 @@ import {
 const Clinic = () => {
   const [selectedClinic, setSelectedClinic] = useState({});
   const [clinicDoctors, setClinicDoctors] = useState([]);
+  const [acceptsAppointments, setAcceptsAppointments] = useState("No");
+  const [acceptsWalkIns, setAcceptsWalkIns] = useState("No");
+  const [acceptsPatients, setAcceptsPatients] = useState("No");
   const id = useParams();
   const clinic = id.clinic;
 
@@ -26,6 +29,22 @@ const Clinic = () => {
       });
   }, [clinic]);
 
+  console.log(selectedClinic);
+
+  useEffect(() => {
+    if (selectedClinic.acceptsAppointments) {
+      setAcceptsAppointments("Yes");
+    }
+
+    if (selectedClinic.acceptsWalkIns) {
+      setAcceptsWalkIns("Yes");
+    }
+
+    if (selectedClinic.acceptsPatients) {
+      setAcceptsPatients("Yes");
+    }
+  }, [selectedClinic]);
+
   return (
     <Container>
       <Header />
@@ -35,6 +54,12 @@ const Clinic = () => {
         <ClinicInfo>Hours: {selectedClinic.hours}</ClinicInfo>
         <ClinicInfo>{selectedClinic.email}</ClinicInfo>
         <ClinicInfo>{selectedClinic.website}</ClinicInfo>
+        <ClinicInfo>
+          Has at least one family doctor accepting new patients:{" "}
+          {acceptsPatients}
+        </ClinicInfo>
+        <ClinicInfo>Accepts appointments: {acceptsAppointments}</ClinicInfo>
+        <ClinicInfo>Accepts walk-ins: {acceptsWalkIns}</ClinicInfo>
         {clinicDoctors.length > 0 && (
           <DoctorsDiv>
             <Title>Doctors at this clinic:</Title>
@@ -93,22 +118,24 @@ const ClinicName = styled.p`
     margin: 5% 0px 5% 0px;
   }
   ${onSmallPhoneMediaQuery()} {
-    margin: 5% 0px 10% 0px;
+    margin: 2% 0px 5% 0px;
   }
 `;
 
 const ClinicInfo = styled.p`
   font-size: 24px;
   font-weight: 500;
+  margin: 10px;
   color: white;
   text-shadow: 1px 1px 1px #000000;
-  ${onDesktopMediaQuery()} {
-  }
   ${onTabletMediaQuery()} {
-    font-size: 20px;
+    font-size: 22px;
+    padding: 10px;
   }
   ${onSmallPhoneMediaQuery()} {
     font-size: 18px;
+    padding: 10px;
+    margin: 0px;
   }
 `;
 
@@ -117,13 +144,15 @@ const DoctorsDiv = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-top: 5%;
 `;
 
 const Title = styled.p`
-  font-size: 30px;
+  font-size: 34px;
   font-weight: 600;
   color: white;
   text-shadow: 1px 1px 1px #000000;
+  margin-top: 10%;
 `;
 
 const DoctorInfo = styled(NavLink)`

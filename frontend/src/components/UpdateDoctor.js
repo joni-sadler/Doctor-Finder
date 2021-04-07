@@ -41,6 +41,16 @@ const UpdateDoctor = ({ selectedDoctor }) => {
     };
   };
 
+  clinics.sort(function (a, b) {
+    if (a.clinicName < b.clinicName) {
+      return -1;
+    }
+    if (a.clinicName > b.clinicName) {
+      return 1;
+    }
+    return 0;
+  });
+
   const primaryClinicMenuHandler = () => {
     setDisplayPrimaryClinicMenu(!displayPrimaryClinicMenu);
   };
@@ -169,40 +179,22 @@ const UpdateDoctor = ({ selectedDoctor }) => {
           <input name="showPhoneNumber" type="radio" value="False" /> No
         </Field>
         <ClinicDropdown>
-          <Text onClick={primaryClinicMenuHandler}>
-            Name of the clinic you are based at:
-          </Text>
-          {displayPrimaryClinicMenu && (
-            <CategoryNav>
-              {clinics.map((clinic) => {
-                return (
-                  <ClinicList
-                    onClick={() => setPrimaryClinic(clinic.clinicName)}
-                  >
-                    {clinic.clinicName}
-                  </ClinicList>
-                );
-              })}
-            </CategoryNav>
-          )}
-        </ClinicDropdown>
-        <ClinicDropdown>
-          <Text onClick={secondaryClinicMenuHandler}>
-            If you work at an additional clinic, please select it:
-          </Text>
-          {displaySecondaryClinicMenu && (
-            <CategoryNav>
-              {clinics.map((clinic) => {
-                return (
-                  <ClinicList
-                    onClick={() => setSecondaryClinic(clinic.clinicName)}
-                  >
-                    {clinic.clinicName}
-                  </ClinicList>
-                );
-              })}
-            </CategoryNav>
-          )}
+          <Text>Name of the clinic you are based at:</Text>
+          <CategoryNav>
+            {clinics.map((clinic) => {
+              return (
+                <ClinicList
+                  onClick={() => setPrimaryClinic(clinic.clinicName)}
+                  style={{
+                    backgroundColor:
+                      primaryClinic === clinic.clinicName ? "#B8D0D3" : "",
+                  }}
+                >
+                  {clinic.clinicName}
+                </ClinicList>
+              );
+            })}
+          </CategoryNav>
         </ClinicDropdown>
         <Field>
           <input
@@ -333,7 +325,8 @@ const CategoryNav = styled.nav`
   padding-left: 5px;
   margin: 0px 0px 10px 10px;
   border: 1px solid black;
-  height: 100%;
+  max-height: 100px;
+  overflow-y: auto;
   display: flex;
   flex-direction: column;
 `;

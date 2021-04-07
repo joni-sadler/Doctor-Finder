@@ -22,6 +22,16 @@ const FamilyDoctor = () => {
       .then((res) => setAcceptingPatients(res.data));
   }, []);
 
+  acceptingPatients.sort(function (a, b) {
+    if (a.clinicName < b.clinicName) {
+      return -1;
+    }
+    if (a.clinicName > b.clinicName) {
+      return 1;
+    }
+    return 0;
+  });
+
   return (
     <Container>
       <Header />
@@ -41,7 +51,7 @@ const FamilyDoctor = () => {
             })}
           </ListItemContainer>
           <PostalCodePrompt>
-            Enter your postal code to find the nearest clinic:
+            Enter your postal code to display your current location:
           </PostalCodePrompt>
           <PostalCodeWrapper>
             <Field>

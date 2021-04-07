@@ -51,7 +51,7 @@ const WalkInClinics = () => {
             })}
           </ListItemContainer>
           <PostalCodePrompt>
-            Enter your postal code to find the nearest clinic:
+            Enter your postal code to display your current location:
           </PostalCodePrompt>
           <PostalCodeWrapper>
             <Field>

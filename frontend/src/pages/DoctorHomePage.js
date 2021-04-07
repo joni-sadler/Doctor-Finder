@@ -121,10 +121,11 @@ const UpdateDoctorContainer = styled.div`
   border: 1px solid black;
   border-radius: 3px;
   ${onDesktopMediaQuery()} {
-    height: 100%;
+    height: 80%;
   }
   ${onTabletMediaQuery()} {
     margin: 20px;
+    height: 70%;
   }
   ${onSmallPhoneMediaQuery()} {
     height: 50%;

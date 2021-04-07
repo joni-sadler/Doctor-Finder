@@ -171,12 +171,13 @@ const UpdateClinic = ({ selectedClinic }) => {
         <SubmitWrapper>
           <SubmitButton onClick={submitFunction}>Submit</SubmitButton>
         </SubmitWrapper>
+
+        {hasSubmittedInfo && (
+          <SubmitConfirmation>
+            <SubmitMessage>Your profile has been updated.</SubmitMessage>
+          </SubmitConfirmation>
+        )}
       </SignupWrapper>
-      {hasSubmittedInfo && (
-        <SubmitConfirmation>
-          <SubmitMessage>Your profile has been updated.</SubmitMessage>
-        </SubmitConfirmation>
-      )}
     </Container>
   );
 };
@@ -187,16 +188,17 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  height: 100%;
-  width: 100%;
+  height: 100vh;
+  width: 100vw;
+  overflow-y: scroll;
 `;
 
 const Title = styled.p`
   font-size: 40px;
   font-weight: 600;
   text-align: center;
-  margin: 20% 0px 0px 0px;
-  padding: 20px;
+  /* margin: 20% 0px 0px 0px; */
+  padding: 10px;
   ${onDesktopMediaQuery()} {
     margin: 10px 0px 0px 0px;
   }
@@ -235,42 +237,6 @@ const SignupWrapper = styled.div`
 
 const Field = styled.div`
   padding: 10px;
-`;
-
-const Text = styled.p`
-  margin-left: 10px;
-  cursor: pointer;
-`;
-
-const ClinicDropdown = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-
-const CategoryNav = styled.nav`
-  background: #ffffff;
-  border-radius: 3px;
-  position: inherit;
-  top: 10%;
-  right: 10px;
-  width: 80%;
-  opacity: 1;
-  padding-left: 5px;
-  margin: 0px 0px 10px 10px;
-  max-height: 300px;
-  border: 1px solid black;
-  overflow-y: auto;
-  display: flex;
-  flex-direction: column;
-`;
-
-const ClinicList = styled.p`
-  margin: 5px;
-  padding: 3px;
-  &:hover {
-    cursor: pointer;
-    background-color: lightgray;
-  }
 `;
 
 const SubmitWrapper = styled.div`
