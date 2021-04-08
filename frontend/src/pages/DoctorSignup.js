@@ -349,8 +349,13 @@ const ContentWrapper = styled.div`
   justify-content: flex-start;
   align-items: center;
   overflow-y: scroll;
+  max-width: 50%;
+  ${onTabletMediaQuery()} {
+    max-width: 70%;
+  }
   ${onSmallPhoneMediaQuery()} {
     margin: 10px;
+    max-width: 90%;
   }
 `;
 
@@ -360,6 +365,7 @@ const Title = styled.p`
   margin: 40px;
   color: white;
   text-shadow: 1px 1px 1px #000000;
+  text-align: center;
 `;
 
 const SignupWrapper = styled.div`

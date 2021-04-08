@@ -136,6 +136,9 @@ const ClinicSignup = () => {
       <ContentWrapper>
         <Title>Create a new clinic account</Title>
         <SignupWrapper>
+          <RegistrationHeader>
+            Please complete the following form:
+          </RegistrationHeader>
           <InputDiv>
             <Field>
               <input
@@ -344,8 +347,13 @@ const ContentWrapper = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
+  max-width: 50%;
+  ${onTabletMediaQuery()} {
+    max-width: 70%;
+  }
   ${onSmallPhoneMediaQuery()} {
     margin: 10px;
+    max-width: 90%;
   }
 `;
 
@@ -355,6 +363,7 @@ const Title = styled.p`
   margin: 40px;
   color: white;
   text-shadow: 1px 1px 1px #000000;
+  text-align: center;
 `;
 
 const SignupWrapper = styled.div`
@@ -371,6 +380,12 @@ const SignupWrapper = styled.div`
   overflow-y: auto;
   display: flex;
   flex-direction: column;
+`;
+
+const RegistrationHeader = styled.p`
+  font-size: 18px;
+  font-weight: 700;
+  text-align: center;
 `;
 
 const Field = styled.div`

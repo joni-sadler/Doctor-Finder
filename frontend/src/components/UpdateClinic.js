@@ -197,16 +197,17 @@ const Title = styled.p`
   font-size: 40px;
   font-weight: 600;
   text-align: center;
-  /* margin: 20% 0px 0px 0px; */
-  padding: 10px;
   ${onDesktopMediaQuery()} {
     margin: 10px 0px 0px 0px;
   }
   ${onTabletMediaQuery()} {
+    font-size: 34px;
     margin: 10px 0px 0px 0px;
   }
   ${onSmallPhoneMediaQuery()} {
-    margin: 10px 0px 0px 0px;
+    font-size: 30px;
+    margin: 10px 0px;
+    padding: 0px;
   }
 `;
 
@@ -221,6 +222,7 @@ const SignupWrapper = styled.div`
   padding: 20px;
   background-color: white;
   overflow-y: auto;
+  margin-top: 2%;
   ${onDesktopMediaQuery()} {
     flex-direction: column;
     justify-content: flex-start;
@@ -253,6 +255,7 @@ const SubmitButton = styled.button`
   padding: 5px;
   font-size: 30px;
   font-weight: 500;
+  cursor: pointer;
 `;
 
 const SubmitConfirmation = styled.div`

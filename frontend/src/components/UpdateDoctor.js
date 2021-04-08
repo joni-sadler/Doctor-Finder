@@ -247,31 +247,32 @@ const UpdateDoctor = ({ selectedDoctor }) => {
     </Container>
   );
 };
-
 const Container = styled.div`
   position: inherit;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  height: 100%;
-  width: 100%;
+  height: 100vh;
+  width: 100vw;
+  overflow-y: scroll;
 `;
 
 const Title = styled.p`
   font-size: 40px;
   font-weight: 600;
   text-align: center;
-  margin: 20% 0px 0px 0px;
-  padding: 20px;
+  padding-top: 20px;
   ${onDesktopMediaQuery()} {
     margin: 10px 0px 0px 0px;
   }
   ${onTabletMediaQuery()} {
+    font-size: 34px;
     margin: 10px 0px 0px 0px;
   }
   ${onSmallPhoneMediaQuery()} {
-    margin: 10px 0px 0px 0px;
+    font-size: 30px;
+    margin: 10px 0px;
   }
 `;
 
@@ -286,6 +287,7 @@ const SignupWrapper = styled.div`
   padding: 20px;
   background-color: white;
   overflow-y: auto;
+  margin-top: 2%;
   ${onDesktopMediaQuery()} {
     flex-direction: column;
     justify-content: flex-start;

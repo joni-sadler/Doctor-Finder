@@ -11,9 +11,9 @@ import {
 const Clinic = () => {
   const [selectedClinic, setSelectedClinic] = useState({});
   const [clinicDoctors, setClinicDoctors] = useState([]);
-  const [acceptsAppointments, setAcceptsAppointments] = useState("No");
-  const [acceptsWalkIns, setAcceptsWalkIns] = useState("No");
-  const [acceptsPatients, setAcceptsPatients] = useState("No");
+  const [acceptsAppointments, setAcceptsAppointments] = useState();
+  const [acceptsWalkIns, setAcceptsWalkIns] = useState();
+  const [acceptsPatients, setAcceptsPatients] = useState();
   const id = useParams();
   const clinic = id.clinic;
 
@@ -32,18 +32,24 @@ const Clinic = () => {
   console.log(selectedClinic);
 
   useEffect(() => {
-    if (selectedClinic.acceptsAppointments) {
+    if (selectedClinic.canBookAppointments) {
       setAcceptsAppointments("Yes");
+    } else {
+      setAcceptsAppointments("No");
     }
 
     if (selectedClinic.acceptsWalkIns) {
       setAcceptsWalkIns("Yes");
+    } else {
+      setAcceptsWalkIns("No");
     }
 
     if (selectedClinic.acceptsPatients) {
       setAcceptsPatients("Yes");
+    } else {
+      setAcceptsPatients("No");
     }
-  }, [selectedClinic]);
+  });
 
   return (
     <Container>
@@ -54,6 +60,9 @@ const Clinic = () => {
         <ClinicInfo>Hours: {selectedClinic.hours}</ClinicInfo>
         <ClinicInfo>{selectedClinic.email}</ClinicInfo>
         <ClinicInfo>{selectedClinic.website}</ClinicInfo>
+        <br />
+        <br />
+        <br />
         <ClinicInfo>
           Has at least one family doctor accepting new patients:{" "}
           {acceptsPatients}
@@ -103,7 +112,7 @@ const ContentWrapper = styled.div`
     text-align: center;
   }
   ${onSmallPhoneMediaQuery()} {
-    padding-top: 10%;
+    padding: 10% 0 5% 0;
     text-align: center;
   }
 `;

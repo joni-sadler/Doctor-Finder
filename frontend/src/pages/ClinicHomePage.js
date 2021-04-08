@@ -42,10 +42,12 @@ const ClinicHomePage = () => {
 
   const updateProfileDropDownTrigger = () => {
     setUpdateProfileDropdown(!updateProfileDropdown);
+    setDeleteProfileDropdown(false);
   };
 
   const deleteProfileDropdownTrigger = () => {
     setDeleteProfileDropdown(!deleteProfileDropdown);
+    setUpdateProfileDropdown(false);
   };
 
   return (
@@ -108,7 +110,6 @@ const ViewProfile = styled(NavLink)`
 `;
 
 const UpdateClinicContainer = styled.div`
-  border: 1px solid black;
   border-radius: 3px;
   ${onDesktopMediaQuery()} {
     height: 100%;
@@ -139,11 +140,15 @@ const DeleteContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding: 20px;
 `;
 
 const DeleteText = styled.p`
   font-size: 20px;
   font-weight: 700;
+  text-align: center;
+  color: white;
+  text-shadow: 1px 1px 1px #000000;
 `;
 
 const DeleteButton = styled.button`
@@ -151,7 +156,7 @@ const DeleteButton = styled.button`
   color: white;
   border-radius: 3px;
   width: 150px;
-  padding: 5px;
+  padding: 10px;
   font-size: 30px;
   font-weight: 500;
   cursor: pointer;
