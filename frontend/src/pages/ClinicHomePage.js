@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { NavLink, useParams, Redirect } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import UpdateClinic from "../components/UpdateClinic";
 import {
   onSmallPhoneMediaQuery,
   onDesktopMediaQuery,
   onTabletMediaQuery,
 } from "../utils/responsive";
+import { handleClinicLogout } from "../components/helpers/fetch-request-helpers";
 
 const ClinicHomePage = () => {
   const [updateProfileDropdown, setUpdateProfileDropdown] = useState();
@@ -15,6 +17,8 @@ const ClinicHomePage = () => {
   const [selectedClinic, setSelectedClinic] = useState({});
   const id = useParams();
   const clinic = id.clinic;
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     fetch(`/clinics/${clinic}`, {
@@ -50,6 +54,10 @@ const ClinicHomePage = () => {
     setUpdateProfileDropdown(false);
   };
 
+  const clinicLogoutFunction = () => {
+    handleClinicLogout(dispatch);
+  };
+
   return (
     <Container>
       <HelloText>Hello {selectedClinic.clinicName}!</HelloText>
@@ -76,7 +84,9 @@ const ClinicHomePage = () => {
       )}
 
       {hasDeletedProfile && <Redirect to={`/account_deleted`} />}
-      <Logout to={`/`}>Logout</Logout>
+      <Logout to={`/`} onClick={() => clinicLogoutFunction()}>
+        Logout
+      </Logout>
     </Container>
   );
 };

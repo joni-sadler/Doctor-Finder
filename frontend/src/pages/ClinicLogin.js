@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Redirect, NavLink } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { handleClinicLogin } from "../components/helpers/fetch-request-helpers";
 import Header from "../components/Header";
 
 const ClinicLogin = () => {
@@ -8,6 +10,8 @@ const ClinicLogin = () => {
   const [clinicArray, setClinicArray] = useState([]);
   const [selectedClinic, setSelectedClinic] = useState();
   const [incorrectLogin, setIncorrectLogin] = useState();
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     fetch(`/clinics`, {
@@ -35,6 +39,12 @@ const ClinicLogin = () => {
       }
     });
   };
+
+  useEffect(() => {
+    if (selectedClinic) {
+      handleClinicLogin(dispatch);
+    }
+  }, [selectedClinic]);
 
   return (
     <Container>

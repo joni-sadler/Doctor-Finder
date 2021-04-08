@@ -1,13 +1,17 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Redirect, NavLink } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import Header from "../components/Header";
+import { handleDoctorLogin } from "../components/helpers/fetch-request-helpers";
 
 const DoctorLogin = () => {
   const [doctorLoginInfo, setDoctorLoginInfo] = useState({});
   const [doctorArray, setDoctorArray] = useState([]);
   const [selectedDoctor, setSelectedDoctor] = useState();
   const [incorrectLogin, setIncorrectLogin] = useState();
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     fetch(`/doctors`, {
@@ -35,6 +39,12 @@ const DoctorLogin = () => {
       }
     });
   };
+
+  useEffect(() => {
+    if (selectedDoctor) {
+      handleDoctorLogin(dispatch);
+    }
+  }, [selectedDoctor]);
 
   return (
     <Container>
