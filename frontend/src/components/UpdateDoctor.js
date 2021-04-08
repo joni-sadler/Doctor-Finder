@@ -11,16 +11,10 @@ const UpdateDoctor = ({ selectedDoctor }) => {
   const [hasSubmittedInfo, setHasSubmittedInfo] = useState(false);
   const [clinics, setClinics] = useState([]);
   const [primaryClinic, setPrimaryClinic] = useState();
-  const [secondaryClinic, setSecondaryClinic] = useState();
-  const [displayPrimaryClinicMenu, setDisplayPrimaryClinicMenu] = useState(
-    false
-  );
-  const [displaySecondaryClinicMenu, setDisplaySecondaryClinicMenu] = useState(
-    false
-  );
   const [showEmail, setShowEmail] = useState(false);
   const [showPhoneNumber, setShowPhoneNumber] = useState(false);
 
+  // Get full array of clinics for dropdown menu
   useEffect(() => {
     fetch(`/clinics`, {
       method: "GET",
@@ -29,9 +23,7 @@ const UpdateDoctor = ({ selectedDoctor }) => {
       .then((res) => setClinics(res.data));
   }, []);
 
-  // console.log(selectedDoctor);
-  console.log(selectedDoctor._id);
-
+  // Replaces existing values with new input where possible
   const updateInfoHandler = (name) => {
     return ({ target: { value } }) => {
       setCurrentInfo((selectedDoctor) => ({
@@ -41,6 +33,7 @@ const UpdateDoctor = ({ selectedDoctor }) => {
     };
   };
 
+  // Sort clinics alphabetically by name
   clinics.sort(function (a, b) {
     if (a.clinicName < b.clinicName) {
       return -1;
@@ -51,16 +44,6 @@ const UpdateDoctor = ({ selectedDoctor }) => {
     return 0;
   });
 
-  const primaryClinicMenuHandler = () => {
-    setDisplayPrimaryClinicMenu(!displayPrimaryClinicMenu);
-  };
-
-  const secondaryClinicMenuHandler = () => {
-    setDisplaySecondaryClinicMenu(!displaySecondaryClinicMenu);
-  };
-
-  console.log(currentInfo);
-
   const showEmailHandlerTrue = () => {
     setShowEmail(true);
   };
@@ -69,6 +52,7 @@ const UpdateDoctor = ({ selectedDoctor }) => {
     setShowPhoneNumber(true);
   };
 
+  // Updates doctor profile
   const submitFunction = () => {
     setHasSubmittedInfo(true);
     fetch(`/doctor_profile/${selectedDoctor._id}`, {
@@ -76,7 +60,6 @@ const UpdateDoctor = ({ selectedDoctor }) => {
       body: JSON.stringify({
         ...currentInfo,
         primaryClinic,
-        secondaryClinic,
         showEmail,
         showPhoneNumber,
       }),
@@ -356,6 +339,7 @@ const SubmitButton = styled.button`
   padding: 5px;
   font-size: 30px;
   font-weight: 500;
+  cursor: pointer;
 `;
 
 const SubmitConfirmation = styled.div`

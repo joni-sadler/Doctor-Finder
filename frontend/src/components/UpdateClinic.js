@@ -13,6 +13,7 @@ const UpdateClinic = ({ selectedClinic }) => {
   const [acceptsWalkIns, setAcceptsWalkIns] = useState(false);
   const [canBookAppointments, setCanBookAppointments] = useState(false);
 
+  // Replaces existing values with new input where possible
   const updateInfoHandler = (name) => {
     return ({ target: { value } }) => {
       setCurrentInfo((selectedDoctor) => ({
@@ -34,6 +35,7 @@ const UpdateClinic = ({ selectedClinic }) => {
     setCanBookAppointments(true);
   };
 
+  // Updates clinic profile
   const submitFunction = () => {
     setHasSubmittedInfo(true);
     fetch(`/clinic_profile/${selectedClinic._id}`, {
