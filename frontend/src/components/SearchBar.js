@@ -2,18 +2,15 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
-import {
-  onSmallPhoneMediaQuery,
-  onDesktopMediaQuery,
-  onTabletMediaQuery,
-} from "../utils/responsive";
+import { onSmallPhoneMediaQuery } from "../utils/responsive";
 
 const SearchBar = () => {
+  // Retrieve all doctors from Redux state
   const searchArrayDoctors = useSelector((state) => state.doctors.doctors);
+
+  // Set initial search term to an empty string
   const [searchTerm, setSearchTerm] = useState("");
   const [status, setStatus] = useState("close");
-
-  console.log(searchArrayDoctors);
 
   return (
     <Container>
@@ -84,6 +81,7 @@ const Input = styled.input`
 const SearchList = styled.div`
   margin-left: 15px;
   background-color: white;
+  border: 1px solid black;
   z-index: 5;
   ${onSmallPhoneMediaQuery()} {
     width: 175px;

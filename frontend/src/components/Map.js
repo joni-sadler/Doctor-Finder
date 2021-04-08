@@ -13,17 +13,8 @@ import L from "leaflet";
 import icon from "leaflet/dist/images/marker-icon.png";
 import iconShadow from "leaflet/dist/images/marker-shadow.png";
 import styled from "styled-components";
-import {
-  onSmallPhoneMediaQuery,
-  onDesktopMediaQuery,
-  onTabletMediaQuery,
-} from "../utils/responsive";
 
-const containerStyle = {
-  width: "100%",
-  height: "100%",
-};
-
+// Cached points used for testing to minimize requests to the map
 const CACHED_POINTS = {
   H2T3A2: { lat: 45.5260031, lng: -73.6084592 },
   H3A2B3: { lat: 45.50773, lng: -73.57914 },
@@ -31,6 +22,7 @@ const CACHED_POINTS = {
   H2S3S3: { lat: 45.53646, lng: -73.61476 },
 };
 
+// acceptingPatients, walkInClinics, appointmentClinics, clinics, and postalCode can all passed in as props depending on which page the map appears on
 const Map = ({
   acceptingPatients,
   walkInClinics,
@@ -41,8 +33,10 @@ const Map = ({
   const [markers, setMarkers] = useState([]);
   const [originPoint, setOriginPoint] = useState([]);
 
+  // Set empty array that will store coordinates of the relevant clinics
   const clinicCoordinates = [];
 
+  // Set markers based on varying clinic criteria (accepts walk-ins, accepts new patients, etc)
   useEffect(() => {
     if (walkInClinics) {
       setMarkers(walkInClinics);
@@ -71,6 +65,8 @@ const Map = ({
     }
   }, [clinics]);
 
+  // Check to see if postal code the user enters is already stored in the cache
+  // If not, retrieve the coordinates from Open Mapquest API and use them to set origin point to display location on map
   useEffect(() => {
     if (postalCode) {
       const cached_point = CACHED_POINTS[postalCode];
@@ -97,6 +93,7 @@ const Map = ({
     }
   }, [postalCode]);
 
+  // Push relevant lat and lng positions into clinicCoordinates array based on which clinics are being queried
   if (clinics) {
     clinics.forEach((clinic) => {
       clinicCoordinates.push({ latitude: clinic.lat, longitude: clinic.lng });
@@ -115,6 +112,7 @@ const Map = ({
     });
   }
 
+  // Specify icon for map marker
   let DefaultIcon = L.icon({
     iconUrl: icon,
     shadowUrl: iconShadow,
@@ -122,11 +120,8 @@ const Map = ({
 
   L.Marker.prototype.options.icon = DefaultIcon;
 
+  // Set red fill to indicate user location
   const fillRedOptions = { color: "red", fillColor: "red" };
-
-  markers.forEach((marker) => {
-    console.log(marker.lng);
-  });
 
   return (
     <MapWrapper>
@@ -170,9 +165,6 @@ const MapWrapper = styled.div`
   & *:focus {
     outline: none;
   }
-  /* ${onTabletMediaQuery()} {
-    height: 50%;
-  } */
 `;
 
 export default Map;

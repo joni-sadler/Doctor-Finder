@@ -1,9 +1,17 @@
 import { createGlobalStyle } from "styled-components";
+import {
+  onSmallPhoneMediaQuery,
+  onDesktopMediaQuery,
+  onTabletMediaQuery,
+} from "../utils/responsive";
 
 export default createGlobalStyle`
 
     .leaflet-container {
         height: 100vh;
+  ${onSmallPhoneMediaQuery()} {
+    height: 70vh;
+  }
     }
 
     body { 
