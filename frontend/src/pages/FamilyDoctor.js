@@ -14,6 +14,7 @@ const FamilyDoctor = () => {
   const [postalCodeStorage, setPostalCodeStorage] = useState();
   const [postalCode, setPostalCode] = useState();
 
+  // Get all clinics with at least one doctor who is currently accepting new patients
   useEffect(() => {
     fetch(`/doctor_finder`, {
       method: "GET",
@@ -22,6 +23,7 @@ const FamilyDoctor = () => {
       .then((res) => setAcceptingPatients(res.data));
   }, []);
 
+  // Sort clinics alphabetically
   acceptingPatients.sort(function (a, b) {
     if (a.clinicName < b.clinicName) {
       return -1;

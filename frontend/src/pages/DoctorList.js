@@ -6,6 +6,7 @@ import Header from "../components/Header";
 const DoctorList = () => {
   const [doctors, setDoctors] = useState([]);
 
+  // Get a list of all doctors in the database
   useEffect(() => {
     fetch(`/doctors`, {
       method: "GET",
@@ -14,6 +15,7 @@ const DoctorList = () => {
       .then((res) => setDoctors(res.data));
   }, []);
 
+  // Sort the doctors alphabetically
   doctors.sort(function (a, b) {
     if (a.lastName < b.lastName) {
       return -1;

@@ -14,11 +14,13 @@ const Home = () => {
     false
   );
 
+  // Dropdown menu that displays options for those seeking healthcare
   const handleProviderDropdown = () => {
     setDisplayProviderDropdown(!displayProviderDropdown);
     setDisplayHealthcareDropdown(false);
   };
 
+  // Dropdown menu that displays options for doctors and clinic administrators
   const handleSeekingHealthcareDropdown = () => {
     setDisplayHealthcareDropdown(!displayHealthcareDropdown);
     setDisplayProviderDropdown(false);

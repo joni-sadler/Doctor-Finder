@@ -13,6 +13,7 @@ const DoctorLogin = () => {
 
   const dispatch = useDispatch();
 
+  // Get list of all doctors in database and store them in doctorArray
   useEffect(() => {
     fetch(`/doctors`, {
       method: "GET",
@@ -21,12 +22,16 @@ const DoctorLogin = () => {
       .then((res) => setDoctorArray(res.data));
   }, []);
 
+  // Collect the email and password the user has logged in with and assign them to doctorLoginInfo
   const doctorLoginHandler = (name) => {
     return ({ target: { value } }) => {
       setDoctorLoginInfo((signupInfo) => ({ ...signupInfo, [name]: value }));
     };
   };
 
+  // Compare doctorLoginInfo with email and password stored in the database
+  // If correct, selectedDoctor is assigned and user is redirected to clinic home page
+  // If incorrect, an error message is displayed
   const doctorSubmitFunction = () => {
     doctorArray.forEach((doctor) => {
       if (
@@ -40,6 +45,7 @@ const DoctorLogin = () => {
     });
   };
 
+  // Handle doctor login through Redux state
   useEffect(() => {
     if (selectedDoctor) {
       handleDoctorLogin(dispatch);

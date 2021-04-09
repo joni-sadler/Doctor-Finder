@@ -14,6 +14,7 @@ const WalkInClinics = () => {
   const [postalCodeStorage, setPostalCodeStorage] = useState();
   const [postalCode, setPostalCode] = useState();
 
+  // Get a list of all clinics that accept walk-in appointments and assign them to walkInClinics array
   useEffect(() => {
     fetch(`/walk_in_clinics`, {
       method: "GET",
@@ -22,6 +23,7 @@ const WalkInClinics = () => {
       .then((res) => setWalkInClinics(res.data));
   }, []);
 
+  // Sort clinics alphabetically
   walkInClinics.sort(function (a, b) {
     if (a.clinicName < b.clinicName) {
       return -1;

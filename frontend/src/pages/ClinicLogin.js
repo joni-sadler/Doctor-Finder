@@ -30,7 +30,7 @@ const ClinicLogin = () => {
   };
 
   // Compare clinicLoginInfo with email and password stored in the database
-  // If correct, selectedClinic is set to true and user is redirected to clinic home page
+  // If correct, selectedClinic is assigned and user is redirected to clinic home page
   // If incorrect, an error message is displayed
   const clinicSubmitFunction = () => {
     clinicArray.forEach((clinic) => {

@@ -13,6 +13,7 @@ const Doctor = () => {
   const id = useParams();
   const doctor = id.doctor;
 
+  // Get specific doctor based on id params and assign that info to selectedDoctor
   useEffect(() => {
     fetch(`/doctors/${doctor}`, {
       method: "GET",
@@ -22,8 +23,6 @@ const Doctor = () => {
         setSelectedDoctor(res.data);
       });
   }, [doctor]);
-
-  console.log(selectedDoctor);
 
   return (
     <Container>

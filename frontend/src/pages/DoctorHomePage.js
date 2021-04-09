@@ -20,6 +20,7 @@ const DoctorHomePage = () => {
 
   const dispatch = useDispatch();
 
+  // Get specific doctor based on id params
   useEffect(() => {
     fetch(`/doctors/${doctor}`, {
       method: "GET",
@@ -30,6 +31,7 @@ const DoctorHomePage = () => {
       });
   }, [doctor]);
 
+  // Delete selected doctor account
   const deleteFunction = () => {
     fetch(`/doctor_profile/${doctor}`, {
       method: "DELETE",
@@ -44,16 +46,21 @@ const DoctorHomePage = () => {
       });
   };
 
+  // Display update profile section
+  // Automatically close delete profile section
   const updateProfileDropDownTrigger = () => {
     setUpdateProfileDropdown(!updateProfileDropdown);
     setDeleteProfileDropdown(false);
   };
 
+  // Display delete profile section
+  // Automatically close update profile section
   const deleteProfileDropdownTrigger = () => {
     setDeleteProfileDropdown(!deleteProfileDropdown);
     setUpdateProfileDropdown(false);
   };
 
+  // Handle doctor logout through Redux state
   const doctorLogoutFunction = () => {
     handleDoctorLogout(dispatch);
   };

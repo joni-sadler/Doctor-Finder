@@ -20,6 +20,7 @@ const DoctorSignup = () => {
   const [emailValidation, setEmailValidation] = useState();
   const [passwordValidation, setPasswordValidation] = useState();
 
+  // Get full list of clinics from database to populate dropdown menu
   useEffect(() => {
     fetch(`/clinics`, {
       method: "GET",
@@ -28,6 +29,7 @@ const DoctorSignup = () => {
       .then((res) => setClinics(res.data));
   }, []);
 
+  // Collect all data entered by the user
   const signupInfoHandler = (name) => {
     return ({ target: { value } }) => {
       setSignupInfo((signupInfo) => ({ ...signupInfo, [name]: value }));
@@ -73,6 +75,7 @@ const DoctorSignup = () => {
     }
   }, [passwordValidation, signupInfo.password]);
 
+  // Doctor can decide whether they want to display their email and phone number publicly
   const showEmailHandlerTrue = () => {
     setShowEmail(true);
   };
@@ -81,6 +84,7 @@ const DoctorSignup = () => {
     setShowPhoneNumber(true);
   };
 
+  // Submit form info and POST to database
   const submitFunction = () => {
     setHasSubmittedInfo(true);
     fetch("/doctor_signup", {
