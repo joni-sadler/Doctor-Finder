@@ -20,6 +20,7 @@ const ClinicHomePage = () => {
 
   const dispatch = useDispatch();
 
+  // Get specific clinic based on id params
   useEffect(() => {
     fetch(`/clinics/${clinic}`, {
       method: "GET",
@@ -30,6 +31,7 @@ const ClinicHomePage = () => {
       });
   }, [clinic]);
 
+  // Delete selected clinic
   const deleteFunction = () => {
     fetch(`/clinic_profile/${clinic}`, {
       method: "DELETE",
@@ -44,16 +46,21 @@ const ClinicHomePage = () => {
       });
   };
 
+  // Display update profile section
+  // Automatically close delete profile section
   const updateProfileDropDownTrigger = () => {
     setUpdateProfileDropdown(!updateProfileDropdown);
     setDeleteProfileDropdown(false);
   };
 
+  // Display delete profile section
+  // Automatically close update profile section
   const deleteProfileDropdownTrigger = () => {
     setDeleteProfileDropdown(!deleteProfileDropdown);
     setUpdateProfileDropdown(false);
   };
 
+  // Handle clinic logout through redux state
   const clinicLogoutFunction = () => {
     handleClinicLogout(dispatch);
   };

@@ -17,6 +17,8 @@ const Clinic = () => {
   const id = useParams();
   const clinic = id.clinic;
 
+  // Get specific clinic based on id params
+  // Set selected clinic and the doctors who practice at that clinic
   useEffect(() => {
     fetch(`/clinics/${clinic}`, {
       method: "GET",
@@ -29,8 +31,7 @@ const Clinic = () => {
       });
   }, [clinic]);
 
-  console.log(selectedClinic);
-
+  // Determine specific permissions for the selected clinic and set appointment, walk-in, and new patient state accordingly
   useEffect(() => {
     if (selectedClinic.canBookAppointments) {
       setAcceptsAppointments("Yes");

@@ -13,6 +13,7 @@ const ClinicLogin = () => {
 
   const dispatch = useDispatch();
 
+  // Get list of all clinics in database and store them in clinicArray
   useEffect(() => {
     fetch(`/clinics`, {
       method: "GET",
@@ -21,12 +22,16 @@ const ClinicLogin = () => {
       .then((res) => setClinicArray(res.data));
   }, []);
 
+  // Collect the email and password the user has logged in with and assign them to clinicLoginInfo
   const clinicLoginHandler = (name) => {
     return ({ target: { value } }) => {
       setClinicLoginInfo((signupInfo) => ({ ...signupInfo, [name]: value }));
     };
   };
 
+  // Compare clinicLoginInfo with email and password stored in the database
+  // If correct, selectedClinic is set to true and user is redirected to clinic home page
+  // If incorrect, an error message is displayed
   const clinicSubmitFunction = () => {
     clinicArray.forEach((clinic) => {
       if (
@@ -40,6 +45,7 @@ const ClinicLogin = () => {
     });
   };
 
+  // Handle clinic login through Redux state
   useEffect(() => {
     if (selectedClinic) {
       handleClinicLogin(dispatch);

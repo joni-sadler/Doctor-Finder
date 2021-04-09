@@ -14,6 +14,7 @@ const ClinicList = () => {
   const [postalCodeStorage, setPostalCodeStorage] = useState();
   const [postalCode, setPostalCode] = useState();
 
+  // Get a list of all clinics in the database
   useEffect(() => {
     fetch(`/clinics`, {
       method: "GET",
@@ -22,6 +23,7 @@ const ClinicList = () => {
       .then((res) => setClinics(res.data));
   }, []);
 
+  // Sort clinics alphabetically
   clinics.sort(function (a, b) {
     if (a.clinicName < b.clinicName) {
       return -1;

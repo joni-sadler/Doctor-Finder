@@ -14,6 +14,7 @@ const AppointmentClinics = () => {
   const [postalCodeStorage, setPostalCodeStorage] = useState();
   const [postalCode, setPostalCode] = useState();
 
+  // Get all clinics that accept appointments
   useEffect(() => {
     fetch(`/clinic_appointments`, {
       method: "GET",
@@ -22,6 +23,7 @@ const AppointmentClinics = () => {
       .then((res) => setAppointmentClinics(res.data));
   }, []);
 
+  // Sort clinics alphabetically
   appointmentClinics.sort(function (a, b) {
     if (a.clinicName < b.clinicName) {
       return -1;
