@@ -66,7 +66,7 @@ const ClinicSignup = () => {
       setEmailValidation(true);
     }
     console.log(emailValidation);
-  }, [signupInfo.email]);
+  }, [emailValidation]);
 
   //Validate phone number
   useEffect(() => {
@@ -99,7 +99,7 @@ const ClinicSignup = () => {
         setLat(res.results[0].locations[0].latLng.lat);
         setLng(res.results[0].locations[0].latLng.lng);
       });
-  }, [hasSubmittedInfo]);
+  }, [signupInfo.clinicAddress]);
 
   // Submit new entry to database
   const submitFunction = () => {

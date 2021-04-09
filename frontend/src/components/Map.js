@@ -4,7 +4,6 @@ import {
   TileLayer,
   Marker,
   Popup,
-  LayerGroup,
   Circle,
   FeatureGroup,
 } from "react-leaflet";
@@ -42,28 +41,28 @@ const Map = ({
       setMarkers(walkInClinics);
       return markers;
     }
-  }, [walkInClinics]);
+  });
 
   useEffect(() => {
     if (acceptingPatients) {
       setMarkers(acceptingPatients);
       return markers;
     }
-  }, [acceptingPatients]);
+  });
 
   useEffect(() => {
     if (appointmentClinics) {
       setMarkers(appointmentClinics);
       return markers;
     }
-  }, [appointmentClinics]);
+  });
 
   useEffect(() => {
     if (clinics) {
       setMarkers(clinics);
       return markers;
     }
-  }, [clinics]);
+  });
 
   // Check to see if postal code the user enters is already stored in the cache
   // If not, retrieve the coordinates from Open Mapquest API and use them to set origin point to display location on map
@@ -144,7 +143,7 @@ const Map = ({
           <div>
             {markers.map((marker) => {
               return (
-                <FeatureGroup>
+                <FeatureGroup key={marker._id}>
                   <Popup>
                     {marker.clinicName} <br /> {marker.clinicAddress}
                   </Popup>

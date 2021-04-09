@@ -44,7 +44,7 @@ const ClinicLogin = () => {
     if (selectedClinic) {
       handleClinicLogin(dispatch);
     }
-  }, [selectedClinic]);
+  }, [dispatch]);
 
   return (
     <Container>

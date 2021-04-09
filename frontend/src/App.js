@@ -29,7 +29,7 @@ const App = () => {
 
   useEffect(() => {
     handleFetchDoctors(dispatch);
-  }, []);
+  }, [dispatch]);
 
   return (
     <BrowserRouter>

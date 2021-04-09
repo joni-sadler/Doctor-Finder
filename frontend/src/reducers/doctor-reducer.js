@@ -5,7 +5,6 @@ export default function doctorReducer(state = initialState, action) {
 
   switch (action.type) {
     case "LOADING_DOCTORS": {
-      console.log(action);
       return {
         ...state,
         status: "loading",
@@ -13,7 +12,6 @@ export default function doctorReducer(state = initialState, action) {
     }
 
     case "RECEIVE_DOCTORS": {
-      console.log(action);
       return {
         ...state,
         doctors: action.doctors,
@@ -22,7 +20,6 @@ export default function doctorReducer(state = initialState, action) {
     }
 
     case "ERROR": {
-      console.log(action);
       return {
         ...state,
         status: "error",

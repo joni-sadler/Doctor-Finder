@@ -49,7 +49,11 @@ const Clinic = () => {
     } else {
       setAcceptsPatients("No");
     }
-  });
+  }, [
+    selectedClinic.canBookAppointments,
+    selectedClinic.acceptsWalkIns,
+    selectedClinic.acceptsPatients,
+  ]);
 
   return (
     <Container>

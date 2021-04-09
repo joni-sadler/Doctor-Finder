@@ -1,9 +1,5 @@
 import { createGlobalStyle } from "styled-components";
-import {
-  onSmallPhoneMediaQuery,
-  onDesktopMediaQuery,
-  onTabletMediaQuery,
-} from "../utils/responsive";
+import { onSmallPhoneMediaQuery } from "../utils/responsive";
 
 export default createGlobalStyle`
 

@@ -42,7 +42,7 @@ const DoctorSignup = () => {
       setFirstNameValidation(true);
     }
     console.log(firstNameValidation);
-  }, [signupInfo.firstName]);
+  }, [firstNameValidation]);
 
   // Validate last name
   useEffect(() => {
@@ -52,7 +52,7 @@ const DoctorSignup = () => {
       setLastNameValidation(true);
     }
     console.log(lastNameValidation);
-  }, [signupInfo.lastName]);
+  }, [lastNameValidation]);
 
   // Validate email
   useEffect(() => {
@@ -62,7 +62,7 @@ const DoctorSignup = () => {
       setEmailValidation(true);
     }
     console.log(emailValidation);
-  }, [signupInfo.email]);
+  }, [emailValidation]);
 
   // Validate password
   useEffect(() => {
@@ -71,7 +71,7 @@ const DoctorSignup = () => {
     } else {
       setPasswordValidation(true);
     }
-  }, [signupInfo.password]);
+  }, [passwordValidation]);
 
   const showEmailHandlerTrue = () => {
     setShowEmail(true);
