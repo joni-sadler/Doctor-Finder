@@ -75,7 +75,10 @@ const ListItem = styled(NavLink)`
   color: white;
   text-shadow: 1px 1px 1px #000000;
   text-decoration: none;
-  cursor: pointer;
+  &:hover {
+    cursor: pointer;
+    color: #bbc6c7;
+  }
 `;
 
 export default DoctorList;
