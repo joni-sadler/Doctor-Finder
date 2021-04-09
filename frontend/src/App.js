@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import GlobalStyles from "./components/GlobalStyles";
 import styled from "styled-components";
 import Home from "./pages/Home";
@@ -87,7 +87,7 @@ const App = () => {
           <Route path="/doctor_profile/:doctor">
             <DoctorHomePage />
           </Route>
-          <Route path="/specialty/:specialty">
+          <Route path="/specialty">
             <Specialty />
           </Route>
           <Route exact path="/account_deleted">
