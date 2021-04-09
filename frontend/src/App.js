@@ -20,7 +20,6 @@ import Doctor from "./pages/Doctor";
 import DoctorHomePage from "./pages/DoctorHomePage";
 import ClinicHomePage from "./pages/ClinicHomePage";
 import DeleteAccount from "./pages/DeleteAccount";
-import Specialty from "./pages/Specialty";
 import { handleFetchDoctors } from "./components/helpers/fetch-request-helpers";
 
 const App = () => {
@@ -82,9 +81,6 @@ const App = () => {
           </Route>
           <Route path="/doctor_profile/:doctor">
             <DoctorHomePage />
-          </Route>
-          <Route path="/specialty">
-            <Specialty />
           </Route>
           <Route exact path="/account_deleted">
             <DeleteAccount />
