@@ -8,7 +8,6 @@ import About from "./pages/About";
 import Faq from "./pages/Faq";
 import DoctorLogin from "./pages/DoctorLogin";
 import ClinicLogin from "./pages/ClinicLogin";
-import HealthcareFinder from "./pages/HealthcareFinder";
 import DoctorSignup from "./pages/DoctorSignup";
 import ClinicSignup from "./pages/ClinicSignup";
 import WalkInClinics from "./pages/WalkInClinics";
@@ -50,9 +49,6 @@ const App = () => {
           </Route>
           <Route exact path="/clinic_login">
             <ClinicLogin />
-          </Route>
-          <Route exact path="/healthcare_finder">
-            <HealthcareFinder />
           </Route>
           <Route exact path="/doctor_signup">
             <DoctorSignup />
