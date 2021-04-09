@@ -56,6 +56,7 @@ const Container = styled.div`
   width: 100%;
   height: 100%;
   background-color: #085b67;
+  padding-bottom: 5%;
 `;
 
 const MenuText = styled.p`

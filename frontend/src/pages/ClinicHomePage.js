@@ -118,11 +118,11 @@ const HelloText = styled.p`
 `;
 
 const ViewProfile = styled(NavLink)`
-  font-size: 24px;
+  font-size: 28px;
   text-decoration: none;
   color: white;
   text-shadow: 1px 1px 1px #000000;
-  margin: 10px;
+  margin: 15px;
   cursor: pointer;
 `;
 
@@ -145,10 +145,10 @@ const UpdateClinicContainer = styled.div`
 `;
 
 const ActionItem = styled.p`
-  font-size: 24px;
+  font-size: 28px;
   color: white;
   text-shadow: 1px 1px 1px #000000;
-  margin: 10px;
+  margin: 15px;
   cursor: pointer;
 `;
 
@@ -180,10 +180,10 @@ const DeleteButton = styled.button`
 `;
 
 const Logout = styled(NavLink)`
-  font-size: 24px;
+  font-size: 28px;
   text-decoration: none;
   color: black;
-  margin: 10px;
+  margin: 15px;
   color: white;
   text-shadow: 1px 1px 1px #000000;
   cursor: pointer;

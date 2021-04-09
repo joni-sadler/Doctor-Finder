@@ -11,7 +11,7 @@ const Faq = () => {
         <DescriptionDiv>
           <Question>What is this site?</Question>
           <Text>
-            This site is a resource to help ordinary people navigate Montreal's
+            This site is a resource to help people navigate Montreal's
             healthcare system.
           </Text>
           <Question>Are the doctors real?</Question>
@@ -71,9 +71,9 @@ const DescriptionDiv = styled.div`
 const Question = styled.p`
   text-align: center;
   line-height: 30px;
-  font-size: 22px;
+  font-size: 24px;
   font-weight: 600;
-  padding: 10px 0px 0px 0px;
+  padding: 20px 0px 0px 0px;
 `;
 
 const Text = styled.p`
@@ -81,7 +81,7 @@ const Text = styled.p`
   line-height: 22px;
   font-size: 18px;
   margin-top: 0px;
-  padding-top: 0px;
+  padding: 0px 10px;
 `;
 
 const Emergency = styled.p`

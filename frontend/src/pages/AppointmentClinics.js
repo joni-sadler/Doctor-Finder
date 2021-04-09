@@ -164,7 +164,7 @@ const ListItemContainer = styled.div`
   border-radius: 3px;
   overflow-y: auto;
   margin-left: 20px;
-  width: 100%;
+  width: 80%;
   ${onDesktopMediaQuery()} {
     margin-left: 5%;
   }
@@ -181,10 +181,13 @@ const ListItemContainer = styled.div`
 const ListItem = styled(NavLink)`
   font-size: 16px;
   font-weight: 600;
-  padding: 10px 0px 10px 25px;
+  padding: 10px 10px 10px 25px;
   color: black;
   text-decoration: none;
-  cursor: pointer;
+  &:hover {
+    cursor: pointer;
+    background: #dbe7e9;
+  }
   ${onDesktopMediaQuery()} {
     padding: 10px 0px 10px 15px;
   }

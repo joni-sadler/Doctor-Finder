@@ -124,7 +124,7 @@ const Map = ({
 
   return (
     <MapWrapper>
-      <MapContainer center={[45.51, -73.65]} zoom={12} scrollWheelZoom={false}>
+      <MapContainer center={[45.49, -73.6]} zoom={12} scrollWheelZoom={false}>
         <TileLayer
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -135,7 +135,7 @@ const Map = ({
             <Circle
               center={originPoint}
               pathOptions={fillRedOptions}
-              radius={250}
+              radius={100}
             />
           </FeatureGroup>
         )}
@@ -145,7 +145,10 @@ const Map = ({
               return (
                 <FeatureGroup key={marker._id}>
                   <Popup>
-                    {marker.clinicName} <br /> {marker.clinicAddress}
+                    <div style={popupContent}>
+                      {marker.clinicName}
+                      <br /> {marker.clinicAddress}
+                    </div>
                   </Popup>
                   <Marker position={[marker.lat, marker.lng]}></Marker>
                 </FeatureGroup>
@@ -165,5 +168,10 @@ const MapWrapper = styled.div`
     outline: none;
   }
 `;
+
+const popupContent = {
+  textAlign: "center",
+  height: "35px",
+};
 
 export default Map;

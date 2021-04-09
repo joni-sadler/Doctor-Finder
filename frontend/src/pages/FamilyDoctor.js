@@ -158,7 +158,7 @@ const ListItemContainer = styled.div`
   display: flex;
   flex-direction: column;
   max-height: 300px;
-  width: 70%;
+  width: 80%;
   background-color: white;
   border-radius: 3px;
   overflow-y: auto;
@@ -180,11 +180,22 @@ const ListItemContainer = styled.div`
 const ListItem = styled(NavLink)`
   font-size: 16px;
   font-weight: 600;
-  padding: 0px 10px;
-  margin: 10px 20px;
+  padding: 10px 10px 10px 25px;
   color: black;
   text-decoration: none;
-  cursor: pointer;
+  &:hover {
+    cursor: pointer;
+    background: #dbe7e9;
+  }
+  ${onDesktopMediaQuery()} {
+    padding: 10px 0px 10px 15px;
+  }
+  ${onTabletMediaQuery()} {
+    padding: 10px 0px 10px 15px;
+  }
+  ${onSmallPhoneMediaQuery()} {
+    padding: 10px 0px 10px 15px;
+  }
 `;
 
 const Field = styled.div`

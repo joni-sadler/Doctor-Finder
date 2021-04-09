@@ -199,6 +199,8 @@ const Title = styled.p`
   font-size: 40px;
   font-weight: 600;
   text-align: center;
+  margin-bottom: 10px;
+  padding-top: 40px;
   ${onDesktopMediaQuery()} {
     margin: 10px 0px 0px 0px;
   }

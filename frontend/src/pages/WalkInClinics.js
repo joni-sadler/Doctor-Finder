@@ -157,10 +157,13 @@ const ListItemContainer = styled.div`
 const ListItem = styled(NavLink)`
   font-size: 16px;
   font-weight: 600;
-  padding: 10px 0px 10px 25px;
+  padding: 10px 10px 10px 25px;
   color: black;
   text-decoration: none;
-  cursor: pointer;
+  &:hover {
+    cursor: pointer;
+    background: #dbe7e9;
+  }
   ${onDesktopMediaQuery()} {
     padding: 10px 0px 10px 15px;
   }
@@ -234,23 +237,24 @@ const SubmitPostalCode = styled.button`
 
 const MapWrapper = styled.div`
   border: 1px solid black;
-  width: 100%;
-  height: 100%;
-  margin: 20px;
+  width: 90%;
+  height: 90%;
+  margin: 2% 2% 2% 5%;
+  overflow-y: hidden;
   ${onDesktopMediaQuery()} {
-    height: 100%;
+    height: 50%;
     width: 90%;
     margin: 5%;
   }
   ${onTabletMediaQuery()} {
-    height: 100%;
+    height: 50%;
     width: 90%;
-    margin: 5%;
+    margin-bottom: 5%;
   }
   ${onSmallPhoneMediaQuery()} {
-    height: 70%;
+    height: 100%;
     width: 90%;
-    margin: 5%;
+    margin-bottom: 5%;
   }
 `;
 
