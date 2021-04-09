@@ -66,7 +66,7 @@ const ClinicSignup = () => {
       setEmailValidation(true);
     }
     console.log(emailValidation);
-  }, [emailValidation]);
+  }, [signupInfo.email]);
 
   //Validate phone number
   useEffect(() => {

@@ -41,28 +41,28 @@ const Map = ({
       setMarkers(walkInClinics);
       return markers;
     }
-  });
+  }, [walkInClinics, markers]);
 
   useEffect(() => {
     if (acceptingPatients) {
       setMarkers(acceptingPatients);
       return markers;
     }
-  });
+  }, [acceptingPatients, markers]);
 
   useEffect(() => {
     if (appointmentClinics) {
       setMarkers(appointmentClinics);
       return markers;
     }
-  });
+  }, [appointmentClinics, markers]);
 
   useEffect(() => {
     if (clinics) {
       setMarkers(clinics);
       return markers;
     }
-  });
+  }, [clinics, markers]);
 
   // Check to see if postal code the user enters is already stored in the cache
   // If not, retrieve the coordinates from Open Mapquest API and use them to set origin point to display location on map
