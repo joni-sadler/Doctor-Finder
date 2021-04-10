@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { NavLink, useParams, Redirect } from "react-router-dom";
-import { useDispatch } from "react-redux";
+// import { useDispatch } from "react-redux";
 import UpdateClinic from "../components/UpdateClinic";
 import {
   onSmallPhoneMediaQuery,
   onDesktopMediaQuery,
   onTabletMediaQuery,
 } from "../utils/responsive";
-import { handleClinicLogout } from "../components/helpers/fetch-request-helpers";
+// import { handleClinicLogout } from "../components/helpers/fetch-request-helpers";
 
 const ClinicHomePage = () => {
   const [updateProfileDropdown, setUpdateProfileDropdown] = useState();
@@ -18,7 +18,7 @@ const ClinicHomePage = () => {
   const id = useParams();
   const clinic = id.clinic;
 
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   // Get specific clinic based on id params
   useEffect(() => {
@@ -60,10 +60,10 @@ const ClinicHomePage = () => {
     setUpdateProfileDropdown(false);
   };
 
-  // Handle clinic logout through redux state
-  const clinicLogoutFunction = () => {
-    handleClinicLogout(dispatch);
-  };
+  // // Handle clinic logout through redux state
+  // const clinicLogoutFunction = () => {
+  //   handleClinicLogout(dispatch);
+  // };
 
   return (
     <Container>
@@ -91,9 +91,7 @@ const ClinicHomePage = () => {
       )}
 
       {hasDeletedProfile && <Redirect to={`/account_deleted`} />}
-      <Logout to={`/`} onClick={() => clinicLogoutFunction()}>
-        Logout
-      </Logout>
+      <Logout to={`/`}>Logout</Logout>
     </Container>
   );
 };

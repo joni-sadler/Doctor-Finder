@@ -39,16 +39,16 @@ const SearchBar = () => {
               }
               return false;
             })
-            .map((doctor, i) => {
+            .map((doctor) => {
               return (
-                <Dropdown>
+                <Dropdown key={doctor._id}>
                   <DoctorLink
                     onClick={() => {
                       setStatus("close");
                       setSearchTerm("");
                     }}
                     to={`/doctors/${doctor._id}`}
-                    key={i}
+                    // key={doctor._id}
                   >
                     {doctor.title} {doctor.firstName} {doctor.lastName}
                   </DoctorLink>

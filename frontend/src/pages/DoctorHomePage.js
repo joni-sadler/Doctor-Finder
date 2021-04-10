@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { NavLink, useParams, Redirect } from "react-router-dom";
-import { useDispatch } from "react-redux";
+// import { useDispatch } from "react-redux";
 import UpdateDoctor from "../components/UpdateDoctor";
 import {
   onSmallPhoneMediaQuery,
   onDesktopMediaQuery,
   onTabletMediaQuery,
 } from "../utils/responsive";
-import { handleDoctorLogout } from "../components/helpers/fetch-request-helpers";
+// import { handleDoctorLogout } from "../components/helpers/fetch-request-helpers";
 
 const DoctorHomePage = () => {
   const [updateProfileDropdown, setUpdateProfileDropdown] = useState();
@@ -18,7 +18,7 @@ const DoctorHomePage = () => {
   const id = useParams();
   const doctor = id.doctor;
 
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   // Get specific doctor based on id params
   useEffect(() => {
@@ -60,10 +60,10 @@ const DoctorHomePage = () => {
     setUpdateProfileDropdown(false);
   };
 
-  // Handle doctor logout through Redux state
-  const doctorLogoutFunction = () => {
-    handleDoctorLogout(dispatch);
-  };
+  // // Handle doctor logout through Redux state
+  // const doctorLogoutFunction = () => {
+  //   handleDoctorLogout(dispatch);
+  // };
 
   return (
     <Container>
@@ -93,9 +93,7 @@ const DoctorHomePage = () => {
       )}
 
       {hasDeletedProfile && <Redirect to={`/account_deleted`} />}
-      <Logout to={`/`} onClick={() => doctorLogoutFunction()}>
-        Logout
-      </Logout>
+      <Logout to={`/`}>Logout</Logout>
     </Container>
   );
 };
