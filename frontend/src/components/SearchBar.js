@@ -37,6 +37,7 @@ const SearchBar = () => {
               ) {
                 return doctor;
               }
+              return;
             })
             .map((doctor, i) => {
               return (
