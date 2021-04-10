@@ -245,17 +245,20 @@ const Title = styled.p`
   font-size: 40px;
   font-weight: 600;
   text-align: center;
-  padding-top: 20px;
+  padding-top: 200px;
   ${onDesktopMediaQuery()} {
     margin: 10px 0px 0px 0px;
+    padding-top: 0px;
   }
   ${onTabletMediaQuery()} {
     font-size: 34px;
     margin: 10px 0px 0px 0px;
+    padding-top: 0px;
   }
   ${onSmallPhoneMediaQuery()} {
     font-size: 30px;
     margin: 10px 0px;
+    padding-top: 0px;
   }
 `;
 

@@ -173,7 +173,7 @@ const DoctorInfo = styled(NavLink)`
   font-size: 24px;
   font-weight: 500;
   margin: 10px;
-  padding: 0px;
+  padding-bottom: 50px;
   color: white;
   text-shadow: 1px 1px 1px #000000;
   text-decoration: none;

@@ -238,8 +238,11 @@ const DropdownText = styled(NavLink)`
   margin: 10px 0px;
   padding: 0px;
   text-decoration: none;
-  cursor: pointer;
   text-shadow: 1px 1px 1px #000000;
+  &:hover {
+    cursor: pointer;
+    color: #bbc6c7;
+  }
   ${onTabletMediaQuery()} {
     margin: 0px 0px 25px 25px;
   }
