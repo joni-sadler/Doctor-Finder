@@ -45,7 +45,7 @@ const DoctorLogin = () => {
     });
   };
 
-  // Handle doctor login through Redux state
+  // Handle  login through Redux state
   useEffect(() => {
     if (selectedDoctor) {
       handleDoctorLogin(dispatch);

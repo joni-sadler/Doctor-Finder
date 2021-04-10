@@ -47,7 +47,7 @@ const ClinicSignup = () => {
     } else {
       setClinicNameValidation(true);
     }
-  }, [signupInfo.clinicName]);
+  }, [signupInfo.clinicName, clinicNameValidation]);
 
   // Validate clinic email address
   useEffect(() => {
@@ -56,7 +56,7 @@ const ClinicSignup = () => {
     } else {
       setClinicAddressValidation(true);
     }
-  }, [signupInfo.clinicAddress]);
+  }, [signupInfo.clinicAddress, clinicAddressValidation]);
 
   // Validate email
   useEffect(() => {
@@ -66,7 +66,7 @@ const ClinicSignup = () => {
       setEmailValidation(true);
     }
     console.log(emailValidation);
-  }, [signupInfo.email]);
+  }, [signupInfo.email, emailValidation]);
 
   //Validate phone number
   useEffect(() => {
@@ -75,7 +75,7 @@ const ClinicSignup = () => {
     } else {
       setPhoneNumberValidation(true);
     }
-  }, [signupInfo.phoneNumber]);
+  }, [signupInfo.phoneNumber, phoneNumberValidation]);
 
   // Validate password
   useEffect(() => {
@@ -84,7 +84,7 @@ const ClinicSignup = () => {
     } else {
       setPasswordValidation(true);
     }
-  }, [signupInfo.password]);
+  }, [signupInfo.password, passwordValidation]);
 
   // Get lat and lng coordinates for new entry based on address
   useEffect(() => {
