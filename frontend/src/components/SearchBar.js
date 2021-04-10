@@ -28,16 +28,16 @@ const SearchBar = () => {
           {searchArrayDoctors
             .filter((doctor) => {
               if (searchTerm === "") {
-                return null;
+                return false;
               } else if (
                 doctor.firstName
                   .toLowerCase()
                   .includes(searchTerm.toLowerCase()) ||
                 doctor.lastName.toLowerCase().includes(searchTerm.toLowerCase())
               ) {
-                return doctor;
+                return true;
               }
-              return;
+              return false;
             })
             .map((doctor, i) => {
               return (
