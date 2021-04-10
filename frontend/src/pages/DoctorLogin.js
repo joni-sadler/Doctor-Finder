@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Redirect, NavLink } from "react-router-dom";
-import { useDispatch } from "react-redux";
+// import { useDispatch } from "react-redux";
 import Header from "../components/Header";
-import { handleDoctorLogin } from "../components/helpers/fetch-request-helpers";
+// import { handleDoctorLogin } from "../components/helpers/fetch-request-helpers";
 
 const DoctorLogin = () => {
   const [doctorLoginInfo, setDoctorLoginInfo] = useState({});
@@ -11,7 +11,7 @@ const DoctorLogin = () => {
   const [selectedDoctor, setSelectedDoctor] = useState();
   const [incorrectLogin, setIncorrectLogin] = useState();
 
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   // Get list of all doctors in database and store them in doctorArray
   useEffect(() => {
@@ -46,11 +46,11 @@ const DoctorLogin = () => {
   };
 
   // Handle  login through Redux state
-  useEffect(() => {
-    if (selectedDoctor) {
-      handleDoctorLogin(dispatch);
-    }
-  }, [dispatch, selectedDoctor]);
+  // useEffect(() => {
+  //   if (selectedDoctor) {
+  //     handleDoctorLogin(dispatch);
+  //   }
+  // }, [dispatch, selectedDoctor]);
 
   return (
     <Container>

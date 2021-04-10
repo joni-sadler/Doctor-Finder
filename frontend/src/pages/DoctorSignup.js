@@ -43,7 +43,6 @@ const DoctorSignup = () => {
     } else {
       setFirstNameValidation(true);
     }
-    console.log(firstNameValidation);
   }, [firstNameValidation, signupInfo.firstName]);
 
   // Validate last name
@@ -53,7 +52,6 @@ const DoctorSignup = () => {
     } else {
       setLastNameValidation(true);
     }
-    console.log(lastNameValidation);
   }, [lastNameValidation, signupInfo.lastName]);
 
   // Validate email
@@ -63,7 +61,6 @@ const DoctorSignup = () => {
     } else {
       setEmailValidation(true);
     }
-    console.log(emailValidation);
   }, [emailValidation, signupInfo.email]);
 
   // Validate password
@@ -102,7 +99,6 @@ const DoctorSignup = () => {
     })
       .then((res) => res.json())
       .then((res) => {
-        console.log(res);
         if (res.status === 201) {
           console.log(res.data);
           setSignupInfo(res.data);
@@ -243,6 +239,7 @@ const DoctorSignup = () => {
                   return (
                     <ClinicList
                       onClick={() => setPrimaryClinic(clinic.clinicName)}
+                      key={clinic._id}
                       style={{
                         backgroundColor:
                           primaryClinic === clinic.clinicName ? "#B8D0D3" : "",

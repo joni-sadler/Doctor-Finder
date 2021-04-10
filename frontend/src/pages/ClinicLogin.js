@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Redirect, NavLink } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { handleClinicLogin } from "../components/helpers/fetch-request-helpers";
+// import { useDispatch } from "react-redux";
+// import { handleClinicLogin } from "../components/helpers/fetch-request-helpers";
 import Header from "../components/Header";
 
 const ClinicLogin = () => {
@@ -11,7 +11,7 @@ const ClinicLogin = () => {
   const [selectedClinic, setSelectedClinic] = useState();
   const [incorrectLogin, setIncorrectLogin] = useState();
 
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   // Get list of all clinics in database and store them in clinicArray
   useEffect(() => {
@@ -46,11 +46,11 @@ const ClinicLogin = () => {
   };
 
   // Handle clinic login through Redux state
-  useEffect(() => {
-    if (selectedClinic) {
-      handleClinicLogin(dispatch);
-    }
-  }, [selectedClinic, dispatch]);
+  // useEffect(() => {
+  //   if (selectedClinic) {
+  //     handleClinicLogin(dispatch);
+  //   }
+  // }, [selectedClinic, dispatch]);
 
   return (
     <Container>

@@ -168,6 +168,7 @@ const UpdateDoctor = ({ selectedDoctor }) => {
               return (
                 <ClinicList
                   onClick={() => setPrimaryClinic(clinic.clinicName)}
+                  key={clinic._id}
                   style={{
                     backgroundColor:
                       primaryClinic === clinic.clinicName ? "#B8D0D3" : "",
