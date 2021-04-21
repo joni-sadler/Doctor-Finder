@@ -2,9 +2,9 @@
 
 # Introduction
 
-This site allows those seeking healthcare in Montreal to access a comprehensive range of information about clinics and doctors in their area with ease and clarity. Inspired by challenges finding a family doctor in my area, I wanted to make a site that would allow doctors and clinics to share the most timely, relevant information directly with their patients. The site is fully responsive so it can be used by people on the go using the device of their preference.
+This site allows those seeking healthcare in Montreal to access a comprehensive range of information about clinics and doctors in their area with ease and clarity. Inspired by my own challenges finding a family doctor, I wanted to make a site that would allow doctors and clinics to share the most timely, relevant information directly with their patients. The site is fully responsive so it can be used by people on the go using the device of their preference.
 
-<img src="./screenshots/mobile_screenshot.png">
+<div style="text-align: center"><img src="./screenshots/mobile_screenshot.png"></div>
 
 # Methodology & languages
 
