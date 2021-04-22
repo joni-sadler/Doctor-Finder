@@ -8,7 +8,7 @@ This site allows those seeking healthcare in Montreal to access a comprehensive 
 
 # Methodology and Languages
 
-The stack for this project is built around React.Js, Redux, Node.Js. The server is built with RESTful endpoints and all data is stored in MongoDB.
+The stack for this project includes React, Redux, Node/Express. The server is uses RESTful endpoints and all data is stored in MongoDB.
 
 # Patient Use
 
