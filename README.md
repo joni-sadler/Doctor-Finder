@@ -24,7 +24,7 @@ Doctors and clinic administrators can register for the site, so they are in full
 
 Initially this site was set up with Google Maps and Google's Geocoding API. After some initial testing it became clear that Google's charges would be prohibitive, so I swapped out OpenStreetMap in place of Google. This was a useful learning experience! Not only did it help to reinforce the importance of being flexible, but it was a good reminder to always have a backup plan. While OpenStreetMap may not have the geographical precision of Google Maps, it is a free and community-driven platform and that aligns nicely with my own ethos and the thinking behind this project.
 
-<img src="./screenshots/doctor_finder_screenshot.png">
+<img src="./screenshots/doctor_finder_screenshot_2.png">
 
 As a precaution against unnecessary API calls, I set up a caching system for repeat postal code entries. An object called CACHED_POINTS contains a series of postal codes and their respective latitude/longitude coordinates, which I used during testing to ensure the functionality worked properly without making a new API call for each minor change. When a user enters a new postal code, a useEffect is called that compares the entry with all data stored within CACHED_POINTS. If the coordinates already exist in the object, then its stored latitude and longitude are used. If not, a GET request is made to the Open Maps API to retrieve the coordinates. That new data is assigned to originPoint using setState and the coordinates are also added to CACHED_POINTS, where they will remain until the user refreshes their browser. This served as an additional safety measure against redundant API calls.
 
