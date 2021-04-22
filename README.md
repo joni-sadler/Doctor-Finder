@@ -8,7 +8,7 @@ This site allows those seeking healthcare in Montreal to access a comprehensive 
 
 # Methodology and Languages
 
-The frontend of this site is built with React. Create React App proved to be a useful tool to get things up and running at first. For the backend, I used Node/Express and built my server with RESTful endpoints. Data for the website is stored in MongoDB.
+The stack for this project is built around React.Js, Redux, Node.Js. The server is built with RESTful endpoints and all data is stored in MongoDB.
 
 # Patient Use
 
